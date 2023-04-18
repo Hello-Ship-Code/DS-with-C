@@ -234,7 +234,7 @@ Example :
 ```c++
 #include<stdio.h>
 
-int add( int a , int b )
+int add( int a , int b ) /* Actual parameters */
 {
 int c;
 c = a + b;
@@ -246,12 +246,10 @@ int main ( )
 int x,y,z;
 x =10;
 y = 5;
-z = add (x,y);
+z = add (x,y); /* Formal parameters */
 printf("The sum of two number is: %d",z);
 }
 ```
-
-![functions_name](../Images/functions_name.png)
 
 ## Parameter Passing Methods
 
