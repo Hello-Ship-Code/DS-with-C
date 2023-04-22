@@ -9,5 +9,3 @@
 [Array_representation](./Array_representation/) ✅
 
 [Array_ADT](./Array_ADT/) ⏳
-
-Testing this
