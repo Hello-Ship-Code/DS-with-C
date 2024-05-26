@@ -1,11 +1,11 @@
 # Data Structures with C & C++
 
-[Essentials_Cpp](./Essentials_Cpp/) ✅
+[Essentials_Cpp](./00-C/) ✅
 
-[Introduction_DS](./Introduction_DS/) ✅
+[Introduction_DS](./01-Introduction_DS/) ✅
 
-[Recursion](./Recursion/) ✅
+[Recursion](./02-Recursion/) ✅
 
-[Array_representation](./Array_representation/) ✅
+[Array_representation](./03-Array_representation/) ✅
 
-[Array_ADT](./Array_ADT/) ⏳
+[Array_ADT](./04-Array_ADT/) ⏳
