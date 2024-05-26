@@ -17,9 +17,109 @@ When ever we initialize the array its going to store in main memory.
 
 ![memory](../Images/memory_array.png)
 
+## Why we need to deallocate the memory?
+
+Deallocating memory is crucial for several reasons, particularly in C++ and other languages where memory management is manual. Here's why deallocating memory is important:
+
+### 1. Prevent Memory Leaks
+
+**Memory Leaks**: When dynamically allocated memory is not properly deallocated, it remains allocated even when it is no longer needed. This leads to memory leaks, where the application consumes more and more memory over time, potentially exhausting system resources and causing the application to crash or slow down significantly.
+
+### 2. Efficient Use of Resources
+
+**Resource Management**: Efficiently managing memory resources is essential for the performance and stability of an application. Deallocating memory when it is no longer needed ensures that the memory can be reused for other parts of the application or by other applications running on the system.
+
+### 3. Avoiding Undefined Behavior
+
+**Memory Corruption**: Failing to deallocate memory can also lead to undefined behavior if the program inadvertently writes to memory that it thinks is still valid. This can corrupt data, cause crashes, and lead to difficult-to-debug issues.
+
+### 4. Compliance with RAII (Resource Acquisition Is Initialization) Principle
+
+**RAII**: This is a common idiom in C++ programming. It ensures that resources are properly released when they are no longer needed. By following RAII, you create robust and exception-safe code. Using destructors to deallocate memory is a key part of this principle.
+
+### We need to manually deallocate the memory in C/C++. In Java, Python, Go, C# no need for manual deallocation. In Rust memory is automatically deallocated when the variable goes out of scope
+
+### Out of scope example
+
+```c
+#include <iostream>
+
+void exampleFunction() {
+    int localVariable = 10; // localVariable is in scope
+    std::cout << "Inside function: " << localVariable << std::endl;
+} // localVariable goes out of scope here
+
+int main() {
+    exampleFunction();
+    // localVariable is not accessible here, it's out of scope
+    return 0;
+}
+```
+
+### Practical Example with Destructor
+
+To illustrate the importance of deallocating memory, consider a simple example with a class that dynamically allocates memory:
+
+```cpp
+#include <iostream>
+
+class Rectangle {
+private:
+    int* length;
+    int* breadth;
+
+public:
+    // Constructor
+    Rectangle(int l, int b) {
+        length = new int;  // Allocate memory for length
+        breadth = new int; // Allocate memory for breadth
+        *length = l;
+        *breadth = b;
+    }
+
+    // Destructor
+    ~Rectangle() {
+        delete length;  // Deallocate memory for length
+        delete breadth; // Deallocate memory for breadth
+        std::cout << "Destructor called, memory deallocated" << std::endl;
+    }
+
+    // Function to calculate the area
+    int area() const {
+        return (*length) * (*breadth);
+    }
+
+    // Function to display the dimensions
+    void display() const {
+        std::cout << "Length: " << *length << ", Breadth: " << *breadth << std::endl;
+    }
+};
+
+int main() {
+    Rectangle* rect = new Rectangle(10, 5);
+
+    rect->display();
+    std::cout << "Area of the rectangle: " << rect->area() << std::endl;
+
+    delete rect; // Manually deleting the object to invoke the destructor and deallocate memory
+
+    return 0;
+}
+```
+
+### Explanation
+
+1. **Constructor**: Allocates memory for `length` and `breadth` dynamically.
+2. **Destructor**: Deallocates the memory to prevent memory leaks.
+3. **Creating and Deleting Object**: In `main`, the `Rectangle` object is created using `new`, and manually deleted using `delete`. This ensures that the destructor is called, which deallocates the memory.
+
+### Summary
+
+Deallocating memory in C++ is a critical part of managing resources efficiently. It prevents memory leaks, ensures that resources are available for other uses, and maintains the stability and performance of the application. The use of destructors to handle deallocation is a standard practice that aligns with the RAII principle, making your code more robust and maintainable.
+
 ## Structures
 
-Structures (also called structs) are a way to group several related variables into one place. Each variable in the structure is known as a member of the structure.
+Structures (also called struct) are a way to group several related variables into one place. Each variable in the structure is known as a member of the structure.
 Unlike an array, a structure can contain many different data types (int, float, char, etc.).
 
 - Collection of data members under one name is structure
@@ -34,11 +134,11 @@ int length;
 int breath;
 }
 
-int main( )
+int main()
 {
 struct Rectangle r ;            - Declaration
-Struct Rectangle r = { 10, 5 }; - Declaration + Initialisation
-r.length = 15 ;                 - Is is used to access a member
+Struct Rectangle r = { 10, 5 }; - Declaration + Initialization
+r.length = 15 ;                 - ( . operator ) Is is used to access a members to modify
 r.breath = 10 ;
 Printf( “ Area of rectangle is %d” , r.length * r.breath ) ; - Accessing the members
 }
@@ -46,7 +146,7 @@ Printf( “ Area of rectangle is %d” , r.length * r.breath ) ; - Accessing the
 
 ## Use of structure
 
- Structures is used to combine data under one name , thus some example usage of structures is:
+ Structures is used to combine data under one name, thus some example usage of structures is:
 
 - In Complex numbers
 - In student details
@@ -61,8 +161,7 @@ In the example, We get the size of the struct as 12 instead of 9 as integers tak
 - Pointer is an address variable that is meant for storing an address, not data itself.
 - They are used for indirect access to data.
 - For a program to use heap memory, pointers are used.
-- To access heap memory and resources outside the main memory like the internet, keyboard, monitor, etc pointers is used.
-- Pointers are also used for parameter passing.
+- To access heap memory and resources outside the main memory like the internet, keyboard, monitor, etc pointers is used. Pointers are also used for parameter passing.
 
 Example :
 
@@ -71,7 +170,7 @@ int main( )
 {
 Int a = 10 ;             - data variable
 Int *p ;                 - declaration
-P = & a ;                - Assignment / Initialisation
+P = & a ;                - Assignment / Initialization
 printf( “% d ” , a ) ;    
 printf(“ %d ” , * p ) ;  - dereferencing
 }
@@ -84,13 +183,14 @@ printf(“ %d ” , * p ) ;  - dereferencing
 int main( )
 {
 Int * p;
-P = new int[5];
+// p = (int*)malloc(5*sizeof(int)); in c
+P = new int[5]; // in C++
 }
 ```
 
 ## Memory
 
-When a program is assigned the mrmory its basically divided into three parts
+When a program is assigned the memory its basically divided into three parts
 
 - code section
 - stack memory
@@ -100,8 +200,8 @@ The program will have access to stack & code section but won't have access to th
 
 ### uses of pointer
 
-- Accesing Heap memory
-- Accessing recources
+- Accessing Heap memory
+- Accessing resources
 - parameter passing
 
 ## de·ref·er·ence
@@ -123,23 +223,23 @@ int main()
 
 ## Accessing Heap memory
 
-```c++
+```c
 #include<stdlib.h>
 
 int main()
 {
     int *p;
-   p=(int *) malloc(5 * sizeof(int)); - Accessing Heap memory in C.
-   p = new int[5]; - in cpp
+    p=(int *) malloc(5 * sizeof(int)); - Accessing Heap memory in C.
+   //p = new int[5]; - in cpp
 }
 ```
 
-- Here 5 is the number of integers into the size of intergers. The compiler will allocate 5 interger with each having sizeof(int).
+- Here 5 is the number of integers into the size of integers. The compiler will allocate 5 integer with each having sizeof(int).
 
 ## Reference
 
 - A reference is a just another name for the same the variable
-- Reference are only available in Cpp
+- Reference are only available in C++
 
 ## Example
 
@@ -152,8 +252,11 @@ Int a = 10;
 Int &r = a; - syntax of reference
 Count << a ;
 r++;
-Cout<< r ;
-Cout << a ;
+cout<< r ;
+cout << a ;
+int b = 30
+r=b;
+cout<<a<<endl<<r<<endl; // 30, 30
 }
 ```
 
@@ -178,7 +281,7 @@ int breath;
 int main( )
 {
 
-struct Rectangle r = { 10, 5 };
+Rectangle r = { 10, 5 }; // can write without struct in cpp
 struct Rectangle *p= &r;
 
 r.length = 15 ;  
@@ -187,7 +290,7 @@ printf("%d\n",r.length);
 (*p).length = 20;  /* This one way of declaring pointer to struct */
 printf("%d\n",(*p).length); 
 
-p->length = 25;  /* This anothr way of declaring pointer to struct */
+p->length = 25;  /* This another way of declaring pointer to struct */
 printf("%d\n",p->length); 
 
 }
@@ -210,7 +313,8 @@ int breath;
 int main( )
 {
 struct Rectangle *p;
-p=(struct Rectangle * )malloc(sizeof(struct Rectangle));
+p=(struct Rectangle * )malloc(sizeof(struct Rectangle)); // in C
+//p = new Rectangle in c++
 p->length = 10 ;
 p->breath = 5;
 
@@ -229,6 +333,7 @@ printf("The length %d & the breadth: %d",p->length,p->breath);
 - Functions provide reusability of code
 - It can be used in other software projects as well
 - you can group function into library
+
 Example :
 
 ```c++
@@ -253,7 +358,7 @@ printf("The sum of two number is: %d",z);
 
 ## Parameter Passing Methods
 
-### Pass by value
+### Pass/call by value
 
 - In pass by value actual parameters will not be modified if any changes are done to the formal parameters
 Example :
@@ -302,7 +407,7 @@ int main()
  b=20;
  swap(&a,&b);
  printf("%d %d", a,b);
-}
+} // 20, 10
 ```
 
 - One function cannot access value of another function directly but it can access it indirectly through pointers
@@ -361,7 +466,7 @@ int main()
 
 - If we are sending structure as a parameter to a structure it may be call by value or call by address call by value
 
-## Example
+ Example
 
 ```c++
 #include<stdio.h>
@@ -483,7 +588,7 @@ int main()
 {
     struct Rectangle r;
     initialize(&r,10,5);
-    printf("The area of a reactangle: %d\n",area(r));
+    printf("The area of a rectangle: %d\n",area(r));
     changelength(&r,20);
 }
 ```
@@ -500,7 +605,7 @@ struct Rectangle
     int length;
     int breadth;
 
-void initialise( int l, int b)
+void initialize( int l, int b)
 {
     length=l;
     breadth=b;
@@ -527,7 +632,7 @@ int main()
     cin>>l>>b;
     /* cin>>r.length>>r.breadth; Can also initialize like this or create a function for initialization*/
 
-    r.initialise(l,b);
+    r.initialize(l,b);
 
     int a=r.area();
     int peri= r.perimeter();
@@ -553,7 +658,7 @@ class Rectangle
     int length;
     int breadth;
 public:
-void initialise( int l, int b)
+void initialize( int l, int b)
 {
     length=l;
     breadth=b;
@@ -579,7 +684,7 @@ int main()
     printf("Enter the length & breadth\n");
     cin>>l>>b;
     /* cin>>r.length>>r.breadth; Can also initialize like this or create a function for initialization*/
-    r.initialise(l,b);
+    r.initialize(l,b);
 
     int a=r.area();
     int peri= r.perimeter();

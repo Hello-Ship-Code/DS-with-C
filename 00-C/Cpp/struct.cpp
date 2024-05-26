@@ -8,7 +8,8 @@ struct Rectangle
     int length;
     int breadth;
     char x;
-} /* r2 Can also declare while initializing the struct*/;
+} // r1,r1,r3;
+/* r2 Can also declare while initializing the struct*/;
   /*struct Rectangle r1;  Can also declare the structure here also. which is available globally*/
 
 int main()

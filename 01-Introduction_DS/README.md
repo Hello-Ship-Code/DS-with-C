@@ -1,5 +1,34 @@
 # Introduction to Data structures
 
+What is a Data Structure?
+A program is a set of instructions which perform operations on data. We need data without the data the program can't be executed.
+How it'll organize the data in main memory during execution time is known as Data Structure
+
+CPU
+
+Data
+
+Program Code
+
+## list of data Structures
+
+### Physical data structures ( arrangement )
+
+- Arrays
+- Matrices
+- Linked List
+  
+### logical data structures ( utilization )
+
+- Stack
+- Queues
+- Trees
+- Graph
+- Hashing
+
+- Recursion
+- Sorting
+
 - Data structures
 - Data bases
 - Data warehouse
@@ -7,9 +36,9 @@
 
 ## Data Structure
 
-- Arragment of collectionn of items so that operations can be done efficiently. Inside main memory during execution of program.
+- Arrangement of collection of items so that operations can be done efficiently. Inside main memory during execution of program.
 - During execution of a program. The complier will manage data in main memory called data Structure.
-- A data structure is not only used for organizing the data. But, Also it is also used for processing, retrieving, and storing data. 
+- A data structure is not only used for organizing the data. But, Also it is also used for processing, retrieving, and storing data.
 - There are different types of basic & advanced types of data structures that are used in almost every program or software system that has been developed. So we must have good knowledge about data structures.
 
 Example:
@@ -22,7 +51,7 @@ Storage -> External storage <br/>
 
 - CPU will execute the instructions.
 - Main memory also knows as temporary memory, Main memory that is working memory of the program code.
-- Storage also knows as permenent storage. When we install a program / application they'll install in the storage as shown in HDD( HardDisk, SSD's ).
+- Storage also knows as permanent storage. When we install a program / application they'll install in the storage as shown in HDD( HardDisk, SSD's ).
 
 Example:
 
@@ -38,7 +67,7 @@ Example:
 
 Why we need main memory?
 
-- If we cook an omlette on pan will we eat the omlette on pan. No, We use a plate to eat it. In the same way to execute we need to get the data to main memory then the CPU will process the data & the result will be write backed to `storage`.
+- If we cook an omelette on pan will we eat the omelette on pan. No, We use a plate to eat it. In the same way to execute we need to get the data to main memory then the CPU will process the data & the result will be write backed to `storage`.
 - The arrangement or organizing how the data resides in the main memory is called data structures.
 - We have many data structures like arrays, trees, hash table.
 
