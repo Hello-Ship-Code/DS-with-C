@@ -91,7 +91,7 @@ Why we need main memory?
 Memory is divided into bytes. Chunk of bytes makes memory/storage. Every byte has it's address in the memory to uniquely identify them from other.
 
 - When ever we perform any operations & we use memory. The complier will assign the bytes for instance int occupies 4-bytes.
-- In cpu the entire memory is divided into managable pieces knows as segments. The size of segment is 64kb.
+- In cpu the entire memory is divided into manageable pieces knows as segments. The size of segment is 64kb.
 
 ![static_vs_dynamic](../Images/static_dynamic.png)
 
@@ -102,7 +102,7 @@ Memory is divided into bytes. Chunk of bytes makes memory/storage. Every byte ha
 ## static memory allocation
 
 - When ever the memory is allocated before run or compile time it's know as static memory allocation.
-- When ever a program is runned the compiler will divde the memory into three parts `Code Section`,`Stack`,`Heap`. The code will reside in the code section & when we compile the program any data is assigned and stored in the stack.
+- When ever a program is runned the compiler will divide the memory into three parts `Code Section`,`Stack`,`Heap`. The code will reside in the code section & when we compile the program any data is assigned and stored in the stack.
 - In the below example when we have declare int, float according the compiler 2/4 bytes are assigned to the integer. The storage is assigned in stack also know as stack form.
 
 ![static_memory](../Images/static_memory.png)
@@ -123,7 +123,7 @@ Memory is divided into bytes. Chunk of bytes makes memory/storage. Every byte ha
 - Heap means piling up like a hill.
 - If the data in memory is not organized and dumped is known as heap.
 - Heap is a not organized but stack memory is organized.
-- Heap memory should be used like recourse ( `Recourse` : If we want to use printer. We'll access the printer and then release the printer so that other can use it, In the sama way we use heap memory).
+- Heap memory should be used like recourse ( `Recourse` : If we want to use printer. We'll access the printer and then release the printer so that other can use it, In the same way we use heap memory).
 - The program will not access the heap memory. We need access them using pointer.
 
 Example:
@@ -133,14 +133,14 @@ void main()
 {
     int *p;
     p=new int[5]; /* In Cpp */
-    p=(int *)malloc(2 * 5); /* in c language */
+    //p=(int *)malloc(2 * 5);  in c language  
 
     delete []p;
     p=NULL;
 }
 ```
 
-- When ever we use heap memory. We need to de-allocate the memoryit. If not the meomry will be saved & occupied in the memory. The next time when you use heap, there may be no space left.
+- When ever we use heap memory. We need to de-allocate the memory. If not the memory will be saved & occupied in the memory. The next time when you use heap, there may be no space left.
 
 ## Physical Data structures
 
@@ -159,6 +159,8 @@ void main()
 
 ## Logical data structures
 
+how we manage certain data on the physical data structure is called logical data structure. we use logical data structure are implement using physical data structure.
+
 ### Linear
 
 - Stack  -> Last In First Out
@@ -169,13 +171,15 @@ void main()
 - Trees
 - Graphs
 
-### Tabluar
+### Tabular
 
 - Hash Tables
 
-This data Structure are used in applications. These logical data strutures are implemented using physical data structures.
+This data Structure are used in applications. These logical data structures are implemented using physical data structures.
 
 ## Abstract Datatype
+
+### What is a data type
 
 Datatype is defined as
 
@@ -189,23 +193,21 @@ Datatype is defined as
 - If we consider `int` occupies 2bytes -> 16 bits of memory in c/c++.
 - In that 16 bits 1bits is assigned to the sign i.e `+/-` & in the remaining 15 bits the number is stored. This is called Representation of data.
 
-### Operations on data
+### Operations on data `int x;`
 
-- Arthemetic operations are allowed on the data like `+ , -, *, /, %, ++, --`
+- Arthematic operations are allowed on the data like `+ , -, *, /, %, ++, --`
 
 ### Abstract
 
 - Hiding internal details is known as abstract.
-- As mentioned above we have representaion & operations of data. Which are done internally so this is know as `Abstract DataType`.
+- As mentioned above we have representation & operations of data. Which are done internally so this is know as `Abstract DataType`.
   
 ![ADT](../Images/ADT.png)
 
 Example:
 
-List
-
-8,5,4,3,2,5,11 <br/>
-0,1,2,3,4,5,6
+List -> 8,5,4,3,2,5,11 <br/>
+         0,1,2,3,4,5,6
 
 - This is list which is collection of elements.
 - We need data Representation:
@@ -227,7 +229,7 @@ These are some operations that we use:
 - .add(element)/append(element)
 - .add(index,element)/insert(index,element)
 - .remove(index)
-- .set(index,set)/replace(index,elemet)
+- .set(index,set)/replace(index,element)
 - .get(index)
 - .search(key)/contains(key)
 - .sort()
@@ -257,8 +259,8 @@ Example:
 
 ## 2. Linked List
 
-- In a linked list for each & every element we process all the elemets then the time complexity is $O(n*n)$ -> $O(n^2)$.
-- A simple way to findout time complexity is by checking the code. If we have nested for loop then the time complexity is $n^2$.
+- In a linked list for each & every element we process all the elements then the time complexity is $O(n*n)$ -> $O(n^2)$.
+- A simple way to find out time complexity is by checking the code. If we have nested for loop then the time complexity is $n^2$.
 
 ```c++
 for(int i=0;i<n;i++>)
@@ -275,7 +277,7 @@ for(int i=0;i<n;i++>)
 
 ## 3. First & Rest
 
-- Being on the first element and we process the rest of the elements. After wards moving the pointer to the second element and process the rest of elememts $1+2+3....n-1$.
+- Being on the first element and we process the rest of the elements. After wards moving the pointer to the second element and process the rest of elements $1+2+3....n-1$.
 
 $$= n(n-1)/2 $$
 
@@ -294,7 +296,7 @@ $$ O(n^2)$$
 ## Matrix
 
 - If we are processing matrix it'll take nXn which is $O(n^2)$
-- If we process only a column then time xomplexity is $O(n)$
+- If we process only a column then time complexity is $O(n)$
 
 ## Array of elements
 
@@ -309,8 +311,8 @@ $$ O(n^2)$$
 
 ## Analyzing code to find out time & Space complexity
 
-- Every simple statement in function or program take a unit of time like arthemetic operation, conditonal statements, assignment.
-- If the statements are more complex we need to futher analysis the code.
+- Every simple statement in function or program take a unit of time like arthematic operation, conditional statements, assignment.
+- If the statements are more complex we need to further analysis the code.
 
 ### Example: Swap numbers
 
@@ -335,7 +337,7 @@ int sum(int A[],int n)
 {
   int s,i;
   s=0; - 1
-  for(i=0,i<n;i++) - n + 1 actuall is 2(n + 1) we write (n + 1)
+  for(i=0,i<n;i++) - n + 1 actual is 2(n + 1) we write (n + 1)
   {
     s=s+A[i]; - n
   }
@@ -372,6 +374,6 @@ $O(n^2)$
 
 ## Note
 
-- Just don't consider the statements & decide the time function. We should also analyze the statments deep. So, we don't miss anything.
+- Just don't consider the statements & decide the time function. We should also analyze the statements deep. So, we don't miss anything.
 
 ______END________________________

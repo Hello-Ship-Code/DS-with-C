@@ -29,11 +29,11 @@ int main() {
 
 Example:
 
-- In the given program we are running a recursive function with a condition. Which will call itself when the condition is DOESN'T satisfis.
+- In the given program we are running a recursive function with a condition. Which will call itself when the condition is DOESN'T satisfy.
 - Here first the program comes to the function with the values & then go to the conditional statements.
 
-- As the value of `int x = 3`. The condition won't get satidfied & the program enter the condition. Then the value of `x` will be printed. Then the fun is called again with `(n-1)` => `fun(3-1)` => `fun(2)`. So, on until the value of `n = 0` program will be exits the functon & perform any task after `fun()` call. The program will get terminated.
-- Check the image below for tracing how does recurion works.
+- As the value of `int x = 3`. The condition won't get satisfied & the program enter the condition. Then the value of `x` will be printed. Then the fun is called again with `(n-1)` => `fun(3-1)` => `fun(2)`. So, on until the value of `n = 0` program will be exits the function & perform any task after `fun()` call. The program will get terminated.
+- Check the image below for tracing how does recursion works.
 
 ```c++
 #include<stdio.h>
@@ -95,7 +95,7 @@ void fun(int n)
   1. Goto next room
   2. Switch on light
 - Here first we'll enter room 1. Then instead of switching on the light. We'll go to next room until we reach the end.
-- After reaching the end the second condition of switching on light is implemented till he reachs the exit.
+- After reaching the end the second condition of switching on light is implemented till he reaches the exit.
 
 ![Example_bulb](../Images/Example_bulb.png)
 
@@ -345,7 +345,7 @@ Example:
 
 ## Indirect Recursion
 
-- Indirect recusion is when a two or more programs calls thems selfs in a circular manners is known as Indirect recursion.
+- Indirect recursion is when a two or more programs calls them selfs in a circular manners is known as Indirect recursion.
 
 ```c++
 #include <stdio.h>
@@ -420,14 +420,19 @@ int sum(int n)
  return 0;
  return sum(n-1)+n;
 }
-int Isum(int n)
-{
- int s=0,i;
- for(i=1;i<=n;i++)
- s=s+i;
+// OTher methods
+// int Isum(int n)
+// {
+//  int s=0,i;
+//  for(i=1;i<=n;i++)
+//  s=s+i;
 
- return s;
-}
+//  return s;
+// }
+// int sum(int n)
+// {
+//     return n *(n+1)/2;
+// }
 int main()
 {
  int r=sum(5);
@@ -471,7 +476,7 @@ int main()
 
 ### Optimizing exponentail
 
-- If we divide the the exponential then the number calculations will be reduced & we can achive time complxity.
+- If we divide the the exponential then the number calculations will be reduced & we can achive time complexity.
 
 ![exponenetial](../Images/Exponential_2.png)
 
