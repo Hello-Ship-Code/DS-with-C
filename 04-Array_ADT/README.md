@@ -1,8 +1,8 @@
 # Array ADT
 
-- Array ADT (Abstract Data Type)
-- The representation of data is define by the compiler itself , However the operations on the data must be given by the program . The combination of theses 2 on an array is called Array ADT.
-        
+- Array ADT (Array as Abstract Data Type)
+- The representation of data is define by the compiler itself, However the operations on the data must be given by the programmer. The combination of theses 2 on an array is called Array ADT.
+
 ## Some possible operations on array are
 
 - Display( )
@@ -20,7 +20,7 @@
 
 1. Array Space
 2. Size
-3. length( no.of element )
+3. Length( no.of element )
 
 ## Demo Array_ADT
 
@@ -63,26 +63,19 @@ public:
     }
 };
 
-int main() {
- 
- 
+int main() 
+{
     Array arr(10);
     arr.create();
     arr.display();
- 
- 
+
     return 0;
 }
 ```
 
-## Inserting Array
-
-Checkout the ![PDF]().
-
-### Inserting and Appending in a Array
+## Inserting and Appending in a Array
 
 ```c++
-
 #include<stdio.h>
 struct Array
 {
@@ -101,8 +94,8 @@ struct Array
 
  void Append(struct Array *arr,int x)
  {
- if(arr->length<arr->size)
- arr->A[arr->length++]=x;
+    if(arr->length<arr->size)
+        arr->A[arr->length++]=x;
  }
 
  void Insert(struct Array *arr,int index,int x)
@@ -111,11 +104,11 @@ struct Array
 
  if(index>=0 && index <=arr->length)
  {
- for(i=arr->length;i>index;i--)
- arr->A[i]=arr->A[i-1];
- arr->A[index]=x;
- arr->length++;
- }
+    for(i=arr->length;i>index;i--)
+        arr->A[i]=arr->A[i-1];
+    arr->A[index]=x;
+    arr->length++;
+    }
  }
 
 int main()
@@ -257,9 +250,9 @@ return 0;
 }
 ```
 
-## Linear Search
+## Linear Search Code
 
-```c 
+```c
 #include<stdio.h>
 struct Array
 {
@@ -305,14 +298,14 @@ int main()
 }
 ```
 
-## Binary Search 
+## Binary Search
 
-- The condition for binary search is that the list of elements 
+- The condition for binary search is that the list of elements
 must be sorted. (check out PDF)[]
 
-## Binary Search Algorithm 
+## Binary Search Algorithm
 
-- The algorithm for binary search is as follows iterative procedure 
+- The algorithm for binary search is as follows iterative procedure
   
 ```c
 Algorithm BinSearch(l,h,key)
@@ -351,10 +344,10 @@ Algorithm RBinSearch(l,h,key)
 ```
 
 - Tail and loop recursive are similar
-- If given option for both always go for loop recursive 
+- If given option for both always go for loop recursive
 as its better than it because it uses stack.
 
-## Binary Search in Array 
+## Binary Search in Array
 
 ```c
 #include<stdio.h>
@@ -425,6 +418,3 @@ int main()
  return 0;
 }
 ```
-
-## (Analysis of Binary Search  check PDF)[]
-
