@@ -13,6 +13,8 @@
 - Get( index )
 - Set( index , x )
 - Max( ) / Min( )
+- sum ()
+- Avg ()
 - Reverse( )
 - Shift( ) / Rotate( )
 
@@ -623,17 +625,176 @@ swap(A[i],A[j])
 ### All up
 
 ```c
-struct array {
+#include<stdio.h>
+#include<stdlib.h>
+#include<iostream>
+using namespace std;
+
+struct Array{
     int A[10];
     int size;
     int length;
+};
+
+void Display(struct Array arr1){
+    for(int i=0;i<arr1.length;i++){
+        printf("%d \n",arr1.A[i]);
+    }
 }
 
-void display(struct array arr){
-    int i;
-    printf("\nElements are\n");
-    for(i=0;i<arr.length;i++)
-    printf("%d ",arr.A[i]);
+void append(struct Array *arr1,int x){
+    if(arr1->length<arr1->size){
+        arr1->A[arr1->length++] = x;
+    }
+    
+}
+
+void insert(struct Array *arr1, int index, int x)
+{
+    if(index>=0 && index<arr1->length){
+        for(int i=arr1->length;i>index;i--)
+        {
+            arr1->A[i]=arr1->A[i-1];
+        }
+        arr1->A[index] = x;
+        arr1->length++;
+    }
+}
+
+void Delete(struct Array *arr1, int index){
+    int temp;
+    temp = arr1->A[index];
+    if(index>=0 && index<arr1->length){
+    for(int i=index;i<arr1->length-1;i++)
+    {
+        arr1->A[i]=arr1->A[i+1];
+    }
+    arr1->length--;
+    }    
+}
+
+int LinearSearch(struct Array arr1, int key)
+{
+    for(int i=0;i<arr1.length;i++)
+    {
+        if(arr1.A[i]==key)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int Bsearch(struct Array arr1, int key)
+{
+    int l,h,mid;
+    l=0;
+    h=arr1.length;
+    while(l<h)
+    {
+        mid = l+h/2;
+        if(arr1.A[mid]==key) 
+        return mid;
+        else if(arr1.A[mid]>key)
+        h=mid-1;
+        else
+        l=mid+1;
+    }
+    return -1;
+}
+
+int get(struct Array arr1, int index)
+{
+    return arr1.A[index];
+    
+}
+
+void set(struct Array *arr1, int index, int x)
+{
+    if(index>=0 && index<arr1->length)
+    {
+        arr1->A[index]=x;
+    }
+}
+
+int max(struct Array arr1){
+    int max = arr1.A[0];
+    for(int i=0;i<arr1.length;i++)
+    {
+        if(arr1.A[i]>max) 
+        {
+            max = arr1.A[i];
+        }
+    }
+    return max;
+}
+
+int min(struct Array arr1){
+    int max = arr1.A[0];
+    for(int i=0;i<arr1.length;i++)
+    {
+        if(arr1.A[i]<max) 
+        {
+            max = arr1.A[i];
+        }
+    }
+    return max;
+}
+
+int sum(struct Array arr1){
+    int sum = 0;
+    for(int i=0;i<arr1.length;i++)
+    {
+        sum = arr1.A[i] + sum;
+    }
+    return sum;
+}
+
+int avg(struct Array arr1){
+    int avg = 0;
+    avg = sum(arr1)/arr1.length;
+    return avg;
+}
+
+void swap(int *x,int *y){
+    int temp=*x;
+    *x=*y;
+    *y=temp;
+}
+
+void reverse(struct Array *arr1){
+    int *arr2;
+    int i,j;
+    
+    arr2 = (int *)malloc(arr1->length * sizeof(int));
+    
+    for(i=arr1->length-1,j=0;i>=0;j++,i--)
+    {
+        arr2[j]=arr1->A[i];
+    }
+    for(i=0;i<arr1->length;i++)
+    {
+        arr1->A[i]=arr2[i];
+    }
+}
+
+void Reverse2(struct Array *arr)
+{
+    int i,j;
+    for(i=0,j=arr->length-1;i<j;i++,j--)
+    {
+        swap(&arr->A[i],&arr->A[j]);
+    }
+}
+
+int isSorted(struct Array arr)
+{
+    for(i=0;i<arr.length-1;i++)
+    {
+        if(arr.A[i]>arr.A[i+1])
+        return 0;
+    }
+    return 1;
 }
 
 struct Array* Merge(struct Array *arr1,struct Array *arr2)
@@ -646,7 +807,7 @@ struct Array* Merge(struct Array *arr1,struct Array *arr2)
     while(i<arr1->length && j<arr2->length)
     {
         if(arr1->A[i]<arr2->A[j])
-        arr3->A[k++]=arr1->A[i++];
+            arr3->A[k++]=arr1->A[i++];
     }
     else
         arr3->A[k++]=arr2->A[j++];
@@ -751,14 +912,110 @@ struct Array* Diff(struct Array *arr1,struct Array *arr2)
     return arr3;
 }
 
-
 int main()
 {
     struct Array arr1={{2,9,21,28,35},10,5};
-    struct Array arr1={{2,3,16,18,28},10,5};
-    struct Array *arr3;
-    arr3=Merge(&arr1,&arr2);
-    Display(*arr3);
+    // append(&arr1,36);
+    // insert(&arr1, 0, 1);
+    // Delete(&arr1,0);
+    // printf("Index found at position: %d \n",LinearSearch(arr1,21));
+    // printf("%d \n",Bsearch(arr1,1));
+    // printf("%d \n",get(arr1,1));
+    // set(&arr1,0,1);
+    // printf("%d \n",max(arr1));
+    // printf("%d \n",min(arr1));
+    // printf("%d\n",sum(arr1));
+    // printf("%d\n",avg(arr1));
+    // struct Array arr2;
+    reverse(&arr1);
+    Display(arr1);
+    
     return 0;
 }
+```
+
+## Array C++ class
+
+```c
+#include <iostream>
+using namespace std;
+
+template<class T>
+class Array
+{
+    private:
+        T *A;
+        int size;
+        int length;
+    public:
+        Array()
+        {
+            size=10;
+            A=new T[10];
+            length=0;
+        }
+        Array(int sz)
+        {
+            size=sz;
+            length=0;
+            A = new T[size]
+        }
+        ~Array()
+        {
+            delete []A; 
+        }
+        void Display();
+        void Insert(int index,T x);
+        T Delete(int index);
+};
+
+template<class T>
+void Array<T>::Display (){
+    t i;
+    printf("\nElements are\n");
+    for(i=0;i<length;i++)
+    printf("%d ",arr.A[i]);
+}
+
+template<class T>
+T Array<T>::Delete(int index)
+{
+    T x=0;
+    if(index>=0 && index<length)
+    {
+        x=A[index];
+        for(int i=index;i<length-1;i++){
+        A[i]=[i+1];}
+        length--;
+    }
+    return x;
+}
+
+template<class T>
+ void Array<T>::Insert(int index,T x)
+ {
+    if(index>=0 && index <=length)
+    {
+        for(int i=length;i>index;i--)
+            A[i]=A[i-1];
+        A[index]=x;
+        length++;
+        }
+ }
+
+
+int main()
+{
+
+    Array<char> arr(10);
+    arr.Insert(0,'a');
+    arr.Insert(1,'c');
+    arr.Insert(2,'d');
+    arr.Display();
+    cout<<arr.Delete(0)<<endl;
+    arr.Display();
+
+    return 0;
+}
+
 ```
