@@ -79,16 +79,16 @@ int main()
 #include<stdio.h>
 struct Array
 {
- int A[10];
- int size;
- int length;
+    int A[10];
+    int size;
+    int length;
 };
 
  void Display(struct Array arr)
  {
- printf("\nElements are\n");
- for(int i=0;i<arr.length;i++)
- printf("%d ",arr.A[i]);
+    printf("\nElements are\n");
+    for(int i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
  }
 
  void Append(struct Array *arr,int x)
@@ -99,30 +99,29 @@ struct Array
 
  void Insert(struct Array *arr,int index,int x)
  {
- if(index>=0 && index <=arr->length)
- {
-    for(int i=arr->length;i>index;i--)
-        arr->A[i]=arr->A[i-1];
-    arr->A[index]=x;
-    arr->length++;
-    }
+    if(index>=0 && index <=arr->length)
+    {
+        for(int i=arr->length;i>index;i--)
+            arr->A[i]=arr->A[i-1];
+        arr->A[index]=x;
+        arr->length++;
+        }
  }
 
 int main()
 {
-struct Array arr1={{2,3,4,5,6},10,5};
-Append(&arr1,10);
-Insert(&arr1,0,12);
-Display(arr1);
- return 0;
+    struct Array arr1={{2,3,4,5,6},10,5};
+    Append(&arr1,10);
+    Insert(&arr1,0,12);
+    Display(arr1);
+    return 0;
 }
 ```
 
 ## Deleting from Array
 
 - Removing an element from an array is called deleting
-- After deleting an element the space must not be empty in an
-array so shift the bits accordingly
+- After deleting an element the space must not be empty in an array so shift the bits accordingly
 - The index should not be beyond the array
 
 Syntax : Delete( 3 )
@@ -140,42 +139,43 @@ Length = 8
 
 ```c++
 #include<stdio.h>
+
 struct Array
 {
- int A[10];
- int size;
- int length;
+    int A[10];
+    int size;
+    int length;
 };
 
  void Display(struct Array arr)
  {
- int i;
- printf("\nElements are\n");
- for(i=0;i<arr.length;i++)
- printf("%d ",arr.A[i]);
+    int i;
+    printf("\nElements are\n");
+    for(i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
  }
 
 int Delete(struct Array *arr,int index)
 {
- int x=0;
- int i;
- if(index>=0 && index<arr->length)
- {
- x=arr->A[index];
-for(i=index;i<arr->length-1;i++){
- arr->A[i]=arr->A[i+1];}
- arr->length--;
- return x;
- }
- return 0;
+    int x=0;
+    int i;
+    if(index>=0 && index<arr->length)
+    {
+        x=arr->A[index];
+        for(i=index;i<arr->length-1;i++){
+        arr->A[i]=arr->A[i+1];}
+        arr->length--;
+        return x;
+    }
+    return 0;
 }
 
 int main()
 {
- struct Array arr1={{2,3,4,5,6},10,5};
- printf("%d",Delete(&arr1,0));
- Display(arr1);
- return 0;
+    struct Array arr1={{2,3,4,5,6},10,5};
+    printf("%d",Delete(&arr1,0));
+    Display(arr1);
+    return 0;
 }
 ```
 
@@ -196,7 +196,7 @@ the key element one by one linearly
 
 A
 0 1 2 3 4 5 6 7 8 9 </br>
- 8 3 7 12 6 3 10 5 14 2
+8 3 7 12 6 3 10 5 14 2
 
 - The result of the search is the location of the element where its present (index number) , it is very useful in accessing the element in the list
 - If the element is not found throughout the list that means it is not present in the list therefore search is unsuccessful
@@ -206,11 +206,11 @@ Syntax :
 ```c
 for( i = 0; i < length ; i++ )
 {
- if( key == A[ i ] )
- return i; //if search is successful it ends here
+    if( key == A[ i ] )
+    return i; //if search is successful it ends here
 }
- return -1; // if search unsuccessful returns -1
- ```
+return -1; // if search unsuccessful returns -1
+```
 
 ## Improving Linear Search
 
@@ -226,8 +226,8 @@ for( i = 0; i < length ; i++ )
 {
 if( key == A[ i ] )
 {
- swap( A[i], A[i-1]);
- return i-1;
+    swap( A[i], A[i-1]);
+    return i-1;
  }
 }
 ```
@@ -239,11 +239,11 @@ search for the same element becomes faster.
 ```c++
 for( i = 0; i < length ; i++ )
 {
- if( key == A[ i ] )
- {
- swap( A[i], A[0]);
-return 0;
-}
+    if( key == A[ i ] )
+    {
+        swap( A[i], A[0]);
+        return 0;
+    }
 }
 ```
 
@@ -251,47 +251,49 @@ return 0;
 
 ```c
 #include<stdio.h>
+
 struct Array
 {
- int A[10];
- int size;
- int length;
+    int A[10];
+    int size;
+    int length;
 };
 
  void Display(struct Array arr)
  {
- int i;
- printf("\nElements are\n");
- for(i=0;i<arr.length;i++)
- printf("%d ",arr.A[i]);
+    int i;
+    printf("\nElements are\n");
+    for(i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
  }
+
 void swap(int *x,int *y)
  {
- int temp=*x;
- *x=*y;
- *y=temp;
+    int temp=*x;
+    *x=*y;
+    *y=temp;
  }
 
 int LinearSearch(struct Array *arr,int key)
 {
- int i;
- for(i=0;i<arr->length;i++)
- {
- if(key==arr->A[i])
- {
- swap(&arr->A[i],&arr->A[0]);
- return i;
- }
- }
- return -1;
+    int i;
+    for(i=0;i<arr->length;i++)
+    {
+        if(key==arr->A[i])
+        {
+            swap(&arr->A[i],&arr->A[0]);
+            return i;
+        }
+    }
+    return -1;
 }
 
 int main()
 {
- struct Array arr1={{2,23,14,5,6,9,8,12},10,8};
- printf("%d",LinearSearch(&arr1,14));
- Display(arr1);
- return 0;
+    struct Array arr1={{2,23,14,5,6,9,8,12},10,8};
+    printf("%d",LinearSearch(&arr1,14));
+    Display(arr1);
+    return 0;
 }
 ```
 
@@ -299,25 +301,22 @@ int main()
 
 - The condition for binary search is that the list of elements
 must be sorted.
-
-## Binary Search Algorithm
-
 - The algorithm for binary search is as follows iterative procedure
-  
+
 ```c
 Algorithm BinSearch(l,h,key)
 {
- while(l<=h)
- {
- mid = [(l+h)/2];
- if(key==A[mid])
- return mid;
- else if (key<A[mid])
- h=mid-1;
- else
- l=mid+1;
- }
- return-1;
+    while(l<=h)
+    {
+        mid = [(l+h)/2];
+        if(key==A[mid])
+            return mid;
+        else if (key<A[mid])
+            h=mid-1;
+        else
+            l=mid+1;
+    }
+    return-1;
 }
 ```
 
@@ -326,17 +325,17 @@ Algorithm BinSearch(l,h,key)
 ```c
 Algorithm RBinSearch(l,h,key)
 {
- if(l<=h)
- {
- mid = [(l+h)/2];
- if(key==A[mid])
- return mid;
- else if (key<A[mid])
- return RBinSearch(l, mid-1, key);
- else
- return RBinSearch(mid+1, h, key);
- }
- return-1;
+    if(l<=h)
+    {
+        mid = [(l+h)/2];
+        if(key==A[mid])
+            return mid;
+        else if (key<A[mid])
+            return RBinSearch(l, mid-1, key);
+        else
+            return RBinSearch(mid+1, h, key);
+    }
+    return-1;
 }
 ```
 
@@ -350,69 +349,70 @@ as its better than it because it uses stack.
 #include<stdio.h>
 struct Array
 {
- int A[10];
- int size;
- int length;
+    int A[10];
+    int size;
+    int length;
 };
 
  void Display(struct Array arr)
  {
- int i;
- printf("\nElements are\n");
- for(i=0;i<arr.length;i++)
- printf("%d ",arr.A[i]);
+    int i;
+    printf("\nElements are\n");
+    for(i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
  }
 
  /*Swapping */
 void swap(int *x,int *y)
  {
- int temp=*x;
- *x=*y;
- *y=temp;
+    int temp=*x;
+    *x=*y;
+    *y=temp;
  }
 
 int BinarySearch(struct Array arr,int key)
 {
- int l,mid,h;
- l=0;
- h=arr.length-1;
- while(l<=h)
- {
- mid=(l+h)/2;
- if(key==arr.A[mid])
- return mid;
- else if(key<arr.A[mid])
- h=mid-1;
- else
- l=mid+1;
- }
-return -1;
+    int l,mid,h;
+    l=0;
+    h=arr.length-1;
+    while(l<=h)
+    {
+        mid=(l+h)/2;
+        if(key==arr.A[mid])
+            return mid;
+        else if(key<arr.A[mid])
+            h=mid-1;
+        else
+            l=mid+1;
+    }
+    return -1;
 }
 
 /* Recursion version */
 int RBinSearch(int a[],int l,int h,int key)
 {
  
- int mid=0;
- if(l<=h)
- {
- mid=(l+h)/2;
- if(key==a[mid])
- return mid;
- else if(key<a[mid])
- return RBinSearch(a,l,mid-1,key);
- }
- else
- return RBinSearch(a,mid+1,h,key);
-return -1;
+    int mid=0;
+    if(l<=h)
+    {
+        mid=(l+h)/2;
+        if(key==a[mid])
+        return mid;
+        else if(key<a[mid])
+        return RBinSearch(a,l,mid-1,key);
+    }
+    else
+        return RBinSearch(a,mid+1,h,key);
+
+    return -1;
 }
 
 int main()
 {
- struct Array arr1={{2,3,9,16,18,21,28,32,35},10,9};
- printf("%d",BinarySearch(arr1,16));
- Display(arr1);
- return 0;
+    struct Array arr1={{2,3,9,16,18,21,28,32,35},10,9};
+    printf("%d",BinarySearch(arr1,16));
+    Display(arr1);
+    return 0;
 }
 ```
 
@@ -423,7 +423,7 @@ int main()
 ```c
 get(index)
 if(index >=0 && index<Length)
-return A[index]
+    return A[index]
 ```
 
 ### set()
@@ -431,7 +431,7 @@ return A[index]
 ```c
 set(index, x)
 if(index >=0 && index<Length)
-A[index] = x
+    A[index] = x
 ```
 
 ### max()
@@ -482,8 +482,8 @@ sum(A,length-1) // calling
 ```c
 total = 0;
 for(i=0;i<n;i++)
-total = total + a[i];
-return total/n
+    total = total + a[i];
+    return total/n
 ```
 
 ### Reverse
@@ -493,104 +493,113 @@ return total/n
 a = [1,2,3]
 b [3]
 for i=len-1,j=0;i>=0;i--,j++
-b[j]=a[i]
+    b[j]=a[i]
 for i=0;i<len;i++
-a[i]=b[j]
-//
+    a[i]=b[j]
+
 a = [1,2,3]
 temp= 0
 for j=len-1,i=0;i<j;j--,ii++
-temp=a[i]
-a[i]=a[j]
-a[j]=temp
+    temp=a[i]
+    a[i]=a[j]
+    a[j]=temp
 ```
 
-### Left shift & Rotate, right shift & rotate
+### Left & Right shift & rotate
 
-- use in adv in led boards scrolling and rotating
+- use in advertizement in LED boards scrolling and rotating the data.
 
 ### Reversing an Array
 
 ```c
- #include<stdio.h>
- #include<stdlib.h>
- struct Array
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Array
 {
     int A[10];
-int size;
-int length;
- };
+    int size;
+    int length;
+};
+
 void Display(struct Array arr)
 {
 int i;
-printf("\nElements are\n");
-for(i=0;i<arr.length;i++)
-printf("%d ",arr.A[i]);
+    printf("\nElements are\n");
+    for(i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
 }
+
 void swap(int *x,int *y){
-int temp=*x;
-*x=*y;
-*y=temp;
+    int temp=*x;
+    *x=*y;
+    *y=temp;
 }
+
 void Reverse(struct Array *arr)
 {
-int *B;
-int i,j;
-B=(int *)malloc(arr->length*sizeof(int));
-for(i=arr->length-1,j=0;i>=0;i--,j++)
-B[j]=arr->A[i];
-for(i=0;i<arr->length;i++)
-arr->A[i]=B[i];
+    int *B;
+    int i,j;
+    B=(int *)malloc(arr->length*sizeof(int));
+    for(i=arr->length-1,j=0;i>=0;i--,j++)
+    B[j]=arr->A[i];
+    for(i=0;i<arr->length;i++)
+    arr->A[i]=B[i];
 }
+
 void Reverse2(struct Array *arr)
 {
- int i,j;
- for(i=0,j=arr->length-1;i<j;i++,j--)
- {
- swap(&arr->A[i],&arr->A[j]);
- }
- }
+    int i,j;
+    for(i=0,j=arr->length-1;i<j;i++,j--)
+    {
+        swap(&arr->A[i],&arr->A[j]);
+    }
+}
+
 int main(){
 
- struct Array arr1={{2,3,9,16,18,21,28,32,35},10,9};
-Reverse(&arr1);
-Display(arr1);
-return 0;
+    struct Array arr1={{2,3,9,16,18,21,28,32,35},10,9};
+    Reverse(&arr1);
+    Display(arr1);
+    return 0;
 }
- ```
+```
 
 ### Checking if Array is Sorted
 
 ```c
 #include<stdio.h>
 #include<stdlib.h>
+
 struct Array
 {
     int A[10];
-int size;
-int length;
+    int size;
+    int length;
 };
+
 void Display(struct Array arr)
 {
-printf("\nElements are\n");
-for(int i=0;i<arr.length;i++)
-printf("%d ",arr.A[i]);
+    printf("\nElements are\n");
+    for(int i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
 }
 
 int isSorted(struct Array arr)
 {
-for(i=0;i<arr.length-1;i++)
-{
-if(arr.A[i]>arr.A[i+1])
-return 0;
+    for(i=0;i<arr.length-1;i++)
+    {
+        if(arr.A[i]>arr.A[i+1])
+        return 0;
+    }
+    return 1;
 }
-return 1;
-}
+
 int main() {
-struct Array arr1={{2,3,9,16,18,21,28,32,35},10,9};
-printf("%d",isSorted(arr1));
-Display(arr1);
-return 0;
+    struct Array arr1={{2,3,9,16,18,21,28,32,35},10,9};
+    printf("%d",isSorted(arr1));
+    Display(arr1);
+    return 0;
 }
 ```
 
@@ -611,146 +620,45 @@ swap(A[i],A[j])
 - Merge only can be used on sorted array and we need a third array to merge.
 - some merge operations ( append, Concat, Compare, Copy)
 
-```c
-#include <iostream>
-#include <stdlib>
- 
-using namespace std;
- 
-class Array{
- 
-private:
-    int* A;
-    int size;
-    int length;
- 
-public:
-    Array(int size, int length, bool sorted=false){
- 
-        this->size = size;
-        this->length = length;
- 
-        A = new int [size];
- 
-        if (sorted){
-            cout << "Enter ints in sorted manner" << endl;
-            for (int i = 0; i < length; i++){
-                cout << "Enter element " << i << " : " << flush;
-                cin >> A[i];
-            }
-        } else {
-            for (int i = 0; i < length; i++){
- 
-                int val;
-                val = rand() % 100;  // Random int in range 0 to 100
- 
-                // Generate random binary int and make value negative
-                if (rand() % 2){
-                    A[i] = -1 * val;
-                } else {
-                    A[i] = val;
-                }
- 
-            }
-        }
-    }
- 
-    int Get(int index){
-        if (index >= 0 && index < length){
-            return A[index];
-        }
-    }
- 
-    void Set(int index, int x){
-        if (index >= 0 && index < length){
-            A[index] = x;
-        }
-    }
- 
-    void display(){
-        for (int i = 0; i < length; i++){
-            cout << A[i] << " ";
-        }
-        cout << endl;
-    }
- 
-    Array Merge(Array& B){
-        Array C(length + B.length, length + B.length);
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        while (i < length && j < B.length){
-            if (A[i] < B.Get(j)){
-                C.Set(k++, A[i++]);
-            } else {
-                C.Set(k++, B.Get(j++));
-            }
-        }
-        for (; i < length; i++){
-            C.Set(k++, A[i]);
-        }
-        for (; j < B.length; j++){
-            C.Set(k++, B.Get(j));
-        }
-        return C;
-    }
- 
-    ~Array(){
-        delete[] A;
-    }
- 
- 
-};
- 
-int main() {
- 
-    Array X(10, 5, true);
-    Array Y(10, 4, true);
- 
-    Array Z = X.Merge(Y);
-    Z.display();
- 
-    return 0;
-}
-```
-
 ### All up
 
 ```c
 struct array {
- int A[10];
- int size;
- int length;
+    int A[10];
+    int size;
+    int length;
 }
+
 void display(struct array arr){
- int i;
- printf("\nElements are\n");
- for(i=0;i<arr.length;i++)
- printf("%d ",arr.A[i]);
+    int i;
+    printf("\nElements are\n");
+    for(i=0;i<arr.length;i++)
+    printf("%d ",arr.A[i]);
 }
 
 struct Array* Merge(struct Array *arr1,struct Array *arr2)
 {
 
-int i,j,k;
-i=j=k=0;
-struct Array *arr3=(struct Array *)malloc(sizeof(struct
-Array));
-while(i<arr1->length && j<arr2->length)
-{
-if(arr1->A[i]<arr2->A[j])
-arr3->A[k++]=arr1->A[i++];
-}
-else
-arr3->A[k++]=arr2->A[j++];
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3=(struct Array *)malloc(sizeof(struct
+    Array));
+    while(i<arr1->length && j<arr2->length)
+    {
+        if(arr1->A[i]<arr2->A[j])
+        arr3->A[k++]=arr1->A[i++];
+    }
+    else
+        arr3->A[k++]=arr2->A[j++];
 
-for(;i<arr1->length;i++)
-    arr3->A[k++]=arr1->A[i];
-for(;j<arr2->length;j++)
-    arr3->A[k++]=arr2->A[j];
-arr3->length=arr1->length+arr2->length;
-arr3->size=10;
-return arr3;
+    for(;i<arr1->length;i++)
+        arr3->A[k++]=arr1->A[i];
+    for(;j<arr2->length;j++)
+        arr3->A[k++]=arr2->A[j];
+    arr3->length=arr1->length+arr2->length;
+    arr3->size=10;
+
+    return arr3;
 }
 
 // Union
@@ -758,97 +666,99 @@ return arr3;
 struct Array* Union(struct Array *arr1,struct Array *arr2)
 {
 
-int i,j,k;
-i=j=k=0;
-struct Array *arr3=(struct Array *)malloc(sizeof(struct
-Array));
-while(i<arr1->length && j<arr2->length)
-{
-if(arr1->A[i]<arr2->A[j])
-arr3->A[k++]=arr1->A[i++];
-}
-else if(arr1->A[i]>arr2->A[j])
-arr3->A[k++]=arr2->A[j++];
-else
-{
-    arr3->A[k++]=arr1->A[i++];
-    j++;
-}
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3=(struct Array *)malloc(sizeof(struct
+    Array));
+    while(i<arr1->length && j<arr2->length)
+    {
+        if(arr1->A[i]<arr2->A[j])
+            arr3->A[k++]=arr1->A[i++];
+        else if(arr1->A[i]>arr2->A[j])
+            arr3->A[k++]=arr2->A[j++];
+        else
+        {
+            arr3->A[k++]=arr1->A[i++];
+            j++;
+        }
+    }
 
-for(;i<arr1->length;i++)
-    arr3->A[k++]=arr1->A[i];
-for(;j<arr2->length;j++)
-    arr3->A[k++]=arr2->A[j];
-arr3->length=k;
-arr3->size=10;
-return arr3;
+    for(;i<arr1->length;i++)
+        arr3->A[k++]=arr1->A[i];
+    for(;j<arr2->length;j++)
+        arr3->A[k++]=arr2->A[j];
+
+    arr3->length=k;
+    arr3->size=10;
+    
+    return arr3;
 }
 
 // Intersection
 
 struct Array* Intersection(struct Array *arr1,struct Array *arr2)
 {
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3=(struct Array *)malloc(sizeof(struct
+    Array));
+    while(i<arr1->length && j<arr2->length)
+    {
+        if(arr1->A[i]<arr2->A[j])
+            i++;
+        else if(arr1->A[i]>arr2->A[j])
+            j++;
+        else
+        {
+            arr3->A[k++]=arr1->A[i++];
+            j++;
+        }
+    }
 
-int i,j,k;
-i=j=k=0;
-struct Array *arr3=(struct Array *)malloc(sizeof(struct
-Array));
-while(i<arr1->length && j<arr2->length)
-{
-if(arr1->A[i]<arr2->A[j])
-i++;
-}
-else if(arr1->A[i]>arr2->A[j])
-j++;
-else
-{
-    arr3->A[k++]=arr1->A[i++];
-    j++;
-}
+    arr3->length=k;
+    arr3->size=10;
 
-arr3->length=k;
-arr3->size=10;
-return arr3;
+    return arr3;
 }
 
 // Diff
 
 struct Array* Diff(struct Array *arr1,struct Array *arr2)
 {
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3=(struct Array *)malloc(sizeof(struct
+    Array));
+    while(i<arr1->length && j<arr2->length)
+    {
+        if(arr1->A[i]<arr2->A[j])
+            arr3->A[k++]=arr1->A[i++];
+        else if(arr1->A[i]>arr2->A[j])
+            j++;
+        else
+        {
+            i++;
+            j++;
+        }
+    }
 
-int i,j,k;
-i=j=k=0;
-struct Array *arr3=(struct Array *)malloc(sizeof(struct
-Array));
-while(i<arr1->length && j<arr2->length)
-{
-if(arr1->A[i]<arr2->A[j])
-arr3->A[k++]=arr1->A[i++];
-}
-else if(arr1->A[i]>arr2->A[j])
-j++;
-else
-{
-   i++;
-    j++;
-}
+    for(;i<arr1->length;i++)
+        arr3->A[k++]=arr1->A[i];
 
-for(;i<arr1->length;i++)
-    arr3->A[k++]=arr1->A[i];
+    arr3->length=k;
+    arr3->size=10;
 
-arr3->length=k;
-arr3->size=10;
-return arr3;
+    return arr3;
 }
 
 
 int main()
 {
- struct Array arr1={{2,9,21,28,35},10,5};
- struct Array arr1={{2,3,16,18,28},10,5};
- struct Array *arr3;
- arr3=Merge(&arr1,&arr2);
- Display(*arr3);
- return 0;
+    struct Array arr1={{2,9,21,28,35},10,5};
+    struct Array arr1={{2,3,16,18,28},10,5};
+    struct Array *arr3;
+    arr3=Merge(&arr1,&arr2);
+    Display(*arr3);
+    return 0;
 }
 ```
