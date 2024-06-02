@@ -47,7 +47,7 @@ Deallocating memory is crucial for several reasons, particularly in C++ and othe
 void exampleFunction() {
     int localVariable = 10; // localVariable is in scope
     std::cout << "Inside function: " << localVariable << std::endl;
-} // localVariable goes out of scope here
+}   // localVariable goes out of scope here
 
 int main() {
     exampleFunction();
@@ -146,7 +146,7 @@ Printf( “ Area of rectangle is %d” , r.length * r.breath ) ; - Accessing the
 
 ## Use of structure
 
- Structures is used to combine data under one name, thus some example usage of structures is:
+Structures is used to combine data under one name, thus some example usage of structures is:
 
 - In Complex numbers
 - In student details
@@ -230,7 +230,7 @@ int main()
 {
     int *p;
     p=(int *) malloc(5 * sizeof(int)); - Accessing Heap memory in C.
-   //p = new int[5]; - in cpp
+    //p = new int[5]; - in cpp
 }
 ```
 
@@ -248,15 +248,15 @@ int main()
 
 int main( )
 {
-Int a = 10;
-Int &r = a; - syntax of reference
-Count << a ;
-r++;
-cout<< r ;
-cout << a ;
-int b = 30
-r=b;
-cout<<a<<endl<<r<<endl; // 30, 30
+    Int a = 10;
+    Int &r = a; - syntax of reference
+    Count << a ;
+    r++;
+    cout<< r ;
+    cout << a ;
+    int b = 30
+    r=b;
+    cout<<a<<endl<<r<<endl; // 30, 30
 }
 ```
 
@@ -274,24 +274,24 @@ cout<<a<<endl<<r<<endl; // 30, 30
 
 struct Rectangle
 {
-int length;
-int breath;
+    int length;
+    int breath;
 };
 
 int main( )
 {
 
-Rectangle r = { 10, 5 }; // can write without struct in cpp
-struct Rectangle *p= &r;
+    Rectangle r = { 10, 5 }; // can write without struct in cpp
+    struct Rectangle *p= &r;
 
-r.length = 15 ;  
-printf("%d\n",r.length);
+    r.length = 15 ;  
+    printf("%d\n",r.length);
 
-(*p).length = 20;  /* This one way of declaring pointer to struct */
-printf("%d\n",(*p).length); 
+    (*p).length = 20;  /* This one way of declaring pointer to struct */
+    printf("%d\n",(*p).length); 
 
-p->length = 25;  /* This another way of declaring pointer to struct */
-printf("%d\n",p->length); 
+    p->length = 25;  /* This another way of declaring pointer to struct */
+    printf("%d\n",p->length); 
 
 }
 ```
@@ -306,19 +306,19 @@ printf("%d\n",p->length);
 
 struct Rectangle
 {
-int length;
-int breath;
+    int length;
+    int breath;
 };
 
 int main( )
 {
-struct Rectangle *p;
-p=(struct Rectangle * )malloc(sizeof(struct Rectangle)); // in C
-//p = new Rectangle in c++
-p->length = 10 ;
-p->breath = 5;
+    struct Rectangle *p;
+    p=(struct Rectangle * )malloc(sizeof(struct Rectangle)); // in C
+    //p = new Rectangle in c++
+    p->length = 10 ;
+    p->breath = 5;
 
-printf("The length %d & the breadth: %d",p->length,p->breath);
+    printf("The length %d & the breadth: %d",p->length,p->breath);
 }
 ```
 
@@ -341,18 +341,18 @@ Example :
 
 int add( int a , int b ) /* Actual parameters */
 {
-int c;
-c = a + b;
-return c;
+    int c;
+    c = a + b;
+    return c;
 }
 
 int main ( )
 {
-int x,y,z;
-x =10;
-y = 5;
-z = add (x,y); /* Formal parameters */
-printf("The sum of two number is: %d",z);
+    int x,y,z;
+    x =10;
+    y = 5;
+    z = add (x,y); /* Formal parameters */
+    printf("The sum of two number is: %d",z);
 }
 ```
 
@@ -368,19 +368,19 @@ Example :
 
 void swap(int x , int y)
 {
- int temp;
- temp = x;
- x = y;
- y = temp;
+    int temp;
+    temp = x;
+    x = y;
+    y = temp;
 }
 
 int main()
 {
- int a ,b;
- a =10;
- b=20;
- swap(a,b);
- printf("%d %d", a ,b);
+    int a ,b;
+    a =10;
+    b=20;
+    swap(a,b);
+    printf("%d %d", a ,b);
 }
 ```
 
@@ -394,19 +394,19 @@ int main()
 
 void swap(int *x , int *y)
 {
- int temp;
- temp = *x;
- *x = *y;
- *y = temp;
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
 }
 
 int main()
 {
- int a,b;
- a =10;
- b=20;
- swap(&a,&b);
- printf("%d %d", a,b);
+    int a,b;
+    a =10;
+    b=20;
+    swap(&a,&b);
+    printf("%d %d", a,b);
 } // 20, 10
 ```
 
@@ -423,19 +423,19 @@ int main()
 
 void swap(int & x , int & y)
 {
- int temp;
- temp = x;
- x = y;
- y = temp;
+    int temp;
+    temp = x;
+    x = y;
+    y = temp;
 }
 
 int main()
 {
- int a ,b;
- a =10;
- b=20;
- swap(a ,b);
- printf("%d %d", a ,b);
+    int a ,b;
+    a =10;
+    b=20;
+    swap(a ,b);
+    printf("%d %d", a ,b);
 }
 ```
 
@@ -450,15 +450,15 @@ int main()
 #include<stdio.h>
 void fun(int A[ ] , int n) /* int *A its a general method which is pointer to int it may array also. */
 {
- int i;
- for(i=0; i<n ; i++)
- printf("%d", A[i]);
+    int i;
+    for(i=0; i<n ; i++)
+    printf("%d", A[i]);
 }
 
 int main()
 {
- int A[5] = {2,4,6,8,10};
- fun(A,5);
+    int A[5] = {2,4,6,8,10};
+    fun(A,5);
 }
 ```
 
@@ -479,13 +479,13 @@ struct Rectangle
 
 int area(struct Rectangle r1)
 {
- return r1.length*r1.breadth;
+    return r1.length*r1.breadth;
 }
 
 int main()
 {
- struct Rectangle r = {10,5};
- printf("% d", area(r));
+    struct Rectangle r = {10,5};
+    printf("% d", area(r));
 }
 ```
 
@@ -510,15 +510,15 @@ struct Rectangle
 
 int area(struct Rectangle &r1) /* Error here check this program */
 {
- return r1.length*r1.breadth;
+    return r1.length*r1.breadth;
 }
 
 int main()
 {
- struct Rectangle r = {10,5};
- printf("%d", area(r));
+    struct Rectangle r = {10,5};
+    printf("%d", area(r));
 
- return 0;
+    return 0;
 }
 ```
 
@@ -541,15 +541,15 @@ struct Rectangle
 
 void changeLength(struct Rectangle *p , int l)
 {
- p->length = l;
- printf("%d",p->length);
+    p->length = l;
+    printf("%d",p->length);
 }
 
 int main()
 {
- struct Rectangle r = {10,5};
-  printf("length before: %d\n",r.length);
- changeLength(&r, 20);
+    struct Rectangle r = {10,5};
+    printf("length before: %d\n",r.length);
+    changeLength(&r, 20);
 }
 ```
 
