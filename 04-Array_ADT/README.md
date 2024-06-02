@@ -934,7 +934,7 @@ int main()
 }
 ```
 
-## Array C++ class
+## Array C++ with templates
 
 ```c
 #include <iostream>
