@@ -8,4 +8,6 @@
 
 [Array_representation](./03-Array_representation/) ✅
 
-[Array_ADT](./04-Array_ADT/) ⏳
+[Array_ADT](./04-Array_ADT/) ✅
+
+[Strings](./05-Strings/) ⏳
