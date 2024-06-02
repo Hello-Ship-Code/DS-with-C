@@ -131,7 +131,7 @@ int main()
 
 ## validate a string
 
-- There are two methods to check weather a string is valid or not else we can use regular expression.
+- There are two methods to check weather a string is valid or not or else we can use regular expression.
 
 ```c
 valid(char *name)
