@@ -57,8 +57,8 @@ void fun(int n)
 
 ## Example:2
 
-- This is the excat copy of the above program, But the only change is where we have used the `fun()` call.
-- In this the funtion is declared before `print` statement. So, the tracing happens differently as shown in the picture.
+- This is the exact copy of the above program, But the only change is where we have used the `fun()` call.
+- In this the function is declared before `print` statement. So, the tracing happens differently as shown in the picture.
 
 - First the `fun` calls itself, Now the value have changed to `2`. So, the `fun` is called instead `printf` statement until the condition is satisfied. As, Shown in the image. Then after the condition is satisfied the `printf` statement will be executed.
 
