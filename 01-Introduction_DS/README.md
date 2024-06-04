@@ -17,7 +17,7 @@ Program Code
 - Arrays
 - Matrices
 - Linked List
-  
+
 ### logical data structures ( utilization )
 
 - Stack
@@ -102,7 +102,7 @@ Memory is divided into bytes. Chunk of bytes makes memory/storage. Every byte ha
 ## static memory allocation
 
 - When ever the memory is allocated before run or compile time it's know as static memory allocation.
-- When ever a program is runned the compiler will divide the memory into three parts `Code Section`,`Stack`,`Heap`. The code will reside in the code section & when we compile the program any data is assigned and stored in the stack.
+- When ever a program is running, At that time the compiler will divide the memory into three parts `Code Section`,`Stack`,`Heap`. The code will reside in the code section & when we compile the program any data is assigned and stored in the stack.
 - In the below example when we have declare int, float according the compiler 2/4 bytes are assigned to the integer. The storage is assigned in stack also know as stack form.
 
 ![static_memory](../Images/static_memory.png)
