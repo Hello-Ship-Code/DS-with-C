@@ -10,4 +10,6 @@
 
 [Array_ADT](./04-Array_ADT/) ✅
 
-[Strings](./05-Strings/) ⏳
+[Strings](./05-Strings/) ✅
+
+[Matrices](./06-Matrices/)  ⏳
