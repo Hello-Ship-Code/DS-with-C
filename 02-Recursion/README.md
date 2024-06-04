@@ -9,9 +9,9 @@
 - Time complexity
 - Recursion Relation
 
-## Recursion
+## Recursions
 
-- A function calling itself is called recursion.
+- A function calling itself is called as recursion.
 - Recursion is the process of repeating items in a self-similar way. In programming languages, if a program allows you to call a function inside the same function, then it is called a recursive call of the function.
 - There must be a base condition to terminate the recursion else it'll go into infinite loop.
 

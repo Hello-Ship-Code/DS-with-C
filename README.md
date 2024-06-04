@@ -1,6 +1,6 @@
 # Data Structures with C & C++
 
-[Essentials_Cpp](./00-Introduciton-C//) ✅
+[Essentials_Cpp](./00-Introduciton-C/) ✅
 
 [Introduction_DS](./01-Introduction_DS/) ✅
 

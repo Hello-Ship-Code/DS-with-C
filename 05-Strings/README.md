@@ -30,12 +30,51 @@ scanf("%s",name); // this only takes a single word (Taj mahel)
 gets(name); // takes multiple words in a string
 ```
 
+## Using C-style strings with gets (not recommended)
+
+```c
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+    char name[100];
+    printf("Enter a name: ");
+    gets(name); // gets is unsafe and not recommended
+    printf("\nHello, %s\n", name);
+    return 0;
+}
+
+```
+
+## Using std::getline
+
+```c
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string name;
+    cout << "Enter a name: ";
+    getline(cin, name);
+    cout << "Hello, " << name << endl;
+    return 0;
+}
+
+```
+
 ## Length of a string
 
 ```c
 int main()
 {
     char s[] = "welcome";
+    int i; // If not declared here it'll give out of scope error as we are using n outside for loop;
     for(int i=0;s[i]!='\0';i++)
     {}
     printf("Length of string S = %d",i);
@@ -49,44 +88,59 @@ int main()
 ```c
 int main()
 {
-    char s[] = "WELCOME";
-    char s[] = "WeLCom4"; // if we have other then alphabets it'll be untouched
-    for(int i=0;s[i]!='\0';i++)
+    char A[] = "Welcome";
+    // char A[] = "WeLCom4"; // if we have other then alphabets it'll be untouched
+    for(int i=0;A[i]!='\0';i++)
     {
         // s[i]=s[i]+32; to covert them to lower
         // s[i]=s[i]-32; to convert them to upper
-        if(a[i]>=65 && a[i]<=90)
-            a[i]+=32;
-        else if(a[i]>=97 or 'a' && a[i]<=122)
-            a[i]-=32;
+        if(A[i]>=65 && A[i]<90)
+            {
+                A[i]+=32;
+            }
+            else if( A[i]>=97 && A[i]<122)
+            {
+                A[i]-=32;
+            }
     }
-    printf("%s",s);
+    printf("Length of string A = %d\n",i);
+    printf("The string %s: ",A);
     return 0;
 }
-
+output: wELCOME;
 ```
 
 ## Counting vowels and consonents
 
 ```c
-int main()
-{
-    char s[] = "How are you";
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string a;
     int vcount = 0, ccount = 0;
-    for(int i=0;s[i]!='\0';i++)
-    {
-        if (a[i]='a' || 'i' ....||'E') 
-        {
+
+    cout << "Enter a string: ";
+    getline(cin, a);
+
+    for (int i = 0; i < a.length(); ++i) {
+        char ch = a[i];
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
             vcount++;
-        }
-        else if((a[i]>=65 && a[i]<=90) || (a[i]>=97 && a[i]<=122))
-        {
+        } else if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
             ccount++;
         }
     }
-    printf("Length of string S = %d",i);
+
+    cout << "Number of vowels: " << vcount << endl;
+    cout << "Number of consonants: " << ccount << endl;
+
     return 0;
 }
+
 
 ```
 
@@ -112,21 +166,30 @@ int main()
 What if we have white space ( continue amount of spaces )
 
 ```c
-int main()
-{
-    char a[] = "How are you";
-    //char a[] = "How are   u";
-    int word=0;
-    for(int i=0;a[i]!='\0';i++)
-    {
-        if(a[i]==' ' && a[i-1]!=' ')
-        {
-            word++;
+#include <iostream>
+
+int main() {
+    char a[] = "How are you";  // Example with normal spacing
+    // char a[] = "How are   u";  // Example with multiple spaces
+
+    int word = 0;
+    bool inWord = false;
+
+    for(int i = 0; a[i] != '\0'; i++) {
+        if(a[i] != ' ') {
+            if(!inWord) {
+                word++;
+                inWord = true;
+            }
+        } else {
+            inWord = false;
         }
     }
-    printf("Length of string S = %d",word+1);
+
+    printf("Number of words = %d\n", word);
     return 0;
 }
+
 ```
 
 ## validate a string
@@ -134,28 +197,40 @@ int main()
 - There are two methods to check weather a string is valid or not or else we can use regular expression.
 
 ```c
-valid(char *name)
-{
-    for(int i=0;name[i]!='\0';i++ )
-    {
-        if(!(name[i]>=65 && name[i]<=90) && !(name[i]>=97 && name[i]<=122) && !(name[i]>=48 && name[i]<=57))
-        {
-            return 0;
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Function to check if a string is alphanumeric
+bool isAlphanumeric(const string &name) {
+    for (int i = 0; i < name.length(); ++i) {
+        if (!(name[i] >= 'A' && name[i] <= 'Z') && 
+            !(name[i] >= 'a' && name[i] <= 'z') && 
+            !(name[i] >= '0' && name[i] <= '9')) {
+            return false;
         }
     }
-    return 1;
+    return true;
 }
-int main()
-{
-    char *name="Ani?321";
-    if(valid(name)){
-        printf("valid string");
+
+int main() {
+    string name;
+    cout << "Enter a string: ";
+    getline(cin, name);
+
+    if (isAlphanumeric(name)) {
+        cout << "The string is alphanumeric." << endl;
+    } else {
+        cout << "The string contains non-alphanumeric characters." << endl;
+        return 0;
     }
-    else
-    {
-        printf("invalid string");
-    }
+
+    // Further processing can be done here if the string is alphanumeric
+
+    return 0;
 }
+
 ```
 
 ## Reverse a string
@@ -597,3 +672,43 @@ Types of Permutations
 - Combinatorial Optimization: Problems like the traveling salesman problem involve finding the optimal permutation of a set of elements.
 - Probability: Calculating probabilities of different outcomes often involves permutations.
 - Computer Science: Permutations are used in algorithms and data structures.
+
+we are using
+
+- State space tree ( cause the leafs are showing us the results )
+- Backtracking
+- finding out all permutations is know as `Brute Force`.
+- recursion
+
+```C
+#include <iostream>
+
+using namespace std;
+
+void perm(char s[], int k) {
+    static int a[10] = {0};    // Array to track which characters are used
+    static char res[10];       // Array to store the current permutation
+
+    if (s[k] == '\0') {        // Base case: if we reach the end of the string
+        res[k] = '\0';         // Null-terminate the result string
+        cout << res << endl;   // Output the current permutation
+    } else {
+        for (int i = 0; s[i] != '\0'; i++) {   // Loop through all characters in the input string
+            if (a[i] == 0) {   // If the character s[i] is not yet used in the current permutation
+                res[k] = s[i]; // Include s[i] in the current position of the result
+                a[i] = 1;      // Mark s[i] as used
+                perm(s, k + 1); // Recur for the next position
+                a[i] = 0;      // Backtrack: unmark s[i] as used
+            }
+        }
+    }
+}
+
+int main() {
+    char s[] = "abc";
+    perm(s, 0);   // Start generating permutations from index 0
+    return 0;
+}
+```
+
+---End
