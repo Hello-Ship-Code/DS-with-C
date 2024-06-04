@@ -87,72 +87,115 @@ int main()
 - Now we do the same for C++
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
-#include<iostream>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+
 using namespace std;
 
-class Diagonal{
+// Class to represent a diagonal matrix
+class Diagonal {
     private:
-        int n;
-        int *A;
-    
+        int n;      // Size of the matrix (n x n)
+        int *A;     // Pointer to dynamically allocated array to store diagonal elements
+
     public:
-        Diagonal(){
-            n=2;
+        // Default constructor initializing a 2x2 matrix
+        Diagonal() {
+            n = 2;
             A = new int[2];
         }
-        Diagonal(int n){
-            this->n=n;
+
+        // Parameterized constructor to initialize an n x n matrix
+        Diagonal(int n) {
+            this->n = n;
             A = new int[n];
         }
+
+        // Member function to set an element at position (i, j)
         void set(int i, int j, int x);
+
+        // Member function to get an element at position (i, j)
         int get(int i, int j);
+
+        // Member function to display the matrix
         void Display();
-        ~Diagonal(){delete []A;}
-}
-void Diagonal::set(int i, int j, int x)
-{
-    if(i==j)
-    {
-        A[i-1]=x;
+
+        // Destructor to free dynamically allocated memory
+        ~Diagonal() {
+            delete [] A;
+        }
+};
+
+// Destructor definition outside the class
+// Diagonal::~Diagonal() {
+//     delete[] A;
+// }
+
+
+// Function to set an element at position (i, j) if it's on the diagonal
+void Diagonal::set(int i, int j, int x) {
+    if (i == j) {
+        A[i - 1] = x; // Adjust for 0-based indexing
     }
 }
 
-int Diagonal::get(int i, int j){
-    if(i==j)
-        return A[i-1];
-    return 0;
+// Function to get an element at position (i, j)
+int Diagonal::get(int i, int j) {
+    if (i == j) {
+        return A[i - 1]; // Return the diagonal element
+    }
+    return 0; // Return 0 for non-diagonal elements
 }
 
-void Diagonal::Display(){
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            if(i==j)
-            {
-                cout<<A[i]<<" ";
-            }
-            else
-            {
-                cout<<"0 ";
+// Function to display the matrix
+void Diagonal::Display() {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) {
+                cout << A[i] << " "; // Print diagonal element
+            } else {
+                cout << "0 "; // Print 0 for non-diagonal elements
             }
         }
-        cout<<endl;
+        cout << endl; // New line after each row
     }
 }
 
-int main()
-{
-    Diagonal d(4);
+// Main function to demonstrate the usage of the Diagonal class
+int main() {
+    Diagonal d(4); // Create a 4x4 diagonal matrix
 
-    d.set(1,1,1);d.set(2,2,2);d.set(3,3,3);d.set(4,4,4);
+    // Set diagonal elements
+    d.set(1, 1, 1);
+    d.set(2, 2, 2);
+    d.set(3, 3, 3);
+    d.set(4, 4, 4);
 
-    printf("%d \n",d.get(1,1));
+    // Get and print the value at position (1, 1)
+    printf("%d \n", d.get(1, 1));
 
+    // Display the entire matrix
     d.Display();
+
     return 0;
 }
 
 ```
+
+## Lower Triangular Matrix
+
+- All lower triangle are non-zero and upper are zero
+
+## Upper Triangular Matrix
+
+## Symmetric Matrix
+
+## Tri diagonal Matrix
+
+## Band Matrix
+
+## Toeplitz Matrix
+
+## Sparse Matrix
