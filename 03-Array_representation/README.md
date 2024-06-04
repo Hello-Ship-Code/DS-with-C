@@ -20,7 +20,7 @@ int A [ 5 ]; // Initialize or declaration
 A[ 2 ] = 15; // Access
 ```
 
-- Some ways of Declaring and initialization of array are as follows
+- Some ways of Declaring and initialization of array are as follows.
 - if you have given the size of the array and only give 1 or 2 values the remaining values will be initialize with `0`.
 
 int A[ 5 ] ; </br>
