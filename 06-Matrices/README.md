@@ -202,7 +202,7 @@ m =
 
 - we use row-Major
 A = 1 | 5 2 | 6 7 3 | 8 9 1 4
-A[i,j] = [ i ( i - 1 ) / 2] + j - 1
+A[i,j] = [ i * ( i - 1 ) / 2 + (j - 1)]
 
 ```C
 #include <stdio.h>
@@ -278,7 +278,7 @@ int main() {
 
 - we use Column-Major
 A = 1 5 6 8 | 2 7 9 | 3 1 | 4
-A[i,j] = [ n * ( j - 1 ) + ( j - 2) + ( j - 1 ) / 2  +  i - j ]
+A[i,j] = [  ( j - 1 ) * n - (( j - 2) * ( j - 1 )) / 2  +  i - j ]
 
 ```C
 #include <stdio.h>
@@ -442,7 +442,7 @@ int main() {
 $$m[i,j]=0  if(i>j) $$
 $$m[i,j]=non-zero  if(i<=j) $$
 - non-zero = 5 + 4 + 3 + 2 + 1
-- non-zero = $$n^2$$ - n * ( n + 1 ) / 2$$
+- non-zero = $$n^2 - n * ( n + 1 ) / 2$$
 - zero = n * ( n - 1 ) / 2
 
 m =  
@@ -454,7 +454,7 @@ m =
 - how to insert
 - we use row-Major
 A = 1 5 6 7 | 2 8 9 | 3 1 | 4
-A[i,j] = [ (i-1) * n - ( i - 2) * ( i - 1 ) / 2 ] + (j - i )
+A[i,j] = [ (i-1) * n - (( i - 2) * ( i - 1 )) / 2  + j - i ]
 
 - we use Column-Major
 A = 1 | 5 2 | 6 8 3 | 7 9 1 4
@@ -502,8 +502,160 @@ size = 3* n - 2 for size
 we can't use row & column major as they are not uniform
 we use diagonals
 
-## Band Matrix
+## Square band diagnol
+
+- there are more than and equal number of bands known as square band matrix
 
 ## Toeplitz Matrix
 
+- ALl the element in diagonal are same and there are no non-zero elements
+
+m[i,j] = m[i-1,j-1]
+elements to store n + n-1
+A = 2 3 4 | 1 4
+index A[i] [j]
+case 1: if i<=j index = j-i
+case 2: if i>j index = n + i - j - 1
+
+m =  
+| 2 3 4 |  
+| 1 2 3 |  
+| 4 1 2 |  
+
 ## Sparse Matrix
+
+## formulas and explanation
+
+### diagonal Matrix
+
+A diagonal matrix is a matrix in which the entries outside the main diagonal are all zero.
+
+Conditions:
+
+- Only diagonal elements are non-zero.
+- Non-zero elements are stored in a 1D array of size \( n \).
+
+Formulas:
+
+- Row-major: \( A[i \cdot (i-1)/2 + (j-1)] \)
+- Column-major: \( A[(j-1) \cdot (j-1)/2 + (i-1)] \)
+
+### lower Triangular Matrix
+
+A lower triangular matrix is a matrix in which all the entries above the main diagonal are zero.
+
+Conditions:
+
+- Non-zero elements satisfy \( i \geq j \).
+- Non-zero elements are stored in a 1D array of size \( n(n+1)/2 \).
+
+Formulas:
+
+- Row-major: \( A[i \cdot (i-1)/2 + (j-1)] \)
+- Column-major: \( A[(j-1) \cdot (2n-j+2)/2 + (i-j)] \)
+
+### upper Triangular Matrix
+
+An upper triangular matrix is a matrix in which all the entries below the main diagonal are zero.
+
+Conditions:
+
+- Non-zero elements satisfy \( i \leq j \).
+- Non-zero elements are stored in a 1D array of size \( n(n+1)/2 \).
+
+Formulas:
+
+- Row-major: \( A[i \cdot (2n-i+1)/2 + (j-i)] \)
+- Column-major: \( A[(j \cdot (j-1)/2) + (i-1)] \)
+
+### symmetric Matrix
+
+A symmetric matrix is a square matrix that is equal to its transpose.
+
+Conditions:
+
+- Non-zero elements satisfy \$$(A[i] [j] = A[j] [i])$$
+- Non-zero elements are stored in a 1D array of size \( n(n+1)/2 \).
+
+Formulas:
+
+- Row-major: If \( i \geq j \): \( A[i \cdot (i-1)/2 + (j-1)] \), else: \( A[j \cdot (j-1)/2 + (i-1)] \)
+- Column-major: If \( i \geq j \): \( A[(j-1) \cdot (2n-j+2)/2 + (i-j)] \), else: \( A[(i-1) \cdot (2n-i+2)/2 + (j-i)] \)
+
+### Tri Diagonal Matrix
+
+A tri-diagonal matrix has non-zero elements only on the main diagonal and the diagonals directly above and below it.
+
+Conditions:
+
+- Non-zero elements satisfy \( |i - j| \leq 1 \).
+- Non-zero elements are stored in a 1D array of size \( 3n - 2 \).
+
+Formulas:
+
+- Row-major:  
+  - Main diagonal: \( A[i-1] \)
+  - Lower diagonal: \( A[n-1 + (i-1)] \)
+  - Upper diagonal: \( A[2n-1 + (i-2)] \)
+
+- Column-major:  
+  - Main diagonal: \( A[i-1] \)
+  - Lower diagonal: \( A[n-1 + (j-1)] \)
+  - Upper diagonal: \( A[2n-1 + (j-2)] \)
+
+### Band Matrix
+
+A band matrix has non-zero elements around the main diagonal within a certain bandwidth.
+
+Conditions:
+
+- Non-zero elements are within bandwidth \( k \).
+- Non-zero elements are stored in a 1D array.
+
+Formulas:
+
+- Row-major:  
+  - \( A[i \cdot (2k+1) + (j-i+k)] \)
+- Column-major:  
+  - \( A[j \cdot (2k+1) + (i-j+k)] \)
+
+### toeplitz Matrix
+
+A Toeplitz matrix has constant diagonals, i.e., each descending diagonal from left to right is constant.
+
+Conditions:
+
+- Non-zero elements satisfy \( A[i] [j] = A[i-1] [j-1] \).
+- Non-zero elements are stored in a 1D array of size \( 2n - 1 \).
+
+Formulas:
+
+- Row-major:  
+  - If \( i \leq j \): \( A[j-i] \)
+  - If \( i > j \): \( A[n + i-j-1] \)
+- Column-major:  
+  - If \( j \leq i \): \( A[i-j] \)
+  - If \( j > i \): \( A[n + j-i-1] \)
+
+### sparse Matrix
+
+A sparse matrix is a matrix in which most of the elements are zero.
+
+Conditions:
+
+- Sparse matrices can be stored efficiently using various techniques such as compressed row storage, compressed column storage, or a list of tuples.
+
+Formulas:
+
+- **Compressed Row Storage**:
+  - Row-major:  
+    - Values array: \( A[\text{value\_index}] \)
+    - Column indices array: \( A[\text{column\_index}] \)
+    - Row pointers array: \( A[\text{row\_pointer}] \)
+- **Compressed Column Storage**:
+  - Column-major:  
+    - Values array: \( A[\text{value\_index}] \)
+    - Row indices array: \( A[\text{row\_index}] \)
+    - Column pointers array: \( A[\text{column\_pointer}] \)
+
+These formulas and conditions provide a guide for storing and accessing elements in various types of matrices efficiently using both row-major and column-major orders.
