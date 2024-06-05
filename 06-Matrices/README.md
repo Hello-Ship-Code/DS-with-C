@@ -186,13 +186,321 @@ int main() {
 
 ## Lower Triangular Matrix
 
-- All lower triangle are non-zero and upper are zero
+- A Matrix `m` `n x n` = `5 x 5` is said to be Lower Triangular Matrix. All lower triangle are non-zero and upper are zero
+$$m[i,j]=0  if(i<=j) $$
+$$m[i,j]=non-zero  if(i>j) $$
+- non-zero = 1 + 2 + 3 + 4 + 5
+- non-zero = $$n^2$$ - n(n+1)/2
+
+m =  
+| 1 0 0 0 |  
+| 5 2 0 0 |  
+| 6 7 3 0 |  
+| 8 9 1 4 |  
+
+### how to insert
+
+- we use row-Major
+A = 1 | 5 2 | 6 7 3 | 8 9 1 4
+A[i,j] = [ i ( i - 1 ) / 2] + j - 1
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a lower triangular matrix
+struct Matrix {
+    int *A;  // Pointer to store non-zero elements of the lower triangular matrix
+    int n;   // Dimension of the matrix (n x n)
+};
+
+// Function to set an element in the lower triangular matrix
+void set(struct Matrix *m, int i, int j, int x) {
+    if (i >= j) {
+        m->A[i * (i - 1) / 2 + j - 1] = x;
+    }
+}
+
+// Function to get an element from the lower triangular matrix
+int get(struct Matrix m, int i, int j) {
+    if (i >= j) {
+        return m.A[i * (i - 1) / 2 + j - 1];
+    }
+    return 0;
+}
+
+// Function to display the lower triangular matrix
+void Display(struct Matrix m) {
+    for (int i = 1; i <= m.n; i++) {
+        for (int j = 1; j <= m.n; j++) {
+            if (i >= j) {
+                printf("%d ", m.A[i * (i - 1) / 2 + j - 1]);
+            } else {
+                printf("0 ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Matrix m;
+    int i, j, x;
+
+    // Prompt the user to enter the dimension of the matrix
+    printf("Enter Dimension: ");
+    scanf("%d", &m.n);
+
+    // Allocate memory to store the non-zero elements of the lower triangular matrix
+    m.A = (int *)malloc(m.n * (m.n + 1) / 2 * sizeof(int));
+
+    // Prompt the user to enter all the elements of the matrix
+    printf("Enter all the elements:\n");
+    for (i = 1; i <= m.n; i++) {
+        for (j = 1; j <= m.n; j++) {
+            scanf("%d", &x);
+            set(&m, i, j, x);
+        }
+    }
+
+    // Display the value at the first position (1,1) and the whole matrix
+    printf("\n\n");
+    printf("%d\n", get(m, 1, 1));
+    Display(m);
+
+    // Free the allocated memory
+    free(m.A);
+
+    return 0;
+}
+
+```
+
+- we use Column-Major
+A = 1 5 6 8 | 2 7 9 | 3 1 | 4
+A[i,j] = [ n * ( j - 1 ) + ( j - 2) + ( j - 1 ) / 2  +  i - j ]
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a lower triangular matrix
+struct Matrix {
+    int *A;  // Pointer to store non-zero elements of the lower triangular matrix
+    int n;   // Dimension of the matrix (n x n)
+};
+
+// Function to set an element in the lower triangular matrix
+void set(struct Matrix *m, int i, int j, int x) {
+    if (i >= j) {
+        m->A[ m.n*( j - 1 ) + ( j - 2) + ( j - 1 ) / 2  + i - j ] = x;
+    }
+}
+
+// Function to get an element from the lower triangular matrix
+int get(struct Matrix m, int i, int j) {
+    if (i >= j) {
+        return m.A[ m->n*( j - 1 ) + ( j - 2) + ( j - 1 ) / 2  + i - j ];
+    }
+    return 0;
+}
+
+// Function to display the lower triangular matrix
+void Display(struct Matrix m) {
+    for (int i = 1; i <= m.n; i++) {
+        for (int j = 1; j <= m.n; j++) {
+            if (i >= j) {
+                printf("%d ", m.A[ m.n*( j - 1 ) + ( j - 2) + ( j - 1 ) / 2  + i - j ]);
+            } else {
+                printf("0 ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Matrix m;
+    int i, j, x;
+
+    // Prompt the user to enter the dimension of the matrix
+    printf("Enter Dimension: ");
+    scanf("%d", &m.n);
+
+    // Allocate memory to store the non-zero elements of the lower triangular matrix
+    m.A = (int *)malloc(m.n * (m.n + 1) / 2 * sizeof(int));
+
+    // Prompt the user to enter all the elements of the matrix
+    printf("Enter all the elements:\n");
+    for (i = 1; i <= m.n; i++) {
+        for (j = 1; j <= m.n; j++) {
+            scanf("%d", &x);
+            set(&m, i, j, x);
+        }
+    }
+
+    // Display the value at the first position (1,1) and the whole matrix
+    printf("\n\n");
+    printf("%d\n", get(m, 1, 1));
+    Display(m);
+
+    // Free the allocated memory
+    free(m.A);
+
+    return 0;
+}
+
+```
+
+### using C++
+
+```C
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+// Class to represent a lower triangular matrix
+class Matrix {
+private:
+    int *A;  // Pointer to store non-zero elements of the lower triangular matrix
+    int n;   // Dimension of the matrix (n x n)
+
+public:
+    // Constructor to initialize the matrix with a given dimension
+    Matrix(int size) {
+        n = size;
+        A = new int[n * (n + 1) / 2];
+    }
+
+    // Destructor to free the allocated memory
+    ~Matrix() {
+        delete[] A;
+    }
+
+    // Function to set an element in the lower triangular matrix
+    void set(int i, int j, int x) {
+        if (i >= j) {
+            A[i * (i - 1) / 2 + j - 1] = x;
+        }
+    }
+
+    // Function to get an element from the lower triangular matrix
+    int get(int i, int j) const {
+        if (i >= j) {
+            return A[i * (i - 1) / 2 + j - 1];
+        }
+        return 0;
+    }
+
+    // Function to display the lower triangular matrix
+    void display() const {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i >= j) {
+                    cout << A[i * (i - 1) / 2 + j - 1] << " ";
+                } else {
+                    cout << "0 ";
+                }
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    int n, i, j, x;
+
+    // Prompt the user to enter the dimension of the matrix
+    cout << "Enter Dimension: ";
+    cin >> n;
+
+    // Create a Matrix object
+    Matrix m(n);
+
+    // Prompt the user to enter all the elements of the matrix
+    cout << "Enter all the elements:" << endl;
+    for (i = 1; i <= n; i++) {
+        for (j = 1; j <= n; j++) {
+            cin >> x;
+            m.set(i, j, x);
+        }
+    }
+
+    // Display the value at the first position (1,1) and the whole matrix
+    cout << "\n" << m.get(1, 1) << endl;
+    m.display();
+
+    return 0;
+}
+
+```
 
 ## Upper Triangular Matrix
 
+- A Matrix `m` `n x n` = `5 x 5` is said to be upper Triangular Matrix. All lower triangle are non-zero and upper are zero
+$$m[i,j]=0  if(i>j) $$
+$$m[i,j]=non-zero  if(i<=j) $$
+- non-zero = 5 + 4 + 3 + 2 + 1
+- non-zero = $$n^2$$ - n * ( n + 1 ) / 2$$
+- zero = n * ( n - 1 ) / 2
+
+m =  
+| 1 5 6 7 |  
+| 0 2 8 9 |  
+| 0 0 3 1 |  
+| 0 0 0 4 |  
+
+- how to insert
+- we use row-Major
+A = 1 5 6 7 | 2 8 9 | 3 1 | 4
+A[i,j] = [ (i-1) * n - ( i - 2) * ( i - 1 ) / 2 ] + (j - i )
+
+- we use Column-Major
+A = 1 | 5 2 | 6 8 3 | 7 9 1 4
+A[i,j] = [ j * ( j - 1 ) / 2  +  i - 1 ]
+
 ## Symmetric Matrix
 
+- A Matrix `m` `n x n` = `5 x 5` is said to be Symmetric Matrix. All symmetric are non-zero and upper are zero
+- if we know i,j == j,i. So, we can just store any one and reduce the value.
+$$m[i,j]=0  if(i>j) $$
+$$m[i,j]=non-zero  if(i<=j) $$
+- non-zero = 5 + 4 + 3 + 2 + 1
+- non-zero = $$n^2$$ - n * ( n + 1 ) / 2$$
+- zero = n * ( n - 1 ) / 2
+
+m =  
+| 1 1 1 1 |  
+| 1 2 2 2 |  
+| 1 2 3 3 |  
+| 1 2 3 4 |  
+
+- how to insert
+- we use row-Major
+A = 1 5 6 7 | 2 8 9 | 3 1 | 4
+A[i,j] = [ (i-1) * n - ( i - 2) * ( i - 1 ) / 2 ] + (j - i )
+
+- we use Column-Major
+A = 1 | 5 2 | 6 8 3 | 7 9 1 4
+A[i,j] = [ j * ( j - 1 ) / 2  +  i - 1 ]
+
 ## Tri diagonal Matrix
+
+m =  
+| 1 1 0 0 |  
+| 1 2 2 0 |  
+| 0 2 3 3 |  
+| 0 0 3 4 |  
+
+main = i - j = 0 index = i-1
+lower = i - j = 1 index = n-1+i-1
+upper = i - j = -1 index 2*n-1+i-1
+m[i,j] = non-zero if | i - j | <= 1
+m[i,j] = 0 if | i - j |  1  
+size = 3* n - 2 for size
+we can't use row & column major as they are not uniform
+we use diagonals
 
 ## Band Matrix
 
