@@ -493,10 +493,10 @@ m =
 | 0 2 3 3 |  
 | 0 0 3 4 |  
 
-main = i - j = 0 index = i-1
-lower = i - j = 1 index = n-1+i-1
-upper = i - j = -1 index 2*n-1+i-1
-m[i,j] = non-zero if | i - j | <= 1
+main = i - j = 0 index = i-1  
+lower = i - j = 1 index = n-1+i-1  
+upper = i - j = -1 index 2*n-1+i-1  
+m[i,j] = non-zero if | i - j | <= 1  
 m[i,j] = 0 if | i - j |  1  
 size = 3* n - 2 for size
 we can't use row & column major as they are not uniform
