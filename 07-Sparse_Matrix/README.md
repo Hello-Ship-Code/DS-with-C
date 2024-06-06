@@ -16,20 +16,78 @@ A **sparse matrix** is a matrix in which the majority of the elements are zero. 
 
 Storing sparse matrices efficiently is crucial to save space and computational resources. Common storage formats include:
 
-1. **Compressed Sparse Row (CSR) Format**:
-    - **Data**: Stores the non-zero values.
-    - **Indices**: Stores the column indices of the elements in the data array.
-    - **Index Pointer**: Stores the index in the data array where each row starts.
-  
-2. **Compressed Sparse Column (CSC) Format**:
-    - Similar to CSR, but it compresses columns instead of rows.
+## Compressed Sparse Row (CSR) Format
 
-3. **Coordinate List (COO) Format**:
-    - **Row Indices**: Stores the row indices of non-zero elements.
-    - **Column Indices**: Stores the column indices of non-zero elements.
-    - **Data**: Stores the non-zero values.
+- **Data**: Stores the non-zero values.
+- **Indices**: Stores the column indices of the elements in the data array.
+- **Index Pointer**: Stores the index in the data array where each row starts.
+- Here we consider three array as mentioned above,
+  1. To store the data.
+  2. To store the column.
+  3. data
 
-4. **Diagonal Storage**: Used for matrices with non-zero elements primarily along the diagonal lines.
+| 0 0 3 0 4 |  
+| 0 0 5 7 0 |  
+| 0 0 0 0 0 |  
+| 0 2 6 0 0 |  
+
+### Data Array
+
+`data = [3, 4, 5, 7, 2, 6]`
+Row 1: Values are 3 and 4.
+Row 2: Values are 5 and 7.
+Row 3: No non-zero values.
+Row 4: Values are 2 and 6.
+Indices Array (indices)
+
+here we are consider the matrix starts from `0` not `1`.  
+`indices = [2, 4, 2, 3, 1, 2]`  
+Corresponds to the data array:  
+3 (row 1, column 2)  
+4 (row 1, column 4)  
+5 (row 2, column 2)  
+7 (row 2, column 3)  
+2 (row 4, column 1)  
+6 (row 4, column 2)  
+
+Index Pointer Array (indptr)  
+`indptr = [0, 2, 4, 4, 6]`
+Row 1 starts at index 0 in data.
+Row 2 starts at index 2 in data.
+Row 3 starts at index 4 in data (but has no non-zero elements).
+Row 4 starts at index 4 in data (ends at index 6).
+The last entry (6) is the length of the data array, indicating the end of the last row.
+Here we add previous elements with current element in the row.
+
+## Compressed Sparse Column (CSC) Format
+
+- Similar to CSR, but it compresses columns instead of rows.
+
+## Coordinate List (COO) Format
+
+- **Row Indices**: Stores the row indices of non-zero elements.
+- **Column Indices**: Stores the column indices of non-zero elements.
+- **Data**: Stores the non-zero values.
+- Also known as 3-column representation
+
+| 0 0 3 0 4 |  
+| 0 0 5 7 0 |  
+| 0 0 0 0 0 |  
+| 0 2 6 0 0 |  
+
+R | C | E  
+-> left blank intentionally ( we use to store the data of the matrix)  
+4 | 5 | 6 This is th data (No rows | No of columns | No elements )  
+1 | 3 | 3  
+1 | 5 | 4  
+2 | 3 | 5  
+2 | 4 | 7  
+4 | 2 | 2  
+4 | 3 | 6  
+
+## Diagonal Storage
+
+- Used for matrices with non-zero elements primarily along the diagonal lines.
 
 ### Operations on Sparse Matrices
 
@@ -64,22 +122,3 @@ In CSR format, it would be represented as:
 This compact representation allows efficient storage and computation, leveraging the sparsity of the matrix.
 
 Understanding and utilizing sparse matrices effectively is important for optimizing performance in large-scale computational problems.
-
-## Coordinate List (COO) Format
-
-- Also known as 3-column representation
-
-| 0 0 3 0 4 |  
-| 0 0 5 7 0 |  
-| 0 0 0 0 0 |  
-| 0 2 6 0 0 |  
-
-R | C | E  
--> left blank intentionally ( we use to store the data of the matrix)  
-4 | 5 | 6 This is th data (No rows | No of columns | No elements )  
-1 | 3 | 3  
-1 | 5 | 4  
-2 | 3 | 5  
-2 | 4 | 7  
-4 | 2 | 2  
-4 | 3 | 6  
