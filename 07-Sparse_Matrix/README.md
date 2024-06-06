@@ -50,14 +50,10 @@ Operations on sparse matrices often require specialized algorithms to avoid unne
 
 Consider a 4x5 matrix with many zeros:
 
-\[
-\begin{bmatrix}
-0 & 0 & 3 & 0 & 4 \\
-0 & 0 & 5 & 7 & 0 \\
-0 & 0 & 0 & 0 & 0 \\
-0 & 2 & 6 & 0 & 0 \\
-\end{bmatrix}
-\]
+| 0 0 3 0 4 |  
+| 0 0 5 7 0 |  
+| 0 0 0 0 0 |  
+| 0 2 6 0 0 |  
 
 In CSR format, it would be represented as:
 
@@ -68,3 +64,22 @@ In CSR format, it would be represented as:
 This compact representation allows efficient storage and computation, leveraging the sparsity of the matrix.
 
 Understanding and utilizing sparse matrices effectively is important for optimizing performance in large-scale computational problems.
+
+## Coordinate List (COO) Format
+
+- Also known as 3-column representation
+
+| 0 0 3 0 4 |  
+| 0 0 5 7 0 |  
+| 0 0 0 0 0 |  
+| 0 2 6 0 0 |  
+
+R | C | E  
+-> left blank intentionally ( we use to store the data of the matrix)  
+4 | 5 | 6 This is th data (No rows | No of columns | No elements )  
+1 | 3 | 3  
+1 | 5 | 4  
+2 | 3 | 5  
+2 | 4 | 7  
+4 | 2 | 2  
+4 | 3 | 6  
