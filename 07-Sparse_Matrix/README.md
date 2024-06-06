@@ -35,23 +35,26 @@ Storing sparse matrices efficiently is crucial to save space and computational r
 ### Data Array
 
 `data = [3, 4, 5, 7, 2, 6]`  
-Row 1: Values are 3 and 4.  
-Row 2: Values are 5 and 7.  
-Row 3: No non-zero values.  
-Row 4: Values are 2 and 6.  
+
+- Row 1: Values are 3 and 4.  
+- Row 2: Values are 5 and 7.  
+- Row 3: No non-zero values.  
+- Row 4: Values are 2 and 6.  
 
 ### Indices Array (indices)  
 
 - here we are consider the matrix starts from `0` not `1`.  
 
 `indices = [2, 4, 2, 3, 1, 2]`  
-Corresponds to the data array:  
-3 (row 1, column 2)  
-4 (row 1, column 4)  
-5 (row 2, column 2)  
-7 (row 2, column 3)  
-2 (row 4, column 1)  
-6 (row 4, column 2)  
+
+#### Corresponds to the data array
+
+- 3 (row 1, column 2)  
+- 4 (row 1, column 4)  
+- 5 (row 2, column 2)  
+- 7 (row 2, column 3)  
+- 2 (row 4, column 1)  
+- 6 (row 4, column 2)  
 
 ### Index Pointer Array (indptr)  
 
