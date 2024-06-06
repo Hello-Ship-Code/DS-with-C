@@ -22,9 +22,10 @@ Storing sparse matrices efficiently is crucial to save space and computational r
 - **Indices**: Stores the column indices of the elements in the data array.
 - **Index Pointer**: Stores the index in the data array where each row starts.
 - Here we consider three array as mentioned above,
-  1. To store the data.
-  2. To store the column.
-  3. data
+
+1. To store the data.
+2. To store the column number.
+3. To store the number of elements in the current 
 
 | 0 0 3 0 4 |  
 | 0 0 5 7 0 |  
@@ -33,14 +34,16 @@ Storing sparse matrices efficiently is crucial to save space and computational r
 
 ### Data Array
 
-`data = [3, 4, 5, 7, 2, 6]`
-Row 1: Values are 3 and 4.
-Row 2: Values are 5 and 7.
-Row 3: No non-zero values.
-Row 4: Values are 2 and 6.
-Indices Array (indices)
+`data = [3, 4, 5, 7, 2, 6]`  
+Row 1: Values are 3 and 4.  
+Row 2: Values are 5 and 7.  
+Row 3: No non-zero values.  
+Row 4: Values are 2 and 6.  
 
-here we are consider the matrix starts from `0` not `1`.  
+### Indices Array (indices)  
+
+- here we are consider the matrix starts from `0` not `1`.  
+
 `indices = [2, 4, 2, 3, 1, 2]`  
 Corresponds to the data array:  
 3 (row 1, column 2)  
@@ -50,14 +53,15 @@ Corresponds to the data array:
 2 (row 4, column 1)  
 6 (row 4, column 2)  
 
-Index Pointer Array (indptr)  
-`indptr = [0, 2, 4, 4, 6]`
-Row 1 starts at index 0 in data.
-Row 2 starts at index 2 in data.
-Row 3 starts at index 4 in data (but has no non-zero elements).
-Row 4 starts at index 4 in data (ends at index 6).
-The last entry (6) is the length of the data array, indicating the end of the last row.
-Here we add previous elements with current element in the row.
+### Index Pointer Array (indptr)  
+
+`indptr = [0, 2, 4, 4, 6]`  
+Row 1 starts at index 0 in data.  
+Row 2 starts at index 2 in data.  
+Row 3 starts at index 4 in data (but has no non-zero elements).  
+Row 4 starts at index 4 in data (ends at index 6).  
+The last entry (6) is the length of the data array, indicating the end of the last row.  
+Here we add previous elements with current element in the row.  
 
 ## Compressed Sparse Column (CSC) Format
 
