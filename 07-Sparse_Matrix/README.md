@@ -689,3 +689,7 @@ $$p(x) = 3x^5+2x^4+5x^2+2x+7$$
 
 - 3,2,5,2,7 are coefficients
 - 5,4,2,1,0 are the exponential
+
+```c
+
+```
