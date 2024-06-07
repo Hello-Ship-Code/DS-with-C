@@ -691,5 +691,110 @@ $$p(x) = 3x^5+2x^4+5x^2+2x+7$$
 - 5,4,2,1,0 are the exponential
 
 ```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+struct term{
+    int exp;
+    int coeff;
+};
+
+struct poly{
+    int n;
+    struct term *t;
+};
+
+void create(struct poly *p)
+{
+    printf("enter the number of elements: \n");
+    scanf("%d",&p->n);
+    
+    p->t=(struct term *)malloc(p->n*sizeof(struct term));
+    
+    printf("Enter all the elements: \n");
+    for(int i=0;i<p->n;i++)
+    {
+        scanf("%d%d",&p->t[i].coeff,&p->t[i].exp);
+    }
+}
+
+void display(struct poly p)
+{
+    for(int i=0;i<p.n;i++)
+        printf("%dx%d+",p.t[i].coeff,p.t[i].exp);
+    printf("\n");
+}
+
+int poly_sum(struct poly p)
+{
+    double sum=0;
+    int x;
+    printf("Enter the value of x\n");
+    scanf("%d",&x);
+    for(int i=0;i<p.n;i++)
+        sum+=p.t[i].coeff*pow(x,p.t[i].exp);
+    return sum;
+}
+
+struct poly *add(struct poly *p1,struct poly *p2)
+{
+    int i,j,k;
+    struct poly *sum;
+    sum=(struct poly*)malloc(sizeof(struct poly));
+    sum->t=(struct term*)malloc((p1->n+p2->n)*sizeof(struct term));
+    i=j=k=0;
+    printf("Working");
+    while(i<p1->n && j<p2->n)
+    {
+        if(p1->t[i].exp > p2->t[j].exp)
+        {
+            sum->t[k++] = p1->t[i++];
+        }
+        else if(p1->t[i].exp < p2->t[j].exp)
+        {
+            sum->t[k++] = p2->t[j++];
+        }
+        else 
+        {
+            sum->t[k].exp = p1->t[i].exp;
+            sum->t[k++].coeff = p1->t[i++].coeff + p2->t[j++].coeff;
+        }
+        
+    }
+    for(;i<p1->n;i++) sum->t[k++] = p1->t[i];
+    for(;j<p2->n;j++) sum->t[k++] = p2->t[j];
+    sum->n = k;
+    return sum;
+
+}
+
+int main()
+{
+    struct poly p1,p2,*p3;
+    create(&p1);
+    create(&p2);
+    printf("poly 1 \n");
+    display(p1);
+    printf("poly 2 \n");
+    display(p2);
+    // printf("%f",(double)poly_sum(p1));
+ 
+    p3=add(&p1,&p2);
+    display(*p3);
+
+
+    free(p1.t);
+    free(p2.t);
+    free(p3->t);
+    free(p3);
+
+
+    return 0;
+}
+
+
 
 ```
+
+---END---
