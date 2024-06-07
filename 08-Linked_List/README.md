@@ -16,7 +16,7 @@ The last node's pointer is typically `NULL`, indicating the end of the list. Lin
 ```c
 struct Node {
     int data;
-    struct Node* next;
+    struct Node* next; // this is known as self-referential structure
 };
 ```
 
@@ -32,3 +32,14 @@ struct Node {
 2. **Memory Waste**: If the array is not fully utilized, there can be wasted memory.
 3. **Costly Insertion and Deletion**: Inserting or deleting elements in an array involves shifting elements, which is costly in terms of time complexity (`O(n)` for worst-case scenarios).
 4. **Contiguous Memory**: Arrays require a contiguous block of
+
+### Simple Statements
+
+- **Linear Search (ls)** works on linked lists because it processes elements sequentially, matching the structure of linked lists which allows traversal from one node to the next.
+
+- **Binary Search (bs)** doesn’t work on linked lists because it relies on quick random access to the middle elements, which linked lists cannot provide efficiently due to their sequential access nature.
+
+```cpp
+
+
+```
