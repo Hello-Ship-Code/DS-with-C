@@ -25,7 +25,7 @@ Storing sparse matrices efficiently is crucial to save space and computational r
 
 1. To store the data.
 2. To store the column number.
-3. To store the number of elements in the current 
+3. To store the number of elements in the current
 
 | 0 0 3 0 4 |  
 | 0 0 5 7 0 |  
@@ -130,3 +130,69 @@ In CSR format, it would be represented as:
 This compact representation allows efficient storage and computation, leveraging the sparsity of the matrix.
 
 Understanding and utilizing sparse matrices effectively is important for optimizing performance in large-scale computational problems.
+
+c for sparse matrix
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Element{
+    int i;
+    int j;
+    int x;
+};
+
+struct sparse{
+    int m;
+    int n;
+    int num;
+    struct Element *ele;
+}
+
+void create(struct sparse *s)
+{
+    printf("Enter dimensions");
+    scanf("%d%d",&s->m,&s->n);
+    printf("Enter the number of non-zero elements");
+    scanf("%d",&s->num);
+
+    s->ele =(struct Element *)malloc(s->num*sizeof(struct Element));
+    printf("Enter the all the elements");
+    for(int i=0;i<s->num;i++)
+    {
+        scanf("%d%d%d",&s->ele[i].i,&s->ele[i].j,&s->ele[i].x);
+    }
+}
+
+void display(struct sparse s)
+{
+    int i,j,k=0;
+    for(i=0;i<s.m;i++)
+    {
+        for(j=0;j<s.n;j++)
+        {
+            if(i==s.ele[k].i && j==s.ele[k].j)
+            {
+                printf("%d ",s.ele[k++].x);
+            }
+            else
+            {
+                printf("0 ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    struct sparse s;
+
+    create(&s);
+    display(s);
+    
+    return 0;
+}
+
+```
