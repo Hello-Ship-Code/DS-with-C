@@ -680,3 +680,9 @@ int main() {
 - **Operator Restrictions**: Only existing operators can be overloaded, and their precedence and associativity remain unchanged.
 
 Operator overloading can greatly enhance the usability and readability of custom types in C++, allowing them to be manipulated similarly to built-in types.
+
+## Polynomial Representation
+
+Polynomials can be represented and manipulated in various ways. A common method is to use a linked list, where each node contains the coefficient and exponent of a term. This approach makes it easier to perform operations like addition and multiplication.
+
+$$p(x) = 3x^5+2x^4+5x^2+2x+7$$
