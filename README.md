@@ -12,4 +12,6 @@
 
 [Strings](./05-Strings/) ✅
 
-[Matrices](./06-Matrices/)  ⏳
+[Matrices](./06-Matrices/)  ✅
+
+[Sparse Matrix & polynomial representation](./07-Sparse_Matrix/) ⏳
