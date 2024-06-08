@@ -744,7 +744,6 @@ struct poly *add(struct poly *p1,struct poly *p2)
     sum=(struct poly*)malloc(sizeof(struct poly));
     sum->t=(struct term*)malloc((p1->n+p2->n)*sizeof(struct term));
     i=j=k=0;
-    printf("Working");
     while(i<p1->n && j<p2->n)
     {
         if(p1->t[i].exp > p2->t[j].exp)
