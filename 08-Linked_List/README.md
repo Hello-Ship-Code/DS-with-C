@@ -53,7 +53,7 @@ struct Node{
 void create(int a[], int n)
 {   
     int i;
-    struct Node *t, *last;
+    struct Node *first,*t, *last;
 
     first=(struct Node *)malloc(sizeof(struct Node));
 
@@ -69,6 +69,7 @@ void create(int a[], int n)
         last->next=t;
         last=t;
     }
+    return first;
 }
 
 void display(struct Node *p){
@@ -300,6 +301,43 @@ void rmv_dup(struct Node *p)
     }
 }
 
+// array
+void reverse1(struct Node *p)
+{ 
+    int *A,i=0;
+
+    struct Node *q;
+    A=(int *)malloc(sizeof(int));
+
+    while(q!=NULL)
+    {
+        A[i]=q->data;
+        q=q->next;
+        i++
+    }
+    q=p;
+    i--;
+    while(q!=NULL)
+    {
+        q->data=A[i];
+        q=q->next;
+        i--;
+    }
+}
+
+void reverse2(struct Node *p)
+{
+    struct Node *q=NULL,*r=NULL;
+
+    while(p!=NULL){
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+    }
+    first=q;
+}
+
 void reverse3(struct Node *p,struct Node *q)
 {
     
@@ -335,7 +373,7 @@ int main ()
     printf("The sum of linked list is: %d\n",sum(first));
     printf("The max of linked list is: %d\n",max_num(first));
      
-    struct Node *temp;
+    s
 
     temp = lsearch(first,8);
     if(temp)
