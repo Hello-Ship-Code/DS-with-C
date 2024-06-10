@@ -640,9 +640,7 @@ ostream &operator<<(ostream &os, const SparseMatrix &s) {
     int k = 0;
     for (int i = 0; i < s.m; i++) {
         for (int j = 0; j < s.n; j++) {
-            if (k < s
-
-.num && i == s.ele[k].i && j == s.ele[k].j) {
+            if (k < s.num && i == s.ele[k].i && j == s.ele[k].j) {
                 os << s.ele[k++].x << " ";
             } else {
                 os << "0 ";
