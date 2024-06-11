@@ -48,10 +48,10 @@ struct Node {
 struct Node {
     int data;
     struct Node *next;
-};
+}*first=NULL;
 
 // Global pointer to the first node
-struct Node *first = NULL;
+// struct Node *first = NULL;
 
 // Function to create and insert a new node at the end of the list
 void create(int data) {
@@ -342,6 +342,50 @@ void concat(struct Node *second) {
     p->next = second; // Link the end of the first list to the start of the second list
 }
 
+// Function to merge two sorted linked lists
+struct Node* merge(struct Node *first1, struct Node *first2) {
+    struct Node *third, *last;
+
+    // Initialize third (result list) and last
+    if (first1->data < first2->data) {
+        third = last = first1;
+        first1 = first1->next;
+        last->next = NULL;
+    } else {
+        third = last = first2;
+        first2 = first2->next;
+        last->next = NULL;
+    }
+
+    // Merge the two lists
+    while (first1 != NULL && first2 != NULL) {
+        if (first1->data < first2->data) {
+            last->next = first1;
+            last = first1;
+            first1 = first1->next;
+            last->next = NULL;
+        } else {
+            last->next = first2;
+            last = first2;
+            first2 = first2->next;
+            last->next = NULL;
+        }
+    }
+
+    // Attach remaining nodes of first1 if any
+    if (first1 != NULL) {
+        last->next = first1;
+    }
+    // Attach remaining nodes of first2 if any
+    if (first2 != NULL) {
+        last->next = first2;
+    }
+
+    return third;
+}
+
+
+
 // Main function with switch-case menu
 int main() {
     int choice, data, pos;
@@ -480,6 +524,496 @@ int main() {
     }
 
     return 0;
+}
+
+```
+
+## Loops in linked list
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a node in the linked list
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+// Global pointer to the first node
+struct Node *first = NULL;
+
+// Function to create and insert a new node at the end of the list
+void create(int data) {
+    struct Node *t, *last;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = data;
+    t->next = NULL;
+
+    if (first == NULL) {
+        first = t;
+    } else {
+        last = first;
+        while (last->next) {
+            last = last->next;
+        }
+        last->next = t;
+    }
+}
+
+// Function to display the linked list
+void display() {
+    struct Node *p = first;
+    while (p) {
+        printf("%d -> ", p->data);
+        p = p->next;
+    }
+    printf("NULL\n");
+}
+
+// Function to create a loop in the linked list
+void create_loop(int pos) {
+    if (pos < 0) return;
+
+    struct Node *p = first, *loop_node = NULL;
+    int count = 0;
+
+    // Traverse to the node at the given position
+    while (p != NULL && count < pos) {
+        loop_node = p;
+        p = p->next;
+        count++;
+    }
+
+    // If the loop_node is found and p is not NULL, create a loop
+    if (loop_node && p) {
+        while (p->next) {
+            p = p->next;
+        }
+        p->next = loop_node; // Create a loop by pointing the last node to the loop_node
+    }
+}
+
+// Function to detect if there is a loop in the linked list
+int detect_loop() {
+    struct Node *slow = first, *fast = first;
+
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        // If slow and fast meet at some point, then there is a loop
+        if (slow == fast) {
+            return 1; // Loop detected
+        }
+    }
+
+    return 0; // No loop detected
+}
+
+// Function to remove the loop from the linked list
+void remove_loop() {
+    struct Node *slow = first, *fast = first;
+
+    // Detect loop using Floyd’s Cycle-Finding Algorithm
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;// we can use as many next's as possible
+
+        if (slow == fast) { // Loop detected
+            // Find the starting point of the loop
+            slow = first;
+            while (slow->next != fast->next) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+
+            // Break the loop
+            fast->next = NULL;
+            return;
+        }
+    }
+}
+
+int main() {
+    int data, choice, pos;
+
+    while (1) {
+        printf("\nMenu:\n");
+        printf("1. Create/Insert\n");
+        printf("2. Display\n");
+        printf("3. Create Loop\n");
+        printf("4. Detect Loop\n");
+        printf("5. Remove Loop\n");
+        printf("0. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                create(data);
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                printf("Enter position to create loop: ");
+                scanf("%d", &pos);
+                create_loop(pos);
+                break;
+            case 4:
+                if (detect_loop())
+                    printf("Loop detected in the linked list.\n");
+                else
+                    printf("No loop detected in the linked list.\n");
+                break;
+            case 5:
+                remove_loop();
+                printf("Loop removed from the linked list.\n");
+                break;
+            case 0:
+                exit(0);
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+```
+
+## Circular Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a node in the circular linked list
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+// Global pointer to the last node in the circular linked list
+struct Node *last = NULL;
+
+// Function to create a circular linked list and insert a new node at the end
+void create(int data) {
+    struct Node *t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = data;
+
+    if (last == NULL) {
+        // If the list is empty, initialize the first node
+        last = t;
+        last->next = last;
+    } else {
+        // Insert the new node at the end and update the last pointer
+        t->next = last->next; // The new node points to the first node
+        last->next = t; // The last node points to the new node
+        last = t; // Update the last pointer to the new node
+    }
+}
+
+// Function to display the circular linked list
+void display() {
+    if (last == NULL) {
+        printf("The list is empty.\n");
+        return;
+    }
+
+    struct Node *p = last->next;
+    do {
+        printf("%d -> ", p->data);
+        p = p->next;
+    } while (p != last->next);
+    printf("(circular)\n");
+}
+
+// Function to insert a node at a given position in the circular linked list
+void insert(int data, int pos) {
+    struct Node *t, *p;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = data;
+
+    if (last == NULL) {
+        // If the list is empty, initialize the first node
+        last = t;
+        last->next = last;
+    } else if (pos == 0) {
+        // Insert at the beginning
+        t->next = last->next;
+        last->next = t;
+    } else {
+        // Insert at the given position
+        p = last->next;
+        for (int i = 0; i < pos - 1 && p != last; i++)
+            p = p->next;
+        t->next = p->next;
+        p->next = t;
+        if (p == last)
+            last = t; // Update last if inserted at the end
+    }
+}
+
+// Function to delete a node at a given position in the circular linked list
+int delete(int pos) {
+    if (last == NULL) {
+        printf("The list is empty.\n");
+        return -1;
+    }
+
+    struct Node *p = last->next, *q = NULL;
+    int x;
+
+    if (pos == 0) {
+        // Delete the first node
+        if (last == last->next) {
+            x = last->data;
+            free(last);
+            last = NULL;
+        } else {
+            q = last->next;
+            x = q->data;
+            last->next = q->next;
+            free(q);
+        }
+    } else {
+        // Delete the node at the given position
+        for (int i = 0; i < pos && p->next != last->next; i++) {
+            q = p;
+            p = p->next;
+        }
+        if (p == last->next) {
+            printf("Invalid position.\n");
+            return -1;
+        }
+        q->next = p->next;
+        x = p->data;
+        if (p == last) last = q; // Update last if deleting the last node
+        free(p);
+    }
+    return x;
+}
+
+int main() {
+    int data, choice, pos;
+
+    while (1) {
+        printf("\nMenu:\n");
+        printf("1. Create/Insert at End\n");
+        printf("2. Display\n");
+        printf("3. Insert at Position\n");
+        printf("4. Delete from Position\n");
+        printf("0. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to insert at end: ");
+                scanf("%d", &data);
+                create(data);
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                printf("Enter position: ");
+                scanf("%d", &pos);
+                insert(data, pos);
+                break;
+            case 4:
+                printf("Enter position to delete from: ");
+                scanf("%d", &pos);
+                data = delete(pos);
+                if (data != -1)
+                    printf("Deleted value: %d\n", data);
+                break;
+            case 0:
+                exit(0);
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+```
+
+## Method 2
+
+```cpp
+#include<stdio.h>
+#include<stdlib.h>
+
+// Define the structure for a node in the circular linked list
+struct Node{
+    int data;         // Data part of the node
+    struct Node *next; // Pointer to the next node
+};
+
+struct Node *Head; // Global pointer to the head of the circular linked list
+
+// Function to create a circular linked list from an array
+void create(int a[], int n) {
+    struct Node *t, *last;
+    Head = (struct Node*)malloc(sizeof(struct Node)); // Allocate memory for the first node
+    Head->data = a[0];  // Set the data of the first node
+    Head->next = Head;  // Point the first node to itself, making it circular
+
+    last = Head; // Initialize last as Head
+    
+    for(int i = 1; i < n; i++) { 
+        t = (struct Node*)malloc(sizeof(struct Node)); // Allocate memory for a new node
+        t->data = a[i];   // Set the data of the new node
+        t->next = last->next; // Point the new node to the first node
+        last->next = t;    // Update the last node to point to the new node
+        last = t;          // Move the last pointer to the new node
+    }
+}
+
+// Function to display the circular linked list recursively
+void recursive_display(struct Node *h) {
+    static int flag = 0; // Static flag to control recursion depth
+
+    if(h != Head || flag == 0) {   
+        flag = 1;               // Set the flag when starting the display
+        printf("%d ", h->data); // Print the data of the current node
+        recursive_display(h->next); // Recursive call to the next node
+    }
+    flag = 0; // Reset the flag to 0 when recursion ends
+}
+
+// Function to get the length of the circular linked list
+int getlength(struct Node *p) {
+    int len = 0; // Initialize length counter
+    
+    do {
+        len++;    // Increment length for each node
+        p = p->next; // Move to the next node
+    } while(p != Head); // Continue until the circular linked list loops back to the head
+
+    return len; // Return the length of the list
+}
+
+// Function to insert a new node at a given index in the circular linked list
+void insert(struct Node *p, int data, int index) {
+    struct Node *t;
+    
+    if(index < 0 || index > getlength(p)) // Check if the index is valid
+        return;
+
+    if(index == 0) { // Insert at the beginning
+        t = (struct Node *)malloc(sizeof(struct Node)); // Allocate memory for the new node
+        t->data = data; // Set the data of the new node
+        if(Head == NULL) { // If the list is empty, initialize the first node
+            Head = t;
+            Head->next = Head; // Point the new node to itself
+        } else {
+            while(p->next != Head) // Traverse to the last node
+                p = p->next;
+            p->next = t; // Point the last node to the new node
+            t->next = Head; // Point the new node to the old head
+            Head = t; // Update head to the new node
+        }
+    } else {
+        for(int i = 0; i < index - 1; i++)
+            p = p->next; // Traverse to the node before the insertion point
+        t = (struct Node *)malloc(sizeof(struct Node)); // Allocate memory for the new node
+        t->data = data; // Set the data of the new node
+        t->next = p->next; // Link the new node to the next node
+        p->next = t; // Link the previous node to the new node
+    }
+}
+
+// Function to display the circular linked list iteratively
+void display(struct Node *h) {
+    do {
+        printf("%d ", h->data); // Print the data of the current node
+        h = h->next; // Move to the next node
+    } while(h != Head); // Continue until the circular linked list loops back to the head
+    
+    printf("\n"); // Print newline at the end of the display
+}
+
+// Function to delete a node at a given index in the circular linked list
+int delete(struct Node *p, int index) {   
+    struct Node *q;
+    int x;
+    if(index < 0 || index > getlength(p)) // Check if the index is valid
+         return -1;
+
+    if(index == 1) { // Delete the first node
+        while(p->next != Head) // Traverse to the last node
+            p = p->next;
+        x = Head->data; // Store data of the node to be deleted
+        if(Head->next == p) { // If the list has only one node
+            free(Head); // Free the memory of the head
+            Head = NULL; // Set head to NULL
+        } else {
+            p->next = Head->next; // Point the last node to the second node
+            free(Head); // Free the memory of the head
+            Head = p->next; // Update head to the second node
+        }
+    } else {
+        for(int i = 0; i < index - 2; i++) p = p->next; // Traverse to the node before the deletion point
+        q = p->next; // Node to be deleted
+        p->next = q->next; // Link the previous node to the next node
+        x = q->data; // Store data of the node to be deleted
+        free(q); // Free the memory of the node to be deleted
+    }
+    return x; // Return the data of the deleted node
+}
+
+int main() {
+    int A[] = {1, 2, 3, 4, 5}; // Array to create the circular linked list
+
+    create(A, 5); // Create the circular linked list
+    insert(Head, 10, 5); // Insert 10 at index 5
+    
+    delete(Head, 9); // Delete the node at index 9 (invalid in this case, should handle error)
+    recursive_display(Head); // Display the list recursively
+
+    return 0;
+}
+
+```
+
+## Doubly Linked List
+
+```cpp
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    struct Node *prev;
+    int data;
+    struct Node *next;
+}*first=NULL;
+
+void create(int A[], int n)
+{
+    struct Node *t,*last;
+
+    first=(struct Node*)malloc(sizeof(struct Node));
+    first->data=A[0];
+    first->prev = NULL;
+    first->next = NULL;
+    
+    last=first;
+
+    for(int i=1;i<n;i++) // i = 1 cause we have already declared the first element
+    {
+        t=(struct Node*)malloc(sizeof(struct Node));
+        t->data=A[i];
+        t->next = last->next; 
+    }
 }
 
 ```
