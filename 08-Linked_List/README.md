@@ -1013,7 +1013,118 @@ void create(int A[], int n)
         t=(struct Node*)malloc(sizeof(struct Node));
         t->data=A[i];
         t->next = last->next; 
+        t->prev = last;
+        last->next=t;
+        last=t; 
     }
+}
+
+void display(struct Node p)
+{
+    while(p!=NULL)
+    {
+        printf("%d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+
+
+int getlength(struct Node p)
+{
+    if(p!=NULL)
+        return getlength(p->next)+1;
+    
+}
+
+
+void insert(struct Node *p,int data, int index)
+{
+    struct Node *t;
+    if(index <0 || index >getlength(p)) return;
+
+    t=(struct Node*)malloc(sizeof(struct Node));
+
+    if(index == 0){ 
+        t = (struct Node *)malloc(sizeof(struct Node)); 
+        t->data = data; 
+        t->prev = NULL;
+        t->next = first;
+        first->prev = t;
+        first = t; 
+    } else {
+        for(int i = 0; i < index - 1; i++)
+            p = p->next; 
+        t = (struct Node *)malloc(sizeof(struct Node));  
+        t->data = data; 
+
+        t->prev = p;
+        t->next = p->next; 
+        if(p->next != NULL)
+            p->next->prev = t; 
+        p->next = t;
+    }
+}
+
+void delete(struct Node *p, int index)
+{
+    if(index < 1 || index > getlength(p))
+        return ;
+    
+    int x;
+
+    if(index == 1 )
+    {
+        first = first->next;
+        if(first) first->prev = NULL;
+
+        x=p->data;
+        free(p);
+    }
+    else
+    {
+        for(int i=0;i<index-1;i++) p = p->next;
+
+        p->prev->next = p->next;
+        if(p->next)
+            p->next->prev = p->prev;
+        x = p->data;
+        free(p);
+    }
+}
+
+void reverse(struct Node *p)
+{
+    int temp;
+    while(p!=NULL)
+    {
+        temp = p->next;
+        p->next= p->prev;
+        p->prev = temp;
+        p=p->prev;
+        if(p->next == NULL)
+            first = p;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+int main()
+{
+    int A[]={1,2,3,4,5};
+
+    create(A,n);
+
+    display(first);
+    
+    return 0;
 }
 
 ```
