@@ -1019,22 +1019,24 @@ void create(int A[], int n)
     }
 }
 
-void display(struct Node p)
+void display(struct Node *p)
 {
     while(p!=NULL)
     {
         printf("%d ",p->data);
         p=p->next;
     }
-    printf("\n");
 }
 
-
-int getlength(struct Node p)
-{
-    if(p!=NULL)
-        return getlength(p->next)+1;
+int getlength(struct Node *p) {
+    int len = 0; 
     
+    while(p!=NULL) {
+        len++;    
+        p = p->next; 
+    }
+
+    return len; // Return the length of the list
 }
 
 
@@ -1068,63 +1070,64 @@ void insert(struct Node *p,int data, int index)
 
 void delete(struct Node *p, int index)
 {
-    if(index < 1 || index > getlength(p))
+    if(index < 0 || index > getlength(p))
         return ;
     
     int x;
 
-    if(index == 1 )
+    if(index == 0 )
     {
         first = first->next;
         if(first) first->prev = NULL;
-
         x=p->data;
         free(p);
+        
     }
     else
     {
         for(int i=0;i<index-1;i++) p = p->next;
 
         p->prev->next = p->next;
-        if(p->next)
-            p->next->prev = p->prev;
+        if(p->next) p->next->prev = p->prev;
         x = p->data;
         free(p);
     }
 }
 
-void reverse(struct Node *p)
+
+void reverse1(struct Node *p)
 {
-    int temp;
+    struct Node  * temp;
     while(p!=NULL)
     {
         temp = p->next;
-        p->next= p->prev;
+        p->next = p->prev;
         p->prev = temp;
         p=p->prev;
-        if(p->next == NULL)
+        if(p!=NULL && p->next == NULL)
             first = p;
     }
 
 }
 
 
-
-
-
-
-
-
-
 int main()
 {
     int A[]={1,2,3,4,5};
 
-    create(A,n);
-
+    create(A,5);
+    
+    insert(first,10,0);
+    delete(first,0);
+    // display(first);
+    
+    reverse1(first);
+    
     display(first);
     
     return 0;
 }
 
 ```
+
+## Circular Doubly Linked list
