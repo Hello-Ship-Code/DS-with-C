@@ -1203,4 +1203,4 @@ middle node of linked list using 2 nodes and p=p->next (1 time ) q=q->next ( 2 t
 
 using stack insert data in stack and divide the stack length /2 and pop that many number of elements from stack and the remaining last one is middle
 
-intersection of 2 linked list using stack
+intersection of 2 linked list using 2 stack insert data in stack  pop that many equal elements by maintaining a copy of previous if different we found the intersection
