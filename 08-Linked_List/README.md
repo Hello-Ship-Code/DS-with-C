@@ -687,6 +687,26 @@ int main() {
 
 ## Circular Linked List
 
+A circular linked list is a variation of a linked list where the last node of the list points back to the first node, forming a loop. In other words, the "next" pointer of the last node points to the first node instead of being NULL as in a traditional linked list.
+
+Here are some key characteristics of a circular linked list:
+
+1. **Circular Structure**: The last node in the list points to the first node, forming a circular structure. This means that traversal can start from any node and continue until the traversal reaches the starting node again.
+
+2. **No NULL Pointers**: Unlike traditional linked lists where the "next" pointer of the last node is NULL, in a circular linked list, there are no NULL pointers among the nodes.
+
+3. **Traversal**: Traversal of a circular linked list can start from any node and continue until the starting node is reached again. This means that there's no need to keep track of the end of the list separately.
+
+4. **Applications**:
+   - Circular linked lists are often used in applications where data needs to be accessed in a continuous loop, such as in round-robin scheduling algorithms.
+   - They can also be useful in implementing data structures like circular buffers or queues.
+
+5. **Insertion and Deletion**: Insertion and deletion operations in a circular linked list are similar to those in traditional linked lists. However, care must be taken to properly update the pointers to maintain the circular structure.
+
+6. **Termination**: Although the list forms a loop, there still needs to be a way to determine when to terminate operations such as traversal. This can be achieved by setting a condition or flag to indicate the end of traversal.
+
+Overall, circular linked lists offer advantages in scenarios where continuous looping and efficient traversal are required. However, they also require careful handling to avoid infinite loops and ensure proper maintenance of the circular structure.
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
