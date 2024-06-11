@@ -1176,3 +1176,31 @@ int main()
 ```
 
 ## Circular Doubly Linked list
+
+A circular doubly linked list combines the features of a circular linked list and a doubly linked list. Like a circular linked list, the last node points back to the first node, forming a loop. Additionally, each node in the list maintains references to both the next and previous nodes, enabling bidirectional traversal.
+
+Here are some key characteristics of a circular doubly linked list:
+
+1. **Circular Structure**: Similar to a circular linked list, the last node in the list points back to the first node, forming a loop. This allows for continuous traversal from any node in the list.
+
+2. **Bidirectional Traversal**: Each node maintains pointers or references to both the next and previous nodes, enabling traversal in both forward and backward directions. This bidirectional traversal is a characteristic inherited from doubly linked lists.
+
+3. **No NULL Pointers**: As with circular linked lists, there are no NULL pointers among the nodes. Instead, the pointers of the first and last nodes in the list are adjusted to maintain the circular structure.
+
+4. **Insertion and Deletion**: Insertion and deletion operations in a circular doubly linked list are similar to those in traditional doubly linked lists. Care must be taken to properly update the pointers to maintain the circular structure and bidirectional links.
+
+5. **Applications**: Circular doubly linked lists find applications in scenarios where continuous looping and bidirectional traversal are required, along with efficient insertion and deletion operations. Examples include implementations of certain types of caches, game loops, and music playlists.
+
+6. **Termination**: Similar to circular linked lists, a termination condition or flag is necessary to determine when to terminate operations such as traversal.
+
+Circular doubly linked lists offer advantages in scenarios requiring bidirectional traversal and continuous looping, while also providing efficient insertion and deletion operations. However, they require careful handling to maintain the integrity of the circular structure and bidirectional links.
+
+```cpp
+
+```
+
+middle node of linked list using 2 nodes and p=p->next (1 time ) q=q->next ( 2 times) if q reaches null stop p and its the middle node
+
+using stack insert data in stack and divide the stack length /2 and pop that many number of elements from stack and the remaining last one is middle
+
+intersection of 2 linked list using stack
