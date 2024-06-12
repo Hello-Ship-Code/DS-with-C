@@ -373,3 +373,78 @@ Here a step-by-step representation:
 - Encounter `)` and pop `(` from the stack: `[]`
 - Encounter `]` and pop `[` from the stack: `[]`
 - Stack is empty after traversal: expression is balanced.
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the Node structure
+struct Node {
+    char data;
+    struct Node* next;
+} *top = NULL;
+
+// Push a character onto the stack
+void push(char x) {
+    struct Node* t = (struct Node*)malloc(sizeof(struct Node));
+    if (t == NULL)
+        printf("The stack is full\n");
+    else {
+        t->data = x;
+        t->next = top;
+        top = t;
+    }
+}
+
+// Pop a character from the stack
+char pop() {
+    struct Node* t;
+    char x = -1;
+    if (top == NULL)
+        printf("The stack is Empty\n");
+    else {
+        t = top;
+        top = top->next;
+        x = t->data;
+        free(t);
+    }
+    return x;
+}
+
+// Display the stack (for debugging purposes)
+void display() {
+    struct Node* p = top;
+    while (p != NULL) {
+        printf("%c ", p->data); // Changed %d to %c to print characters
+        p = p->next;
+    }
+    printf("\n");
+}
+
+// Check if the expression has balanced parentheses
+int isbalanced(const char* exp) {
+    for (int i = 0; exp[i] != '\0'; i++) {
+        if (exp[i] == '(' || exp[i] == '{' || exp[i] == '[')
+            push(exp[i]);
+        else if (exp[i] == ')' || exp[i] == '}' || exp[i] == ']') {
+            if (top == NULL)
+                return 0; // Return 0 for unbalanced
+
+            char topChar = pop();
+            if ((exp[i] == ')' && topChar != '(') ||
+                (exp[i] == '}' && topChar != '{') ||
+                (exp[i] == ']' && topChar != '['))
+                return 0; // Return 0 for unbalanced
+        }
+    }
+    return top == NULL; // Return 1 for balanced, 0 for unbalanced
+}
+
+// Main function
+int main() {
+    const char* exp = "((a+b)*(b+c))"; // Use const char* for string literals
+    printf("Is the expression balanced? %s\n", isbalanced(exp) ? "Yes" : "No");
+    return 0;
+}
+
+```
