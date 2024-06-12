@@ -331,12 +331,11 @@ int main()
 
    return 0;
 }
+```
 
 ## paranthesis matching
 
-### Definition of Parenthesis Matching Using Stack
-
-**Parenthesis matching** (or **parentheses balancing**) is a problem of checking if the parentheses (and other types of brackets) in a given expression are correctly balanced and nested. A stack is a common data structure used to solve this problem efficiently. 
+**Parenthesis matching** (or **parentheses balancing**) is a problem of checking if the parentheses (and other types of brackets) in a given expression are correctly balanced and nested. A stack is a common data structure used to solve this problem efficiently.  
 
 **Definition:**
 
