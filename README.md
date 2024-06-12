@@ -16,4 +16,6 @@
 
 [Sparse Matrix & polynomial representation](./07-Sparse_Matrix/) ✅
 
-[Linked List](./08-Linked_List/) ⏳
+[Linked List](./08-Linked_List/) ✅
+
+[Stack](./09-Stack/) ⏳
