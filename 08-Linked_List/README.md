@@ -1204,3 +1204,217 @@ middle node of linked list using 2 nodes and p=p->next (1 time ) q=q->next ( 2 t
 using stack insert data in stack and divide the stack length /2 and pop that many number of elements from stack and the remaining last one is middle
 
 intersection of 2 linked list using 2 stack insert data in stack  pop that many equal elements by maintaining a copy of previous if different we found the intersection
+
+## polynomial using Linked list
+
+```cpp
+#include <stdio.h>
+#include<stdlib.h>
+#include <math.h>
+
+struct Node{
+    int exp;
+    double coeff;
+    struct Node *next;
+}*first = NULL, *first1 = NULL;
+
+void create(struct Node **p, double a[], int b[], int n)
+
+{
+    struct Node *t,*last;
+    
+    *p = (struct Node *)malloc(sizeof(struct Node));
+    if(*p == NULL){
+        printf("Memory allocation failed \n");
+        return;
+    }
+    
+    (*p)->coeff = a[0];
+    (*p)->exp   = b[0];
+    (*p)->next = NULL;
+    last = *p;
+    
+    for(int i=1;i<n;i++)
+    {
+        t=(struct Node *)malloc(sizeof(struct Node));
+        t->coeff = a[i];
+        t->exp   = b[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
+
+void display(struct Node *p)
+{
+    if(p == NULL)
+        printf("There are no elements to display");
+        
+    while(p!=NULL)
+    {
+        printf("%lfx%d^",p->coeff,p->exp);
+        if(p->next != NULL)printf("+ ");
+        p=p->next;
+    }
+}
+
+void evaluate(struct Node *p, int x)
+{
+    double sum;
+    while(p!= NULL){
+        sum+=p->coeff*pow(x,p->exp);
+        p=p->next;
+    }
+    printf("the sum of the polynomial is %lf",sum);
+}
+
+void sum(struct Node *p, struct Node *q) {
+    struct Node *resHead = NULL; // Head of the result polynomial
+    struct Node *tail = NULL; // Tail to keep track of the last node in the result
+
+    // Traverse both lists
+    while (p != NULL && q != NULL) {
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+
+        if (p->exp == q->exp) {
+            newNode->coeff = p->coeff + q->coeff; // Sum coefficients
+            newNode->exp = p->exp;
+            p = p->next;
+            q = q->next;
+        } else if (p->exp > q->exp) {
+            newNode->coeff = p->coeff;
+            newNode->exp = p->exp;
+            p = p->next;
+        } else {
+            newNode->coeff = q->coeff;
+            newNode->exp = q->exp;
+            q = q->next;
+        }
+
+        newNode->next = NULL; // Initialize next of the new node
+
+        // Append the new node to the result
+        if (resHead == NULL) {
+            resHead = newNode; // Set the head of the result list
+            tail = newNode; // Set the tail to the new node
+        } else {
+            tail->next = newNode; // Append the new node to the result
+            tail = newNode; // Move the tail to the new node
+        }
+    }
+
+    // Append the remaining nodes from either list
+    while (p != NULL) {
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->coeff = p->coeff;
+        newNode->exp = p->exp;
+        newNode->next = NULL;
+        tail->next = newNode;
+        tail = newNode;
+        p = p->next;
+    }
+
+    while (q != NULL) {
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->coeff = q->coeff;
+        newNode->exp = q->exp;
+        newNode->next = NULL;
+        tail->next = newNode;
+        tail = newNode;
+        q = q->next;
+    }
+
+    // Print the result for verification (optional)
+    printf("Resultant polynomial: ");
+    struct Node *temp = resHead;
+    while (temp != NULL) {
+        printf("%lfx^%d ", temp->coeff, temp->exp);
+        temp = temp->next;
+        if (temp != NULL) printf("+ ");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int choice, x,n;
+
+ while (1) {
+        printf("\nMenu:\n");
+        printf("1. Create Polynomial 1\n");
+        printf("2. Create Polynomial 2\n");
+        printf("3. Display Polynomial 1\n");
+        printf("4. Display Polynomial 2\n");
+        printf("5. Evaluate Polynomial 1\n");
+        printf("6. Evaluate Polynomial 2\n");
+        printf("7. sum\n");
+        printf("0. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: {
+                printf("Enter the number of terms for Polynomial 1: ");
+                scanf("%d", &n);
+
+                double a[n];
+                int b[n];
+                for (int i = 0; i < n; i++) {
+                    printf("Enter coefficient and exponent: ");
+                    scanf("%lf%d", &a[i], &b[i]);
+                }
+                create(&first, a, b, n);
+                break;
+            }
+            case 2: {
+                printf("Enter the number of terms for Polynomial 2: ");
+                scanf("%d", &n);
+
+                double a[n];
+                int b[n];
+                for (int i = 0; i < n; i++) {
+                    printf("Enter coefficient and exponent: ");
+                    scanf("%lf%d", &a[i], &b[i]);
+                }
+                create(&first1, a, b, n);
+                break;
+            }
+            case 3:
+                printf("Polynomial 1: ");
+                display(first);
+                break;
+            case 4:
+                printf("Polynomial 2: ");
+                display(first1);
+                break;
+            case 5:
+                printf("Enter the value of x for Polynomial 1: ");
+                if (scanf("%d", &x) != 1) {
+                    printf("Invalid input!\n");
+                    break;
+                }
+                evaluate(first, x);
+                break;
+            case 6:
+                printf("Enter the value of x for Polynomial 2: ");
+                if (scanf("%d", &x) != 1) {
+                    printf("Invalid input!\n");
+                    break;
+                }
+                evaluate(first1, x);
+                break;
+            case 7:
+                sum(first,first1);
+                break;
+            case 0:
+                exit(0);
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+
+```
