@@ -66,3 +66,110 @@ The **Stack Abstract Data Type (ADT)** is a conceptual framework that defines a 
    - **Example:** `Size()` on the stack `[5, 10]` returns `2`.
 
 The Stack ADT defines these operations to ensure a consistent and predictable interface for using stacks, regardless of their underlying implementation (e.g., arrays or linked lists).
+
+## Implementing the Stacks using arrays
+
+```cpp
+#include<stdio.h>
+#include<stdlib.h>
+
+struct stack
+{
+    int size;
+    int top;
+    int *S;
+};
+
+void create(struct stack *st)
+{
+    printf("Enter the size: ");
+    scanf("%d",&st->size);
+
+    st->top = -1;
+    st->S = (int *)malloc(st->size*sizeof(int));
+}
+
+void display(struct stack st)
+{
+   for(int i=st.top;i>=0;i--)
+      printf("%d ",st.S[i]);
+   printf("\n");
+}
+
+void push(struct stack *st, int x)
+{
+   if(st->top == st->size-1)
+      printf("Stack Overflow\n");
+   else
+   {
+      st->top++;
+      st->S[st->top]=x;
+   }
+}
+
+int pop(struct stack *st)
+{
+   int x=-1;
+   if(st->top == -1)
+      printf("Stack underflow\n");
+   else
+   {
+      x = st->S[st->top--];
+   }
+   return x;
+}
+
+int peek(struct stack st, int index)
+{
+    int x=-1;
+    if(st.top-index+1<0)
+        printf("Invalid Index");
+    x = st.S[st.top-index+1];
+    
+    return x;
+    
+}
+
+int isEmpty(struct stack st)
+{
+    if(st.top == -1)
+        return 1;
+    return 0;
+}
+
+int isFull(struct stack st)
+{
+    return st.top == st.size-1;
+}
+
+int stacktop(struct stack st)
+{
+    if(!isEmpty(st))
+        return st.S[st.top];
+    return -1;
+}
+
+int main()
+{
+   struct stack st;
+   create(&st);
+
+   push(&st,10);
+   push(&st,20);
+   push(&st,30);
+   push(&st,40);
+   push(&st,50);
+   
+   printf("The stack is: %d \n",isEmpty(st));
+   printf("Is the stack Full: %d \n",isFull(st));
+   printf("top element of the stack: %d \n",stacktop(st));
+   printf("the element at index is : %d \n",peek(st, 1));
+   printf("The element deleted is : %d \n",pop(&st));
+
+   display(st);
+
+   return 0;
+}
+
+
+```
