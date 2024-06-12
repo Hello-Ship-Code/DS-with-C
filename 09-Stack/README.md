@@ -170,6 +170,207 @@ int main()
 
    return 0;
 }
-
-
 ```
+
+## Stack using Linked List
+
+```cpp
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+   int data;
+   struct Node *next;
+}*top = NULL;
+
+void push(int x)
+{
+   struct Node *t;
+   t=(struct Node*)malloc(sizeof(struct Node));
+   
+   if(t == NULL)
+      printf("The stack is full\n");
+   else{
+      t->data = x;
+      t->next = top;
+      top = t;
+   }
+}
+
+int pop()
+{
+   struct Node *t;
+   int x=-1;
+
+   if(top == NULL)
+      printf("The stack is Empty\n");
+   else{
+      t = top;
+      top = top->next;
+      x = t->data;
+      free(t);
+   }
+   return x;
+}
+
+void display()
+{
+   struct Node *p;
+   p = top;
+   while( p != NULL )
+   {
+      printf("%d ",p->data);
+      p=p->next;
+   }
+   printf("\n");
+}
+
+int main()
+{
+   push(10);
+   push(20);
+   push(30);
+   push(40);
+
+   display();
+   
+   printf("%d ",pop());
+   
+   return 0;
+}
+```
+
+## stack using Linked list with C++
+
+```cpp
+#include<stdio.h>
+#include<stdlib.h>
+#include<iostream>
+
+using namespace std;
+
+class Node{
+   public:
+      int data;
+      Node *next;
+};
+
+class stack{
+   private:
+      Node *top;
+   public:
+      stack(){top=NULL;}     
+      // Stack() : top(nullptr) {} can also implement like this
+
+   // free stack if its empty
+    ~stack() {
+        while (top != NULL) {
+            Node* temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+
+      void push(int x);
+      int pop();
+      void display();
+};
+
+void stack::push(int x)
+{
+   Node * t = new Node(x);
+
+   if( t == NULL)
+      std::cout << "The stack is full \n";
+   else
+   {
+      t->next = top;
+      top = t;
+   }
+}
+
+int stack::pop()
+{
+   int x=-1;
+   if(top == NULL)
+      std::cout<<"stack is empty"<<endl;
+   else{
+      Node *t = top;
+      top = top->next;
+      x = t->data;
+      delete(t);
+   }
+   return x;
+}
+
+void stack::display()
+{
+   Node *p = top;
+   while(p != NULL )
+   {
+      std::cout<<p->data<<" ";
+      p=p->next;
+   }
+   cout<<endl;
+}
+
+int main()
+{
+   stack s;
+   s.push(10);
+   s.push(20);
+   s.push(30);
+   s.push(40);
+   s.push(50);
+
+   s.display();
+
+   std::cout << s.pop() << std::endl;
+
+   return 0;
+}
+
+## paranthesis matching
+
+### Definition of Parenthesis Matching Using Stack
+
+**Parenthesis matching** (or **parentheses balancing**) is a problem of checking if the parentheses (and other types of brackets) in a given expression are correctly balanced and nested. A stack is a common data structure used to solve this problem efficiently. 
+
+**Definition:**
+
+**Parenthesis Matching Using Stack** is a method for verifying if every opening parenthesis (or other bracket) in an expression has a corresponding closing parenthesis in the correct order and properly nested. The algorithm involves pushing each opening parenthesis onto a stack and popping from the stack when a closing parenthesis is encountered. If at the end of the expression the stack is empty and no unmatched parenthesis is found, the expression is considered balanced.
+
+### Algorithm
+
+1. **Initialize an empty stack**.
+2. **Traverse the expression** from left to right.
+3. **For each character** in the expression:
+   - **If the character is an opening parenthesis** (e.g., `(`, `{`, or `[`):
+     - **Push it onto the stack**.
+   - **If the character is a closing parenthesis** (e.g., `)`, `}`, or `]`):
+     - **Check if the stack is empty**:
+       - **If it is empty**, the expression is unbalanced (return false).
+       - **Otherwise**, pop the top of the stack and check if the popped parenthesis matches the closing parenthesis.
+       - If they do not match, the expression is unbalanced (return false).
+4. **After processing all characters**, check if the stack is empty:
+   - If it is not empty, the expression is unbalanced (return false).
+   - If it is empty, the expression is balanced (return true).
+
+### Example
+
+Given the expression `"(a + b) * [c / d]"`:
+
+1. Traverse the expression.
+2. When encountering `(` and `[`, push them onto the stack.
+3. When encountering `)` and `]`, pop from the stack and check for matching opening parentheses.
+
+Here a step-by-step representation:
+
+- Expression: `"(a + b) * [c / d]"`
+- Stack after encountering `(`: `[(]`
+- Stack after encountering `[`: `[(, []`
+- Encounter `)` and pop `(` from the stack: `[]`
+- Encounter `]` and pop `[` from the stack: `[]`
+- Stack is empty after traversal: expression is balanced.
