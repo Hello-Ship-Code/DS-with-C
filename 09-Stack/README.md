@@ -38,3 +38,31 @@ A **stack** is a linear data structure that follows the **Last In, First Out (LI
 8. **Syntax Parsing:**
    - Assists in parsing and interpreting structured data or code.
    - Example: Parsing HTML or XML documents.
+
+### Stack Abstract Data Type (ADT)
+
+The **Stack Abstract Data Type (ADT)** is a conceptual framework that defines a stack's operations and expected behavior, without specifying how these operations are implemented. It focuses on a collection of elements managed through the **Last In, First Out (LIFO)** principle.
+
+#### **Core Operations of Stack ADT**
+
+1. **Push (add an element to the top):**
+   - **Description:** Inserts an element at the top of the stack.
+   - **Example:** `Push(5)` results in the stack `[5]` if it was initially empty.
+
+2. **Pop (remove the top element):**
+   - **Description:** Removes and returns the topmost element from the stack.
+   - **Example:** `Pop()` on the stack `[5, 10]` results in `[5]` and returns `10`.
+
+3. **Peek/Top (retrieve the top element):**
+   - **Description:** Returns the top element without removing it from the stack.
+   - **Example:** `Peek()` on the stack `[5, 10]` returns `10`.
+
+4. **IsEmpty (check if the stack is empty):**
+   - **Description:** Checks if the stack contains no elements.
+   - **Example:** `IsEmpty()` on the stack `[]` returns `True`.
+
+5. **Size (return the number of elements):**
+   - **Description:** Returns the count of elements in the stack.
+   - **Example:** `Size()` on the stack `[5, 10]` returns `2`.
+
+The Stack ADT defines these operations to ensure a consistent and predictable interface for using stacks, regardless of their underlying implementation (e.g., arrays or linked lists).
