@@ -448,3 +448,231 @@ int main() {
 }
 
 ```
+
+### Infix, Prefix, and Postfix Notation
+
+These notations describe different ways of writing arithmetic expressions, primarily differing in the placement of operators and operands.
+
+#### **1. Infix Notation**
+
+**Definition**:
+
+- Operators are written **between** operands. This is the most familiar form of arithmetic notation.
+
+**Example**:
+
+- `(A + B) * (C - D)`
+
+**Why It's Used**:
+
+- **Human Readability**: Closely resembles the conventional arithmetic taught in schools.
+- **Natural Parenthesis Handling**: Parentheses and operator precedence rules determine the order of operations.
+
+**Precedence**:
+
+- Parentheses dictate operations within them to be performed first.
+- Operator precedence and associativity rules determine the order without parentheses.
+
+**Manual Conversion to Prefix and Postfix**:
+
+- Convert using structured algorithms like the Shunting Yard Algorithm for postfix and a stack-based approach for prefix.
+
+#### **2. Prefix Notation (Polish Notation)**
+
+**Definition**:
+
+- Operators are written **before** their operands.
+
+**Example**:
+
+- `* + A B - C D` (equivalent to `(A + B) * (C - D)` in infix)
+
+**Why It's Used**:
+
+- **Simplifies Parsing**: No need for parentheses or precedence rules during evaluation.
+- **Direct Evaluation**: Suitable for certain computational processes and applications, like function composition in Lisp.
+
+**Precedence**:
+
+- Not needed, as the order of operations is explicit based on the position of operators.
+
+**Manual Conversion from Infix**:
+
+- **Steps**:
+  - Traverse the infix expression from right to left.
+  - Use a stack to reverse the order of operators and operands.
+  - Ensure operators precede operands by carefully placing them in the output as encountered.
+
+#### **3. Postfix Notation (Reverse Polish Notation, RPN)**
+
+**Definition**:
+
+- Operators are written **after** their operands.
+
+**Example**:
+
+- `AB+CD-*` (equivalent to `(A + B) * (C - D)` in infix)
+
+**Why It's Used**:
+
+- **Simplifies Evaluation**: No need for parentheses or precedence rules.
+- **Efficient Execution**: Especially useful for stack-based evaluations and computer parsing.
+
+**Precedence**:
+
+- Not needed, as the order of operations is explicit based on the sequence of operators and operands.
+
+**Manual Conversion from Infix**:
+
+- **Steps**:
+  - Traverse the infix expression from left to right.
+  - Use a stack to temporarily hold operators until they can be added to the output after operands.
+  - Pop operators from the stack to the output based on precedence and associativity.
+
+### **Summary**
+
+- **Infix Notation**:
+  - **Order**: `Operand Operator Operand`
+  - **Usage**: Commonly used in human-readable arithmetic.
+  - **Handling**: Requires parentheses and precedence rules.
+
+- **Prefix Notation**:
+  - **Order**: `Operator Operand Operand`
+  - **Usage**: Simplifies parsing and function composition.
+  - **Handling**: Eliminates the need for parentheses and precedence rules.
+
+- **Postfix Notation**:
+  - **Order**: `Operand Operand Operator`
+  - **Usage**: Ideal for stack-based evaluation and expression parsing.
+  - **Handling**: Direct evaluation without precedence or parentheses.
+
+### **Detailed Conversion Process**
+
+**Infix to Prefix**:
+
+1. **Reverse** the infix expression.
+2. **Change** `(` to `)` and vice versa.
+3. **Apply** infix-to-postfix conversion on the modified expression.
+4. **Reverse** the postfix expression to get the prefix expression.
+
+**Infix to Postfix**:
+
+1. **Initialize** an empty stack and output list.
+2. **Scan** the infix expression from left to right.
+3. **Operands**: Add directly to the output.
+4. **Operators**: Push to stack. Pop from stack to output if the stack's top has higher or equal precedence.
+5. **Parentheses**:
+   - **Left Parenthesis**: Push to stack.
+   - **Right Parenthesis**: Pop and output until a left parenthesis is encountered.
+
+**Example Conversion**:
+
+- **Infix**: `A + B * (C - D)`
+- **Prefix**: `+ A * B - C D`
+  - **Step-by-Step**:
+    - Reverse infix: `) D - C ( * B + A`
+    - Swap parentheses: `( D - C ) * B + A`
+    - Convert to postfix: `D C - B * A +`
+    - Reverse to get prefix: `+ A * B - C D`
+
+- **Postfix**: `A B C D - * +`
+  - **Step-by-Step**:
+    - Read and apply operators to operands.
+    - `B C -`: Subtract `C` from `B`.
+    - `A + B * (result)`: Multiply the result by `B`, then add `A`.
+
+These notations provide different ways to write expressions that can simplify parsing and evaluation for both humans and computers, each suited for specific applications and contexts.
+
+### BODMAS Rule
+
+**Definition**: The BODMAS rule is a mathematical principle that outlines the order of operations to evaluate an arithmetic expression correctly. The acronym stands for:
+
+- **B**: Brackets
+- **O**: Orders (i.e., powers and roots, etc.)
+- **D**: Division
+- **M**: Multiplication
+- **A**: Addition
+- **S**: Subtraction
+
+**Alternative Acronyms**:
+
+- **PEMDAS** (Parentheses, Exponents, Multiplication, Division, Addition, Subtraction) is commonly used in the United States.
+- **BIDMAS** (Brackets, Indices, Division, Multiplication, Addition, Subtraction) is another variation.
+
+### Details
+
+**1. Brackets (B)**:
+
+- Evaluate expressions within brackets first. This includes parentheses `()`, square brackets `[]`, and curly braces `{}`.
+- **Example**: In the expression `3 * (2 + 4)`, the sum inside the brackets `()` is computed first to get `3 * 6`.
+
+**2. Orders (O)**:
+
+- Evaluate powers (exponents) and roots (square roots, cube roots, etc.) next.
+- **Example**: In the expression `2^3 * 4`, compute the exponentiation `2^3 = 8` first to get `8 * 4`.
+
+**3. Division and Multiplication (DM)**:
+
+- Perform division and multiplication from left to right. These operations are of equal precedence.
+- **Example**: In the expression `6 / 3 * 2`, perform the division first `6 / 3 = 2`, then multiply by `2` to get `4`.
+
+**4. Addition and Subtraction (AS)**:
+
+- Perform addition and subtraction from left to right. These operations are of equal precedence.
+- **Example**: In the expression `7 - 3 + 2`, perform the subtraction first `7 - 3 = 4`, then add `2` to get `6`.
+
+### Importance of BODMAS Rule
+
+- **Consistent Results**: Ensures that mathematical expressions are evaluated consistently and correctly.
+- **Avoids Ambiguity**: Eliminates ambiguity in arithmetic operations by providing a clear order of operations.
+- **Standardized**: Provides a standardized method for solving mathematical problems, widely accepted and taught in educational systems.
+
+### **Examples**
+
+1. **Expression**: `2 + 3 * 4`
+   - **Using BODMAS**:
+     - Multiply first: `3 * 4 = 12`
+     - Add: `2 + 12 = 14`
+   - **Result**: `14`
+
+2. **Expression**: `(8 - 3) + 4^2`
+   - **Using BODMAS**:
+     - Brackets first: `(8 - 3) = 5`
+     - Exponentiation: `4^2 = 16`
+     - Add: `5 + 16 = 21`
+   - **Result**: `21`
+
+3. **Expression**: `18 / (3 * 3) - 2`
+   - **Using BODMAS**:
+     - Brackets first: `3 * 3 = 9`
+     - Division: `18 / 9 = 2`
+     - Subtract: `2 - 2 = 0`
+   - **Result**: `0`
+
+4. **Expression**: `5 + 2 * (12 / 4) - 3`
+   - **Using BODMAS**:
+     - Brackets first: `12 / 4 = 3`
+     - Multiply: `2 * 3 = 6`
+     - Add: `5 + 6 = 11`
+     - Subtract: `11 - 3 = 8`
+   - **Result**: `8`
+
+### **Handling Different Types of Brackets**
+
+- **Parentheses `( )`**: Used to group parts of an expression.
+  - **Example**: `(2 + 3) * 4` computes `2 + 3` first, then multiplies by `4`.
+
+- **Square Brackets `[ ]`**: Used in nested expressions.
+  - **Example**: `[3 * (4 + 5)]` computes `4 + 5` first, then multiplies by `3`.
+
+- **Curly Braces `{ }`**: Used for further nesting.
+  - **Example**: `{[2 + 3] * (4 + 1)}` computes `2 + 3` and `4 + 1` first, then multiplies the results.
+
+### **In Summary**
+
+- **B**: Brackets, handle expressions inside them first.
+- **O**: Orders, evaluate exponents and roots next.
+- **DM**: Division and Multiplication, from left to right.
+- **AS**: Addition and Subtraction, from left to right.
+
+The BODMAS rule provides a clear sequence to follow for solving mathematical expressions, ensuring accuracy and consistency in arithmetic operations.
