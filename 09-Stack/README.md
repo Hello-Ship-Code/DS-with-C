@@ -676,3 +676,360 @@ These notations provide different ways to write expressions that can simplify pa
 - **AS**: Addition and Subtraction, from left to right.
 
 The BODMAS rule provides a clear sequence to follow for solving mathematical expressions, ensuring accuracy and consistency in arithmetic operations.
+
+## Infix to postfix using stack linked list
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+// Define the Node structure
+struct Node {
+    char data; // Data part of the node, holding a character
+    struct Node* next; // Pointer to the next node in the stack
+} *top = NULL; // Global pointer to the top of the stack, initialized to NULL
+
+// Push a character onto the stack
+void push(char x) {
+    // Allocate memory for a new node
+    struct Node* t = (struct Node*)malloc(sizeof(struct Node));
+    if (t == NULL) // Check if memory allocation failed
+        printf("The stack is full\n");
+    else {
+        // Set the data and link the new node to the current top
+        t->data = x;
+        t->next = top;
+        // Update the top to point to the new node
+        top = t;
+    }
+}
+
+// Pop a character from the stack
+char pop() {
+    struct Node* t; // Temporary pointer to hold the node being popped
+    char x = -1; // Default return value in case of an empty stack
+    if (top == NULL)
+        printf("The stack is empty\n");
+    else {
+        // Update the top to the next node
+        t = top;
+        top = top->next;
+        // Retrieve the data from the popped node
+        x = t->data;
+        // Free the memory of the popped node
+        free(t);
+    }
+    return x; // Return the popped data
+}
+
+// Check if the stack is empty
+int isEmpty() {
+    return top == NULL; // Returns 1 if the stack is empty, 0 otherwise
+}
+
+// Peek at the top of the stack
+char peek() {
+    return top ? top->data : '\0'; // Return the data of the top node, or '\0' if empty
+}
+
+// Display the stack (for debugging purposes)
+void display() {
+    struct Node* p = top; // Pointer to traverse the stack
+    while (p != NULL) {
+        // Print the data of each node
+        printf("%c ", p->data); // Changed %d to %c to print characters
+        p = p->next; // Move to the next node
+    }
+    printf("\n"); // Newline after displaying the stack
+}
+
+// Determine precedence of operators
+int precedence(char op) {
+    switch (op) {
+        case '+':
+        case '-':
+            return 1; // Lowest precedence
+        case '*':
+        case '/':
+            return 2; // Higher precedence
+        case '^':
+            return 3; // Highest precedence
+    }
+    return 0; // Return 0 for non-operators
+}
+
+// Check if a character is an operator
+int isOperator(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+    // Return 1 if c is an operator, 0 otherwise
+}
+
+// Convert infix to postfix
+char* InToPost(const char* infix) {
+    int len = strlen(infix); // Length of the infix expression
+    // Allocate memory for the postfix expression
+    char* postfix = (char*)malloc((len + 2) * sizeof(char));
+    if (!postfix) {
+        printf("Memory allocation failed\n");
+        exit(1); // Exit if memory allocation fails
+    }
+
+    int i = 0, j = 0; // Indices for traversing infix and building postfix
+    while (infix[i] != '\0') {
+        if (isalnum(infix[i])) { // If the character is alphanumeric
+            postfix[j++] = infix[i++]; // Add it to the postfix expression
+        } else if (infix[i] == '(') {
+            push(infix[i++]); // Push '(' onto the stack
+        } else if (infix[i] == ')') {
+            // Pop and add to postfix until '(' is encountered
+            while (!isEmpty() && peek() != '(') {
+                postfix[j++] = pop();
+            }
+            if (!isEmpty() && peek() == '(') {
+                pop(); // Remove the '(' from the stack
+            }
+            i++; // Move past the ')'
+        } else if (isOperator(infix[i])) {
+            // Pop and add to postfix based on precedence
+            while (!isEmpty() && precedence(peek()) >= precedence(infix[i])) {
+                postfix[j++] = pop();
+            }
+            push(infix[i++]); // Push the operator onto the stack
+        }
+    }
+
+    // Pop all remaining operators from the stack
+    while (!isEmpty()) {
+        postfix[j++] = pop();
+    }
+    postfix[j] = '\0'; // Null-terminate the postfix expression
+    return postfix; // Return the postfix expression
+}
+
+// Main function
+int main() {
+    const char* exp = "a+b*c"; // Example infix expression, use const char* for string literals
+
+    char* postfix = InToPost(exp); // Convert infix to postfix
+
+    printf("Postfix expression: %s\n", postfix); // Print the postfix expression
+
+    free(postfix); // Free the allocated memory for postfix
+
+    return 0; // Return 0 to indicate successful execution
+}
+```
+
+## Evaluating a postfix expression
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+// Define the Node structure for stack operations
+struct Node {
+    char data; // For the conversion stack
+    int value; // For the evaluation stack
+    struct Node* next;
+} *top = NULL; // Stack pointer
+
+// Push a character onto the stack (for infix to postfix conversion)
+void push(char x) {
+    struct Node* t = (struct Node*)malloc(sizeof(struct Node));
+    if (t == NULL)
+        printf("The stack is full\n");
+    else {
+        t->data = x;
+        t->next = top;
+        top = t;
+    }
+}
+
+// Push an integer onto the stack (for postfix evaluation)
+void pushValue(int val) {
+    struct Node* t = (struct Node*)malloc(sizeof(struct Node));
+    if (t == NULL)
+        printf("The stack is full\n");
+    else {
+        t->value = val;
+        t->next = top;
+        top = t;
+    }
+}
+
+// Pop a character from the stack (for infix to postfix conversion)
+char pop() {
+    struct Node* t;
+    char x = -1;
+    if (top == NULL)
+        printf("The stack is empty\n");
+    else {
+        t = top;
+        top = top->next;
+        x = t->data;
+        free(t);
+    }
+    return x;
+}
+
+// Pop an integer from the stack (for postfix evaluation)
+int popValue() {
+    struct Node* t;
+    int val = -1;
+    if (top == NULL)
+        printf("The stack is empty\n");
+    else {
+        t = top;
+        top = top->next;
+        val = t->value;
+        free(t);
+    }
+    return val;
+}
+
+// Check if the stack is empty
+int isEmpty() {
+    return top == NULL;
+}
+
+// Peek at the top of the stack (for infix to postfix conversion)
+char peek() {
+    return top ? top->data : '\0';
+}
+
+// Display the stack (for debugging purposes)
+void display() {
+    struct Node* p = top;
+    while (p != NULL) {
+        printf("%c ", p->data);
+        p = p->next;
+    }
+    printf("\n");
+}
+
+// Determine precedence of operators
+int precedence(char op) {
+    switch (op) {
+        case '+':
+        case '-':
+            return 1;
+        case '*':
+        case '/':
+            return 2;
+        case '^':
+            return 3;
+    }
+    return 0;
+}
+
+// Check if a character is an operator
+int isOperator(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+}
+
+// Convert infix to postfix
+char* InToPost(const char* infix) {
+    int len = strlen(infix);
+    char* postfix = (char*)malloc((len + 2) * sizeof(char));
+    if (!postfix) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+
+    int i = 0, j = 0;
+    while (infix[i] != '\0') {
+        if (isalnum(infix[i])) {
+            postfix[j++] = infix[i++];
+        } else if (infix[i] == '(') {
+            push(infix[i++]);
+        } else if (infix[i] == ')') {
+            while (!isEmpty() && peek() != '(') {
+                postfix[j++] = pop();
+            }
+            if (!isEmpty() && peek() == '(') {
+                pop();
+            }
+            i++;
+        } else if (isOperator(infix[i])) {
+            while (!isEmpty() && precedence(peek()) >= precedence(infix[i])) {
+                postfix[j++] = pop();
+            }
+            push(infix[i++]);
+        }
+    }
+
+    while (!isEmpty()) {
+        postfix[j++] = pop();
+    }
+    postfix[j] = '\0';
+    return postfix;
+}
+
+// Evaluate a postfix expression
+int evaluatePostfix(const char* postfix) {
+    int i = 0;
+    int val1, val2, result;
+
+    while (postfix[i] != '\0') {
+        if (isalnum(postfix[i])) {
+            // For simplicity, we'll assume operands are single-digit numbers
+            pushValue(postfix[i] - '0');
+        } else if (isOperator(postfix[i])) {
+            // Pop the top two values from the stack
+            val2 = popValue();
+            val1 = popValue();
+
+            // Perform the operation
+            switch (postfix[i]) {
+                case '+':
+                    result = val1 + val2;
+                    break;
+                case '-':
+                    result = val1 - val2;
+                    break;
+                case '*':
+                    result = val1 * val2;
+                    break;
+                case '/':
+                    result = val1 / val2;
+                    break;
+                case '^':
+                    result = 1;
+                    for (int j = 0; j < val2; j++) {
+                        result *= val1;
+                    }
+                    break;
+            }
+
+            // Push the result back onto the stack
+            pushValue(result);
+        }
+        i++;
+    }
+
+    // The result of the expression will be the top value of the stack
+    return popValue();
+}
+
+// Main function
+int main() {
+    const char* exp = "3+5*2"; // Example infix expression
+
+    char* postfix = InToPost(exp); // Convert infix to postfix
+
+    printf("Postfix expression: %s\n", postfix);
+
+    int result = evaluatePostfix(postfix); // Evaluate the postfix expression
+
+    printf("Result of postfix evaluation: %d\n", result);
+
+    free(postfix); // Free the allocated memory
+
+    return 0;
+}
+
+```
