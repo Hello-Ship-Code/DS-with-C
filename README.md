@@ -18,4 +18,6 @@
 
 [Linked List](./08-Linked_List/) ✅
 
-[stack](./09-Stack/) ⏳
+[stack](./09-Stack/) ✅
+
+[Queues](./10-Queues/) ⏳
