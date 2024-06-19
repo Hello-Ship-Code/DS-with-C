@@ -848,11 +848,11 @@ q);
 }
 ```
 
-## Sum mary
+## Summary
 
 A dequeue is a versatile data structure that supports insertion and deletion at both ends. It provides flexibility and is useful in a variety of applications where bidirectional operations are required.
 
-### Priority Queue
+## Priority Queue
 
 **Definition**:
 A **priority queue** is an abstract data structure similar to a regular queue or stack, but where each element is associated with a priority. In a priority queue, elements are removed based on their priority rather than their order of insertion. The element with the highest priority is served before elements with lower priority, regardless of the order in which they were added to the queue.
@@ -1101,7 +1101,7 @@ void display(struct PriorityQueue* pq) {
 }
 ```
 
-## Sum  mary
+## Summary
 
 - **Priority Queue**: A data structure where elements are processed based on their priority.
 - **Max-Priority Queue**: Serves the highest priority element first.
