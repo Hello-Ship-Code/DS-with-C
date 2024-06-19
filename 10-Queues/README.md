@@ -340,3 +340,771 @@ Memory for each node must be dynamically allocated and freed, which can be more 
 | **Linked List**         | Memory overhead for pointers, increased complexity, slower access times                                 |
 
 Each implementation has trade-offs, and the choice depends on the specific requirements and constraints of the application, such as memory usage, performance needs, and ease of implementation.
+
+## circular Queue
+
+```cpp
+#include <iostream>
+#include <cstdlib> // For std::exit
+
+class CircularQueue {
+private:
+    int size;
+    int front;
+    int rear;
+    int *Q;
+
+public:
+    // Constructor to initialize queue
+    CircularQueue(int sz) {
+        size = sz;
+        front = rear = 0; // Initialize front and rear to 0
+        Q = new int[size];
+    }
+
+    // Destructor to free allocated memory
+    ~CircularQueue() {
+        delete[] Q;
+    }
+
+    // Function to add an element to the queue
+    void enqueue(int data) {
+        if ((rear + 1) % size == front) {
+            std::cout << "Queue is full\n";
+        } else {
+            rear = (rear + 1) % size; // Move rear to the next position
+            Q[rear] = data;
+        }
+    }
+
+    // Function to remove an element from the queue
+    int dequeue() {
+        int x = -1;
+        if (rear == front) {
+            std::cout << "Queue is empty\n";
+        } else {
+            front = (front + 1) % size; // Move front to the next position
+            x = Q[front];
+        }
+        return x;
+    }
+
+    // Function to display queue elements
+    void display() {
+        if (rear == front) {
+            std::cout << "Queue is empty\n";
+            return;
+        }
+
+        std::cout << "The elements in the queue are: ";
+        int i = (front + 1) % size;
+        while (i != (rear + 1) % size) {
+            std::cout << Q[i] << " ";
+            i = (i + 1) % size; // Move to the next position
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    int size;
+    std::cout << "Enter the size of the queue: ";
+    std::cin >> size;
+
+    CircularQueue q(size + 1); // Add one extra space to differentiate full and empty
+
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+
+    q.display();
+
+    std::cout << "The deleted value: " << q.dequeue() << std::endl;
+
+    q.display();
+
+    return 0;
+}
+
+```
+
+## Queues using Linked List
+
+```cpp
+
+#include <iostream>
+
+// Node structure for linked list
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Queue class using linked list
+class LinkedListQueue {
+private:
+    Node* front;
+    Node* rear;
+
+public:
+    // Constructor to initialize an empty queue
+    LinkedListQueue() : front(nullptr), rear(nullptr) {}
+
+    // Destructor to free all nodes in the queue
+    ~LinkedListQueue() {
+        while (front != nullptr) {
+            Node* temp = front;
+            front = front->next;
+            delete temp;
+        }
+    }
+
+    // Function to add an element to the queue
+    void enqueue(int data) {
+        Node* newNode = new Node{data, nullptr};
+        if (rear == nullptr) {
+            // If queue is empty, both front and rear will point to the new node
+            front = rear = newNode;
+        } else {
+            // Attach the new node at the end of the queue and move rear to the new node
+            rear->next = newNode;
+            rear = newNode;
+        }
+    }
+
+    // Function to remove an element from the queue
+    int dequeue() {
+        if (front == nullptr) {
+            std::cerr << "Queue is empty\n";
+            return -1; // Return a sentinel value indicating empty queue
+        }
+        int data = front->data;
+        Node* temp = front;
+        front = front->next;
+        if (front == nullptr) {
+            // If the queue becomes empty, set rear to nullptr as well
+            rear = nullptr;
+        }
+        delete temp;
+        return data;
+    }
+
+    // Function to display the queue elements
+    void display() const {
+        if (front == nullptr) {
+            std::cout << "Queue is empty\n";
+            return;
+        }
+        std::cout << "The elements in the queue are: ";
+        Node* temp = front;
+        while (temp != nullptr) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    LinkedListQueue q;
+
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+
+    q.display();
+
+    std::cout << "The deleted value: " << q.dequeue() << std::endl;
+
+    q.display();
+
+    return 0;
+}
+
+```
+
+### Dequeue (Double-Ended Queue)
+
+**Definition**:
+A **Dequeue** (also known as **Deque**) stands for **Double-Ended Queue**. It is a generalized version of a queue data structure that allows elements to be added or removed from both the **front** and the **rear** ends. Unlike a simple queue, which follows the **First-In-First-Out (FIFO)** principle, a dequeue does not restrict the end from which data can be enqueued or dequeued.
+
+### Characteristics of a Dequeue
+
+- **Bidirectional Operations**: Supports insertion and deletion operations at both ends.
+- **Flexible**: Can function as both a stack (LIFO) and a queue (FIFO).
+- **Dynamic Size**: Like a queue, it can grow and shrink dynamically depending on the implementation (linked list or dynamically resized array).
+
+### Types of Dequeues
+
+1. **Input-Restricted Dequeue**:
+   - Insertion is allowed only at one end (either front or rear).
+   - Deletion is allowed at both ends.
+
+2. **Output-Restricted Dequeue**:
+   - Deletion is allowed only at one end.
+   - Insertion is allowed at both ends.
+
+### Applications of Dequeue
+
+- **Palindrome Checking**: Efficiently used to check whether a string is a palindrome by comparing elements from both ends.
+- **Sliding Window Problems**: Used in algorithms that require maintaining a window of elements, such as finding the maximum or minimum in a sliding window.
+- **Task Scheduling**: Helps in managing tasks where insertion and removal from both ends are required.
+- **Undo Operations**: Useful in applications like text editors for maintaining a history of actions to support undo/redo operations.
+
+### Diagrammatic Representation
+
+**Typical Dequeue Operations**:
+
+```c
+Front <- [Element1] <-> [Element2] <-> [Element3] <-> [Element4] -> Rear
+```
+
+- **Insert at Front**: Adds an element at the front.
+- **Remove from Front**: Removes an element from the front.
+- **Insert at Rear**: Adds an element at the rear.
+- **Remove from Rear**: Removes an element from the rear.
+
+### Example in C++
+
+Here's how a dequeue can be implemented using a doubly linked list:
+
+```cpp
+#include <iostream>
+
+// Node structure for doubly linked list
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+// Dequeue class using doubly linked list
+class Dequeue {
+private:
+    Node* front;
+    Node* rear;
+
+public:
+    // Constructor to initialize an empty dequeue
+    Dequeue() : front(nullptr), rear(nullptr) {}
+
+    // Destructor to free all nodes in the dequeue
+    ~Dequeue() {
+        while (front != nullptr) {
+            Node* temp = front;
+            front = front->next;
+            delete temp;
+        }
+    }
+
+    // Function to insert an element at the front
+    void insertFront(int data) {
+        Node* newNode = new Node{data, nullptr, front};
+        if (front == nullptr) {
+            rear = newNode;
+        } else {
+            front->prev = newNode;
+        }
+        front = newNode;
+    }
+
+    // Function to insert an element at the rear
+    void insertRear(int data) {
+        Node* newNode = new Node{data, rear, nullptr};
+        if (rear == nullptr) {
+            front = newNode;
+        } else {
+            rear->next = newNode;
+        }
+        rear = newNode;
+    }
+
+    // Function to remove an element from the front
+    int deleteFront() {
+        if (front == nullptr) {
+            std::cerr << "Dequeue is empty\n";
+            return -1; // Sentinel value indicating empty dequeue
+        }
+        int data = front->data;
+        Node* temp = front;
+        front = front->next;
+        if (front == nullptr) {
+            rear = nullptr;
+        } else {
+            front->prev = nullptr;
+        }
+        delete temp;
+        return data;
+    }
+
+    // Function to remove an element from the rear
+    int deleteRear() {
+        if (rear == nullptr) {
+            std::cerr << "Dequeue is empty\n";
+            return -1; // Sentinel value indicating empty dequeue
+        }
+        int data = rear->data;
+        Node* temp = rear;
+        rear = rear->prev;
+        if (rear == nullptr) {
+            front = nullptr;
+        } else {
+            rear->next = nullptr;
+        }
+        delete temp;
+        return data;
+    }
+
+    // Function to display dequeue elements from front to rear
+    void display() const {
+        if (front == nullptr) {
+            std::cout << "Dequeue is empty\n";
+            return;
+        }
+        Node* temp = front;
+        std::cout << "The elements in the dequeue are: ";
+        while (temp != nullptr) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    Dequeue dq;
+
+    dq.insertRear(1);
+    dq.insertRear(2);
+    dq.insertFront(0);
+    dq.insertFront(-1);
+
+    dq.display();
+
+    std::cout << "Deleted from front: " << dq.deleteFront() << std::endl;
+    std::cout << "Deleted from rear: " << dq.deleteRear() << std::endl;
+
+    dq.display();
+
+    return 0;
+}
+```
+
+### Example in C
+
+Here's how a dequeue can be implemented using a doubly linked list in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure for doubly linked list
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+// Dequeue structure using doubly linked list
+struct Dequeue {
+    struct Node* front;
+    struct Node* rear;
+};
+
+// Function to create and initialize an empty dequeue
+struct Dequeue* createDequeue() {
+    struct Dequeue* dq = (struct Dequeue*)malloc(sizeof(struct Dequeue));
+    if (dq == NULL) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+    dq->front = dq->rear = NULL;
+    return dq;
+}
+
+// Function to insert an element at the front
+void insertFront(struct Dequeue* dq, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = dq->front;
+    if (dq->front == NULL) {
+        dq->rear = newNode;
+    } else {
+        dq->front->prev = newNode;
+    }
+    dq->front = newNode;
+}
+
+// Function to insert an element at the rear
+void insertRear(struct Dequeue* dq, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    newNode->prev = dq->rear;
+    if (dq->rear == NULL) {
+        dq->front = newNode;
+    } else {
+        dq->rear->next = newNode;
+    }
+    dq->rear = newNode;
+}
+
+// Function to remove an element from the front
+int deleteFront(struct Dequeue* dq) {
+    if (dq->front == NULL) {
+        printf("Dequeue is empty\n");
+        return -1; // Sentinel value indicating empty dequeue
+    }
+    int data = dq->front->data;
+    struct Node* temp = dq->front;
+    dq->front = dq->front->next;
+    if (dq->front == NULL) {
+        dq->rear = NULL;
+    } else {
+        dq->front->prev = NULL;
+    }
+    free(temp);
+    return data;
+}
+
+// Function to remove an element from the rear
+int deleteRear(struct Dequeue* dq) {
+    if (dq->rear == NULL) {
+        printf("Dequeue is empty\n");
+        return -1; // Sentinel value indicating empty dequeue
+    }
+    int data = dq->rear->data;
+    struct Node* temp = dq->rear;
+    dq->rear = dq->rear->prev;
+    if (dq->rear == NULL) {
+        dq->front = NULL;
+    } else {
+        dq->rear->next = NULL;
+    }
+    free(temp);
+    return data;
+}
+
+// Function to display dequeue elements from front to rear
+void display(struct Dequeue* dq) {
+    if (dq->front == NULL) {
+        printf("Dequeue is empty\n");
+        return;
+    }
+    struct Node* temp = dq->front;
+    printf("The elements in the dequeue are: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+// Function to free the dequeue
+void freeDequeue(struct Dequeue* dq) {
+    struct Node* temp = dq->front;
+    while (temp != NULL) {
+        struct Node* next = temp->next;
+        free(temp);
+        temp = next;
+    }
+    free(dq);
+}
+
+// Main function to demonstrate dequeue operations
+int main() {
+    struct Dequeue* dq = createDequeue();
+
+    insertRear(dq, 1);
+    insertRear(dq, 2);
+    insertFront(dq, 0);
+    insertFront(dq, -1);
+
+    display(d
+
+q);
+
+    printf("Deleted from front: %d\n", deleteFront(dq));
+    printf("Deleted from rear: %d\n", deleteRear(dq));
+
+    display(dq);
+
+    freeDequeue(dq);
+
+    return 0;
+}
+```
+
+## Sum mary
+
+A dequeue is a versatile data structure that supports insertion and deletion at both ends. It provides flexibility and is useful in a variety of applications where bidirectional operations are required.
+
+### Priority Queue
+
+**Definition**:
+A **priority queue** is an abstract data structure similar to a regular queue or stack, but where each element is associated with a priority. In a priority queue, elements are removed based on their priority rather than their order of insertion. The element with the highest priority is served before elements with lower priority, regardless of the order in which they were added to the queue.
+
+### Characteristics of Priority Queue
+
+- **Priority-Based Removal**: Elements with higher priority are dequeued before elements with lower priority.
+- **Dynamic Order**: Unlike a standard FIFO queue, the order of elements is dynamically determined by their priorities.
+- **Customizable Priority**: Priorities can be determined by any criteria, making the data structure very flexible.
+
+### Types of Priority Queues
+
+1. **Max-Priority Queue**:
+   - The element with the highest priority (or the largest value) is dequeued first.
+
+   **Example**: A job scheduling system where more critical tasks are processed before less critical ones.
+
+2. **Min-Priority Queue**:
+   - The element with the lowest priority (or the smallest value) is dequeued first.
+
+   **Example**: Dijkstra's algorithm, where nodes with the smallest distance are processed first.
+
+### Applications of Priority Queue
+
+- **Task Scheduling**: In operating systems, more critical tasks (e.g., system processes) are given higher priority over less critical ones (e.g., user processes).
+- **Graph Algorithms**: Used in algorithms like Dijkstra's shortest path algorithm and Prim's minimum spanning tree algorithm.
+- **Event Simulation**: Managing events that need to be processed in a particular order of importance.
+- **Data Compression**: Used in Huffman coding for prioritizing the smallest frequencies.
+
+### Example Implementations
+
+#### Using a Sorted List or Array
+
+- **Insertion**: Add the element in a sorted position based on priority.
+- **Deletion**: Remove the element from the beginning (highest priority for max-priority queue).
+
+#### Using a Binary Heap
+
+- **Insertion**: Add the element to the end of the heap and adjust (heapify up).
+- **Deletion**: Remove the root element (highest priority), replace it with the last element, and adjust (heapify down).
+
+## Diagrammatic Representations
+
+For a **Max-Priority Queue**:
+
+```c
+Enqueue (Insertion)
+   Priority Queue:
+      [8] [7] [5] [3] [1]
+      ^        ^
+      highest priority
+
+Dequeue (Removal)
+   Priority Queue after dequeue:
+      [7] [5] [3] [1]
+      ^     
+      highest priority
+```
+
+### Example Code in C++
+
+Here’s a basic implementation of a priority queue using a binary heap in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+class MaxPriorityQueue {
+private:
+    std::vector<int> heap;
+
+    void heapifyUp(int index) {
+        while (index > 0) {
+            int parent = (index - 1) / 2;
+            if (heap[index] <= heap[parent]) break;
+            std::swap(heap[index], heap[parent]);
+            index = parent;
+        }
+    }
+
+    void heapifyDown(int index) {
+        int size = heap.size();
+        while (true) {
+            int left = 2 * index + 1;
+            int right = 2 * index + 2;
+            int largest = index;
+
+            if (left < size && heap[left] > heap[largest]) {
+                largest = left;
+            }
+            if (right < size && heap[right] > heap[largest]) {
+                largest = right;
+            }
+            if (largest == index) break;
+
+            std::swap(heap[index], heap[largest]);
+            index = largest;
+        }
+    }
+
+public:
+    void insert(int data) {
+        heap.push_back(data);
+        heapifyUp(heap.size() - 1);
+    }
+
+    int extractMax() {
+        if (heap.empty()) throw std::runtime_error("Priority queue is empty");
+        int max = heap[0];
+        heap[0] = heap.back();
+        heap.pop_back();
+        heapifyDown(0);
+        return max;
+    }
+
+    bool isEmpty() const {
+        return heap.empty();
+    }
+
+    void display() const {
+        for (int val : heap) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    MaxPriorityQueue pq;
+
+    pq.insert(3);
+    pq.insert(5);
+    pq.insert(7);
+    pq.insert(8);
+    pq.insert(1);
+
+    pq.display();
+
+    std::cout << "Extracted max: " << pq.extractMax() << std::endl;
+
+    pq.display();
+
+    return 0;
+}
+```
+
+### Example Code in C
+
+Here’s a basic implementation of a priority queue using a binary heap in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_HEAP_SIZE 100
+
+struct PriorityQueue {
+    int heap[MAX_HEAP_SIZE];
+    int size;
+};
+
+// Function prototypes
+void insert(struct PriorityQueue* pq, int data);
+int extractMax(struct PriorityQueue* pq);
+void heapifyUp(struct PriorityQueue* pq, int index);
+void heapifyDown(struct PriorityQueue* pq, int index);
+void display(struct PriorityQueue* pq);
+
+int main() {
+    struct PriorityQueue pq = { .size = 0 };
+
+    insert(&pq, 3);
+    insert(&pq, 5);
+    insert(&pq, 7);
+    insert(&pq, 8);
+    insert(&pq, 1);
+
+    display(&pq);
+
+    printf("Extracted max: %d\n", extractMax(&pq));
+
+    display(&pq);
+
+    return 0;
+}
+
+void insert(struct PriorityQueue* pq, int data) {
+    if (pq->size == MAX_HEAP_SIZE) {
+        printf("Priority queue is full\n");
+        return;
+    }
+    pq->heap[pq->size] = data;
+    heapifyUp(pq, pq->size);
+    pq->size++;
+}
+
+int extractMax(struct PriorityQueue* pq) {
+    if (pq->size == 0) {
+        printf("Priority queue is empty\n");
+        return -1;
+    }
+    int max = pq->heap[0];
+    pq->heap[0] = pq->heap[--pq->size];
+    heapifyDown(pq, 0);
+    return max;
+}
+
+void heapifyUp(struct PriorityQueue* pq, int index) {
+    while (index > 0) {
+        int parent = (index - 1) / 2;
+        if (pq->heap[index] <= pq->heap[parent]) break;
+        int temp = pq->heap[index];
+        pq->heap[index] = pq->heap[parent];
+        pq->heap[parent] = temp;
+        index = parent;
+    }
+}
+
+void heapifyDown(struct PriorityQueue* pq, int index) {
+    while (1) {
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+        int largest = index;
+
+        if (left < pq->size && pq->heap[left] > pq->heap[largest]) {
+            largest = left;
+        }
+        if (right < pq->size && pq->heap[right] > pq->heap[largest]) {
+            largest = right;
+        }
+        if (largest == index) break;
+
+        int temp = pq->heap[index];
+        pq->heap[index] = pq->heap[largest];
+        pq->heap[largest] = temp;
+        index = largest;
+    }
+}
+
+void display(struct PriorityQueue* pq) {
+    for (int i = 0; i < pq->size; i++) {
+        printf("%d ", pq->heap[i]);
+    }
+    printf("\n");
+}
+```
+
+## Sum  mary
+
+- **Priority Queue**: A data structure where elements are processed based on their priority.
+- **Max-Priority Queue**: Serves the highest priority element first.
+- **Min-Priority Queue**: Serves the lowest priority element first.
+- **Applications**: Used in scheduling, graph algorithms, event simulation, and more.
+- **Implementation**: Can be implemented using sorted arrays, binary heaps, or other structures based on the requirement.
