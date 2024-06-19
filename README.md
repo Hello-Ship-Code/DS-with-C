@@ -20,4 +20,6 @@
 
 [stack](./09-Stack/) ✅
 
-[Queues](./10-Queues/) ⏳
+[Queues](./10-Queues/) ✅
+
+[Trees](./11-Trees/) ⏳
