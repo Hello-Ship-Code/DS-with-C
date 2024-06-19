@@ -22,4 +22,4 @@
 
 [Queues](./10-Queues/) ✅
 
-[Trees](./11-Trees/) ⏳
+[Tree's](./11-Trees/) ⏳
