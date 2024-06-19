@@ -1111,13 +1111,13 @@ void display(struct PriorityQueue* pq) {
 
 Implementing a queue using two stacks is a common exercise in data structures that demonstrates the versatility and power of stacks. This technique involves using two stacks to simulate the FIFO behavior of a queue. Below is an explanation and implementation of a queue using two stacks, in both C and C++.
 
-### Concept
+## Queues using two stacks
 
 - **Stack**: A data structure that follows the **Last-In-First-Out (LIFO)** principle.
 - **Queue**: A data structure that follows the **First-In-First-Out (FIFO)** principle.
 - **Using Two Stacks**: By leveraging the LIFO property of stacks, you can simulate FIFO behavior of a queue.
 
-#### Basic Idea
+### Basic Idea
 
 1. **Two Stacks**: Use two stacks, `stack1` and `stack2`.
    - **stack1** is used for enqueue operations (pushing elements).
