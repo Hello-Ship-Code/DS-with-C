@@ -4,6 +4,8 @@ In data structures, trees are a hierarchical model used to represent and organiz
 
 ## **Basic Terminologies**
 
+Here's a comprehensive list of basic tree terminologies, incorporating the provided terms:
+
 1. **Tree**: A data structure consisting of nodes, with a single root node and potentially many levels of additional nodes forming a hierarchical structure. Each node may have zero or more child nodes.
 
 2. **Node**: A fundamental part of a tree structure that stores data and has references to child nodes. Each node contains a value and possibly pointers to child nodes.
@@ -26,15 +28,31 @@ In data structures, trees are a hierarchical model used to represent and organiz
 
 11. **Level**: The depth of a node; nodes at the same depth form a level.
 
-12. **Degree**: The number of children a node has. The degree of a tree is the maximum degree of any node in the tree.
+12. **Degree of Node**: The number of children a node has. The degree of a tree is the maximum degree of any node in the tree.
 
-13. **Path**: A sequence of nodes and edges connecting a node with a descendant.
+13. **Internal Node**: A node with at least one child; not a leaf. Internal nodes are also called non-leaf nodes.
 
-14. **Ancestor**: Any node along the path from the root to a particular node.
+14. **External Node**: A node with no children; also known as a leaf node.
 
-15. **Descendant**: Any node that is reachable from a particular node through a sequence of edges.
+15. **Forest**: A collection of disjoint trees, meaning multiple trees that are not connected to each other.
 
-16. **Binary Tree**: A tree where each node has at most two children, often referred to as the left and right child.
+16. **Sibling**: Nodes that share the same parent are siblings.
+
+17. **Path**: A sequence of nodes and edges connecting a node with a descendant.
+
+18. **Ancestor**: Any node along the path from the root to a particular node.
+
+19. **Descendant**: Any node that is reachable from a particular node through a sequence of edges.
+
+20. **Binary Tree**: A tree where each node has at most two children, often referred to as the left and right child.
+
+21. **Balanced Tree**: A tree in which the height of the left and right subtrees of every node differs by no more than one.
+
+22. **Complete Tree**: A binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+
+23. **Full Tree**: A binary tree in which every node other than the leaves has two children.
+
+24. **Perfect Tree**: A binary tree in which all interior nodes have two children and all leaves have the same depth.
 
 ### **Specialized Trees**
 
