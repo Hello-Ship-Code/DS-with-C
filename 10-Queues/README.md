@@ -1108,3 +1108,256 @@ void display(struct PriorityQueue* pq) {
 - **Min-Priority Queue**: Serves the lowest priority element first.
 - **Applications**: Used in scheduling, graph algorithms, event simulation, and more.
 - **Implementation**: Can be implemented using sorted arrays, binary heaps, or other structures based on the requirement.
+
+Implementing a queue using two stacks is a common exercise in data structures that demonstrates the versatility and power of stacks. This technique involves using two stacks to simulate the FIFO behavior of a queue. Below is an explanation and implementation of a queue using two stacks, in both C and C++.
+
+### Concept
+
+- **Stack**: A data structure that follows the **Last-In-First-Out (LIFO)** principle.
+- **Queue**: A data structure that follows the **First-In-First-Out (FIFO)** principle.
+- **Using Two Stacks**: By leveraging the LIFO property of stacks, you can simulate FIFO behavior of a queue.
+
+#### Basic Idea
+
+1. **Two Stacks**: Use two stacks, `stack1` and `stack2`.
+   - **stack1** is used for enqueue operations (pushing elements).
+   - **stack2** is used for dequeue operations (popping elements).
+
+2. **Enqueue Operation**: Always push the element onto `stack1`.
+
+3. **Dequeue Operation**:
+   - If `stack2` is empty, transfer all elements from `stack1` to `stack2` (reversing their order), and then pop the top element from `stack2`.
+   - If `stack2` is not empty, simply pop the top element from `stack2`.
+
+### Example Implementation
+
+#### C++ Implementation
+
+Here’s how to implement a queue using two stacks in C++:
+
+```cpp
+#include <iostream>
+#include <stack>
+
+class QueueUsingStacks {
+private:
+    std::stack<int> stack1, stack2;
+
+    // Helper function to transfer elements from stack1 to stack2
+    void transferStack1ToStack2() {
+        while (!stack1.empty()) {
+            stack2.push(stack1.top());
+            stack1.pop();
+        }
+    }
+
+public:
+    // Function to add an element to the queue
+    void enqueue(int data) {
+        stack1.push(data);
+    }
+
+    // Function to remove and return the front element from the queue
+    int dequeue() {
+        if (stack2.empty()) {
+            if (stack1.empty()) {
+                std::cerr << "Queue is empty\n";
+                return -1; // Sentinel value indicating empty queue
+            }
+            transferStack1ToStack2();
+        }
+        int front = stack2.top();
+        stack2.pop();
+        return front;
+    }
+
+    // Function to display the elements of the queue
+    void display() {
+        if (stack2.empty() && stack1.empty()) {
+            std::cout << "Queue is empty\n";
+            return;
+        }
+        // Transfer elements to stack2 for display purpose
+        transferStack1ToStack2();
+        std::stack<int> temp = stack2;
+        std::cout << "The elements in the queue are: ";
+        while (!temp.empty()) {
+            std::cout << temp.top() << " ";
+            temp.pop();
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    QueueUsingStacks q;
+
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+
+    q.display();
+
+    std::cout << "Dequeued: " << q.dequeue() << std::endl;
+
+    q.display();
+
+    return 0;
+}
+```
+
+#### C Implementation
+
+Here’s how to implement a queue using two stacks in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100
+
+// Stack structure
+struct Stack {
+    int arr[MAX];
+    int top;
+};
+
+// Queue using two stacks
+struct QueueUsingStacks {
+    struct Stack stack1;
+    struct Stack stack2;
+};
+
+// Initialize stack
+void initStack(struct Stack* stack) {
+    stack->top = -1;
+}
+
+// Push element to stack
+void push(struct Stack* stack, int data) {
+    if (stack->top == MAX - 1) {
+        printf("Stack overflow\n");
+        return;
+    }
+    stack->arr[++stack->top] = data;
+}
+
+// Pop element from stack
+int pop(struct Stack* stack) {
+    if (stack->top == -1) {
+        printf("Stack underflow\n");
+        return -1; // Sentinel value indicating empty stack
+    }
+    return stack->arr[stack->top--];
+}
+
+// Initialize queue
+void initQueue(struct QueueUsingStacks* queue) {
+    initStack(&queue->stack1);
+    initStack(&queue->stack2);
+}
+
+// Enqueue element to queue
+void enqueue(struct QueueUsingStacks* queue, int data) {
+    push(&queue->stack1, data);
+}
+
+// Dequeue element from queue
+int dequeue(struct QueueUsingStacks* queue) {
+    if (queue->stack2.top == -1) {
+        while (queue->stack1.top != -1) {
+            push(&queue->stack2, pop(&queue->stack1));
+        }
+    }
+    return pop(&queue->stack2);
+}
+
+// Display queue elements
+void display(struct QueueUsingStacks* queue) {
+    if (queue->stack1.top == -1 && queue->stack2.top == -1) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    // Temporary stack to hold elements for display
+    struct Stack tempStack;
+    initStack(&tempStack);
+
+    // Transfer elements from stack2 to tempStack to display them
+    while (queue->stack2.top != -1) {
+        push(&tempStack, pop(&queue->stack2));
+    }
+    while (tempStack.top != -1) {
+        printf("%d ", tempStack.arr[tempStack.top]);
+        enqueue(queue, pop(&tempStack));
+    }
+
+    // Transfer elements from stack1 to tempStack to display them
+    while (queue->stack1.top != -1) {
+        push(&tempStack, pop(&queue->stack1));
+    }
+    while (tempStack.top != -1) {
+        printf("%d ", tempStack.arr[tempStack.top]);
+        enqueue(queue, pop(&tempStack));
+    }
+    printf("\n");
+}
+
+int main() {
+    struct QueueUsingStacks queue;
+    initQueue(&queue);
+
+    enqueue(&queue, 1);
+    enqueue(&queue, 2);
+    enqueue(&queue, 3);
+    enqueue(&queue, 4);
+    enqueue(&queue, 5);
+
+    display(&queue);
+
+    printf("Dequeued: %d\n", dequeue(&queue));
+
+    display(&queue);
+
+    return 0;
+}
+```
+
+### Detailed Explanation
+
+1. **Initialization**:
+   - **C++**: Constructor initializes two empty stacks.
+   - **C**: `initStack` initializes the stack by setting `top` to `-1`, and `initQueue` initializes the queue by initializing both stacks.
+
+2. **Enqueue Operation**:
+   - **C++**: Push the element onto `stack1`.
+   - **C**: Push the element onto `stack1` using `push`.
+
+3. **Dequeue Operation**:
+   - **C++**:
+     - If `stack2` is empty, transfer all elements from `stack1` to `stack2` by popping from `stack1` and pushing onto `stack2`.
+     - Pop the top element from `stack2` and return it.
+   - **C**:
+     - If `stack2` is empty, transfer elements from `stack1` to `stack2`.
+     - Pop the top element from `stack2` and return it.
+
+4. **Display Operation**:
+   - **C++**:
+     - Transfer elements from `stack1` to `stack2` for display purposes.
+     - Display elements from `stack2` using a temporary stack to hold the elements.
+   - **C**:
+     - Use a temporary stack to hold elements while displaying and ensure the queue state is restored after displaying.
+
+### Summery
+
+- **Purpose**: To simulate FIFO behavior using two LIFO stacks.
+- **Advantages**:
+  - Demonstrates how stack operations can be used to implement queue behavior.
+  - Efficiently handles enqueue and dequeue operations by dividing tasks between two stacks.
+- **Drawbacks**:
+  - Additional memory overhead for maintaining two stacks.
+  - Potential inefficiency if dequeue operations are frequent and require transferring elements between stacks repeatedly.
+
+This approach is a common example of using stacks to achieve queue-like behavior, showing the flexibility of stack operations and providing a good exercise in understanding stack and queue dynamics.
