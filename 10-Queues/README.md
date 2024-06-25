@@ -266,7 +266,8 @@ A simple array-based queue uses a fixed-size array to store elements. `Enqueue` 
 - **Overflow/Underflow**: Managing the conditions for checking if the queue is full or empty can be problematic, and errors can occur if these conditions are not handled properly.
 
 **Diagram**:
-```
+
+```cpp
 Enqueue at rear      Dequeue from front
    |                        |
    v                        v

@@ -156,51 +156,35 @@ Each node except the root has exactly one parent, and each node may have zero or
 
 **Definition**: The number of distinct binary trees that can be formed with `n` nodes is given by the Catalan number. For `n` nodes, the count is represented by the `n`-th Catalan number \( C_n \).
 
-**Formula**:
-\[ C_n = \frac{1}{n+1} \binom{2n}{n} = \frac{(2n)!}{(n+1)!n!} \]
+Here are the corrected formulas for markdown format:
 
-**Representation**:
-
-- **Example**: For `n = 3` nodes:
-  - The number of binary trees is \( C_3 = \frac{1}{3+1} \binom{6}{3} = \frac{1}{4} \times 20 = 5 \).
-  - These 5 binary trees can be visualized as:
-
-    ```text
-      Tree 1         Tree 2       Tree 3        Tree 4         Tree 5
-         1             1            1             2              3
-          \             \            \           / \            /
-           2             3            2         1   3          1
-            \           /              \                     / \
-             3         2                3                   2   3
-    ```
-
-#### Catalan Number
+### Catalan Number
 
 **Definition**: The Catalan number is a sequence of natural numbers that appears in various counting problems, often involving recursively defined structures. It represents the number of ways to correctly match parentheses, the number of rooted binary trees, the number of paths along the edges of a grid that do not pass above the diagonal, etc.
 
 **Formula**:
 \[ C_n = \frac{1}{n+1} \binom{2n}{n} = \frac{(2n)!}{(n+1)!n!} \]
-Where \( \binom{2n}{n} \) is a binomial coefficient.
+Where \(\binom{2n}{n}\) is a binomial coefficient.
 
 **Recursive Formula**:
 \[ C_0 = 1 \]
 \[ C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i} \]
 
-**Representation**:
+### Representation
 
 - **Catalan Numbers**:
 
   \[ C_0 = 1, \; C_1 = 1, \; C_2 = 2, \; C_3 = 5, \; C_4 = 14, \; C_5 = 42, \; C_6 = 132, \; \ldots \]
   
 - **Visual Representation**:
-  - **Parentheses Matching**: For `n = 3`, the 5 valid combinations are:
+  - **Parentheses Matching**: For \(n = 3\), the 5 valid combinations are:
 
     ```text
     ((())), (()()), (())(), ()(()), ()()()
     ```
 
-  - **Binary Trees**: For `n = 3` nodes, as shown above.
-  - **Grid Paths**: For `n = 2`, the number of paths from the bottom-left to the top-right of a 2x2 grid without crossing above the diagonal is 2:
+  - **Binary Trees**: For \(n = 3\) nodes, as shown above.
+  - **Grid Paths**: For \(n = 2\), the number of paths from the bottom-left to the top-right of a 2x2 grid without crossing above the diagonal is 2:
 
     ```text
      .__.
@@ -210,10 +194,10 @@ Where \( \binom{2n}{n} \) is a binomial coefficient.
 
 ### Applications of Catalan Numbers
 
-1. **Binary Trees**: Counting the number of distinct binary trees with `n` nodes.
-2. **Parentheses Combinations**: Number of ways to correctly match `n` pairs of parentheses.
+1. **Binary Trees**: Counting the number of distinct binary trees with \(n\) nodes.
+2. **Parentheses Combinations**: Number of ways to correctly match \(n\) pairs of parentheses.
 3. **Grid Paths**: Number of paths along the edges of a grid that do not pass above the diagonal.
-4. **Polygon Triangulation**: Number of ways to triangulate a convex polygon with `n+2` sides.
+4. **Polygon Triangulation**: Number of ways to triangulate a convex polygon with \(n+2\) sides.
 
 ### Examples and Calculation
 
@@ -225,9 +209,9 @@ Where \( \binom{2n}{n} \) is a binomial coefficient.
   \[ C_0 = 1 \]
   \[ C_1 = C_0 \cdot C_0 = 1 \]
   \[ C_2 = C_0 \cdot C_1 + C_1 \cdot C_0 = 1 + 1 = 2 \]
-  \[ C_3 = C_0 \cdot C_2 + C_1 \cdot C_1 + C_2 \cdot C_0 = 2 + 1 + 2 = 5 \]
+  \[ C_3 = C_0 \cdot C_2 + C_1 \cdot C_1 + C_2 \cdot C_0 = 1 \cdot 2 + 1 \cdot 1 + 2 \cdot 1 = 2 + 1 + 2 = 5 \]
 
 ### Summary
 
-- The number of binary trees for `n` nodes corresponds to the `n`-th Catalan number.
+- The number of binary trees for \(n\) nodes corresponds to the \(n\)-th Catalan number.
 - Catalan numbers have a wide range of applications in combinatorial mathematics and computer science.

@@ -157,7 +157,7 @@ int main()
    push(&st,10);
    push(&st,20);
    push(&st,30);
-   push(&st,40);
+   push(&st,40);\
    push(&st,50);
    
    printf("The stack is: %d \n",isEmpty(st));
