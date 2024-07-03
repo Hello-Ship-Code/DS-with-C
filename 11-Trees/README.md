@@ -160,12 +160,6 @@ Here are the corrected formulas for markdown format:
 
 Sure, here is the markdown with the formulas formatted using `$$` for display mode:
 
----
-
-Sure, I'll format the formulas using single `$` for inline math:
-
----
-
 ### Catalan Number
 
 **Definition**: The Catalan number is a sequence of natural numbers that appears in various counting problems, often involving recursively defined structures. It represents the number of ways to correctly match parentheses, the number of rooted binary trees, the number of paths along the edges of a grid that do not pass above the diagonal, etc.
@@ -235,7 +229,7 @@ $C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}$
 - The number of binary trees for $n$ nodes corresponds to the $n$-th Catalan number.
 - Catalan numbers have a wide range of applications in combinatorial mathematics and computer science.
 
-### Steps to Calculate the Number of Labeled Binary Trees
+## Steps to Calculate the Number of Labeled Binary Trees
 
 To determine the number of distinct binary trees that can be generated using labeled nodes, we need to consider both the number of binary tree structures possible with $( n )$ unlabeled nodes and the permutations of the labeled nodes.
 
