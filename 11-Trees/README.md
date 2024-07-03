@@ -305,4 +305,4 @@ $\log_2 (n+1) - 1 \leq height \leq n -1$
 
 - if we are given height of binary tree. We can determine minimum and maximum  nodes. We can generate a formulae.
 
-$ h + 1 \leq n \leq 2^{H+1} - 1$
+$h + 1 \leq n \leq 2^{H+1} - 1$
