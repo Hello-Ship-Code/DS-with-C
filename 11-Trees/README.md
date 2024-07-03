@@ -346,11 +346,91 @@ A **strict N-ary tree**, also known as a **full N-ary tree**, is an N-ary tree i
 
 - if we are given Nodes of binary tree. We can determine minimum and maximum  height. We can generate a formulae.
 
-$\log_m [n(m-1)+ 1] - 1 \leq height \leq \frac{no of nodes - 1}{m}$
-m = n - binary tree
+$\log_m [n(m-1)+ 1] - 1 \leq height \leq \frac{n - 1}{m}$  
+m = n - binary tree  
+n = Total number of nodes
 
 ## Number of nodes in a strict n - binary tree
 
 - if we are given height of binary tree. We can determine minimum and maximum  nodes. We can generate a formulae.
 
 $mh+ 1 \leq nodes \leq \frac{n^{h+1} - 1}{n - 1}$
+
+## internal node vs external node
+
+$E = (n - 1)I +1$
+
+## Array representation of Binary tree
+
+```c
+        a
+       / \
+      b   c
+     / \ / \
+    d  e f  g
+
+```
+
+element  = $i$  
+left child = $2 * i$  
+right child = $2 * i + 1$  
+parent = $\left\lfloor \frac{i-1}{2} \right\rfloor$
+
+## linked representation of binary tree
+
+```c
+        a
+       / \
+      b   c
+     / \ / \
+    d  e f  g
+
+```
+
+Node = $[Left-child, Node, Right-Child]$
+
+```c
+struct Node{
+   struct Node *leftchild;
+   int data;
+   struct Node *rightchild;
+};
+```
+
+### Full Binary Tree
+
+A **full binary tree** (also known as a **strict binary tree** or **proper binary tree**) is a type of binary tree in which every node other than the leaves has exactly two children.
+
+#### Diagram of a Full Binary Tree
+
+```c
+        a
+       / \
+      b   c
+     / \ / \
+    d  e f  g
+```
+
+In this tree:
+
+- Every node has either 0 or 2 children.
+- All internal nodes have exactly two children.
+
+### Complete Binary Tree
+
+A **complete binary tree** is a type of binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+
+#### Diagram of a Complete Binary Tree
+
+```c
+        a
+       / \
+      b   c
+     / \ / 
+    d  e f  
+```
+
+In this tree:
+
+- All levels except the last are completely filled.
+- Nodes in the last level are as far left as possible.
