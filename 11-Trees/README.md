@@ -294,3 +294,15 @@ Simplifying, we get:
 This formula allows you to calculate the number of distinct labeled binary trees for any given \( n \) labeled nodes.
 
 ---
+
+## Height of binary tree
+
+- if we are given Nodes of binary tree. We can determine minimum and maximum  height. We can generate a formulae.
+
+$\log_2 (n+1) - 1 \leq height \leq n -1$
+
+## Number of nodes in a binary tree
+
+- if we are given height of binary tree. We can determine minimum and maximum  nodes. We can generate a formulae.
+
+$ h + 1 \leq n \leq 2^{H+1} - 1$
