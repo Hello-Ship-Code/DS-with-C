@@ -235,6 +235,10 @@ $C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}$
 - The number of binary trees for $n$ nodes corresponds to the $n$-th Catalan number.
 - Catalan numbers have a wide range of applications in combinatorial mathematics and computer science.
 
+Sure! Here is the explanation in Markdown format with LaTeX for the formulas:
+
+---
+
 To determine the number of distinct binary trees that can be generated using labeled nodes, we need to consider both the number of binary tree structures possible with \( n \) unlabeled nodes and the permutations of the labeled nodes.
 
 ### Steps to Calculate the Number of Labeled Binary Trees
@@ -288,3 +292,5 @@ Simplifying, we get:
 \]
 
 This formula allows you to calculate the number of distinct labeled binary trees for any given \( n \) labeled nodes.
+
+---
