@@ -291,7 +291,7 @@ Simplifying, we get:
 \text{Number of labeled binary trees} = \frac{(2n)!}{(n+1)!}
 \]
 
-This formula allows you to calculate the number of distinct labeled binary trees for any given \( n \) labeled nodes.
+This formula allows you to calculate the number of distinct labeled binary trees for any given $\( n \)$ labeled nodes.
 
 ---
 
@@ -305,4 +305,4 @@ $\log_2 (n+1) - 1 \leq height \leq n -1$
 
 - if we are given height of binary tree. We can determine minimum and maximum  nodes. We can generate a formulae.
 
-$h + 1 \leq n \leq 2^{H+1} - 1$
+$h + 1 \leq n \leq 2^{h+1} - 1$
