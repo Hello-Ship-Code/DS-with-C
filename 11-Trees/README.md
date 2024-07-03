@@ -235,7 +235,7 @@ $C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}$
 - The number of binary trees for $n$ nodes corresponds to the $n$-th Catalan number.
 - Catalan numbers have a wide range of applications in combinatorial mathematics and computer science.
 
-Sure! Here is the explanation in Markdown format with LaTeX for the formulas:
+Sure! Here is the explanation in Markdown format with LaTeX formulas using `$`:
 
 ---
 
