@@ -304,3 +304,53 @@ $\log_2 (n+1) - 1 \leq height \leq \frac{n -1}{2}$
 - if we are given height of binary tree. We can determine minimum and maximum  nodes. We can generate a formulae.
 
 $2^{h+1} \leq n \leq 2^{h+1} - 1$
+
+## internal vs external node
+
+$ E = ( I + 1)$
+
+### N-ary Trees
+
+An **N-ary tree** is a tree data structure in which each node has at most \( N \) children. In other words, each node can have zero or more children, but no more than \( N \) children. N-ary trees generalize the concept of binary trees, which are a specific case of N-ary trees with \( N = 2 \).
+
+### Strict N-ary Trees
+
+A **strict N-ary tree**, also known as a **full N-ary tree**, is an N-ary tree in which every internal node has exactly \( N \) children or no children at all. This means that every non-leaf node must have \( N \) children.
+
+### Key Properties of N-ary and Strict N-ary Trees
+
+1. **Number of Nodes**:
+   - In a general N-ary tree, the number of nodes can vary widely based on the structure and completeness of the tree.
+   - In a strict N-ary tree, if the tree has \( I \) internal nodes, the number of total nodes \( T \) is:
+     \[
+     T = (N - 1) \times I + 1
+     \]
+
+2. **Number of Leaves (External Nodes)**:
+   - For a strict N-ary tree, the number of leaves \( L \) can be determined by the number of internal nodes \( I \):
+     \[
+     L = (N - 1) \times I + 1
+     \]
+
+3. **Height of the Tree**:
+   - The height \( h \) of an N-ary tree is the number of edges on the longest path from the root to a leaf. For a strict N-ary tree, the height depends on the number of levels filled completely.
+
+4. **Example of a Strict N-ary Tree**:
+   - For \( N = 3 \) (a ternary tree):
+     - Each internal node has exactly 3 children.
+     - If the tree has 2 levels of internal nodes (excluding the root), it will have \( 1 + 3 + 9 = 13 \) nodes in total.
+
+## height vs Nodes
+
+## Height of strict n - binary tree
+
+- if we are given Nodes of binary tree. We can determine minimum and maximum  height. We can generate a formulae.
+
+$\log_m [n(m-1)+ 1] - 1 \leq height \leq \frac{no of nodes - 1}{m}$
+m = n - binary tree
+
+## Number of nodes in a strict n - binary tree
+
+- if we are given height of binary tree. We can determine minimum and maximum  nodes. We can generate a formulae.
+
+$mh+ 1 \leq nodes \leq \frac{n^{h+1} - 1}{n - 1}$
