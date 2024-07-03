@@ -297,7 +297,7 @@ In a strict binary tree:
 
 - if we are given Nodes of binary tree. We can determine minimum and maximum  height. We can generate a formulae.
 
-$\log_2 (n+1) - 1 \leq height \leq {n -1}{2}$
+$\log_2 (n+1) - 1 \leq height \leq \frac{n -1}{2}$
 
 ## Number of nodes in a strict binary tree
 
