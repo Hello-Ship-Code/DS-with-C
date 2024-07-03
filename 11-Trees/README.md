@@ -277,19 +277,15 @@ To determine the number of distinct binary trees that can be generated using lab
    \text{Number of labeled binary trees} = C_3 \times 3! = 5 \times 6 = 30
    \]
 
-### General Formula:
+### General Formula
 
 For \( n \) labeled nodes, the number of distinct labeled binary trees is:
 
-\[
-\text{Number of labeled binary trees} = \frac{(2n)!}{(n+1)!n!} \times n!
-\]
+Number of labeled binary trees = $\frac{2nC_n}{n+1} \times n!$
 
 Simplifying, we get:
 
-$\[
-\text{Number of labeled binary trees} = \frac{(2n)!}{(n+1)!}
-\]$
+Number of labeled binary trees = $\frac{2n}!{n+1}!$
 
 This formula allows you to calculate the number of distinct labeled binary trees for any given $\( n \)$ labeled nodes.
 
