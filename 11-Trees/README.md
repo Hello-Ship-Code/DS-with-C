@@ -287,9 +287,9 @@ For \( n \) labeled nodes, the number of distinct labeled binary trees is:
 
 Simplifying, we get:
 
-\[
+$\[
 \text{Number of labeled binary trees} = \frac{(2n)!}{(n+1)!}
-\]
+\]$
 
 This formula allows you to calculate the number of distinct labeled binary trees for any given $\( n \)$ labeled nodes.
 
