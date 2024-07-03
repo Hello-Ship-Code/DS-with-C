@@ -241,7 +241,7 @@ Sure! Here is the explanation in Markdown format with LaTeX for the formulas:
 
 To determine the number of distinct binary trees that can be generated using labeled nodes, we need to consider both the number of binary tree structures possible with \( n \) unlabeled nodes and the permutations of the labeled nodes.
 
-### Steps to Calculate the Number of Labeled Binary Trees
+### Steps to Calculate the Number of Labeled Binary Trees:
 
 1. **Count the Number of Unlabeled Binary Trees**:
    The number of unlabeled binary trees with \( n \) nodes is given by the \( n \)-th Catalan number, \( C_n \). The formula for the \( n \)-th Catalan number is:
@@ -260,7 +260,7 @@ To determine the number of distinct binary trees that can be generated using lab
    \text{Number of labeled binary trees} = C_n \times n!
    \]
 
-### Example for \( n = 3 \)
+### Example for \( n = 3 \):
 
 1. **Number of Unlabeled Binary Trees**:
    \[
@@ -277,7 +277,7 @@ To determine the number of distinct binary trees that can be generated using lab
    \text{Number of labeled binary trees} = C_3 \times 3! = 5 \times 6 = 30
    \]
 
-### General Formula
+### General Formula:
 
 For \( n \) labeled nodes, the number of distinct labeled binary trees is:
 
