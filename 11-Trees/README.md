@@ -235,6 +235,56 @@ $C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}$
 - The number of binary trees for $n$ nodes corresponds to the $n$-th Catalan number.
 - Catalan numbers have a wide range of applications in combinatorial mathematics and computer science.
 
----
+To determine the number of distinct binary trees that can be generated using labeled nodes, we need to consider both the number of binary tree structures possible with \( n \) unlabeled nodes and the permutations of the labeled nodes.
 
-Copying this markdown should now correctly display the formulas.
+### Steps to Calculate the Number of Labeled Binary Trees
+
+1. **Count the Number of Unlabeled Binary Trees**:
+   The number of unlabeled binary trees with \( n \) nodes is given by the \( n \)-th Catalan number, \( C_n \). The formula for the \( n \)-th Catalan number is:
+
+   \[
+   C_n = \frac{1}{n+1} \binom{2n}{n} = \frac{(2n)!}{(n+1)!n!}
+   \]
+
+2. **Count the Number of Permutations of Labeled Nodes**:
+   For \( n \) labeled nodes, the number of permutations is \( n! \).
+
+3. **Combine Both Counts**:
+   The total number of distinct labeled binary trees is the product of the number of unlabeled binary trees and the number of permutations of the labeled nodes:
+
+   \[
+   \text{Number of labeled binary trees} = C_n \times n!
+   \]
+
+### Example for \( n = 3 \)
+
+1. **Number of Unlabeled Binary Trees**:
+   \[
+   C_3 = \frac{1}{3+1} \binom{6}{3} = \frac{1}{4} \cdot 20 = 5
+   \]
+
+2. **Number of Permutations of 3 Labeled Nodes**:
+   \[
+   3! = 6
+   \]
+
+3. **Total Number of Labeled Binary Trees**:
+   \[
+   \text{Number of labeled binary trees} = C_3 \times 3! = 5 \times 6 = 30
+   \]
+
+### General Formula
+
+For \( n \) labeled nodes, the number of distinct labeled binary trees is:
+
+\[
+\text{Number of labeled binary trees} = \frac{(2n)!}{(n+1)!n!} \times n!
+\]
+
+Simplifying, we get:
+
+\[
+\text{Number of labeled binary trees} = \frac{(2n)!}{(n+1)!}
+\]
+
+This formula allows you to calculate the number of distinct labeled binary trees for any given \( n \) labeled nodes.
