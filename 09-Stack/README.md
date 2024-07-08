@@ -157,7 +157,7 @@ int main()
    push(&st,10);
    push(&st,20);
    push(&st,30);
-   push(&st,40);\
+   push(&st,40);
    push(&st,50);
    
    printf("The stack is: %d \n",isEmpty(st));
@@ -187,15 +187,13 @@ struct Node
 
 void push(int x)
 {
-   struct Node *t;
-   t=(struct Node*)malloc(sizeof(struct Node));
-   
-   if(t == NULL)
+    struct Node *t = (struct Node*)malloc(sizeof(struct Node));
+    if(t == NULL)
       printf("The stack is full\n");
-   else{
-      t->data = x;
-      t->next = top;
-      top = t;
+    else{
+        t->data = x;
+        t->next = top;
+        top = t;
    }
 }
 
