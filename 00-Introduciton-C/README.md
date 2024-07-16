@@ -154,7 +154,7 @@ Structures is used to combine data under one name, thus some example usage of st
 - Bank Details etc
 - Defining Shapes etc…
 
-In the example, We get the size of the struct as 12 instead of 9 as integers take 4 bytes each and char takes 1 byte. But instead, the compiler takes 4 bytes as it's easy for the compiler to read but fur char it assigns only 1 byte from the four. This is called padding as it takes more bytes other than what is required.
+> In the example, We get the size of the struct as 12 instead of 9 as integers take 4 bytes each and char takes 1 byte. But instead, the compiler takes 4 bytes as it's easy for the compiler to read but fur char it assigns only 1 byte from the four. This is called `padding` as it takes more bytes other than what is required.
 
 ## Pointers
 
@@ -170,19 +170,18 @@ int main( )
 {
 Int a = 10 ;             - data variable
 Int *p ;                 - declaration
-P = & a ;                - Assignment / Initialization
-printf( “% d ” , a ) ;    
-printf(“ %d ” , * p ) ;  - dereferencing
+P = &a ;                 - Assignment / Initialization
+printf(“%d ” , a );    
+printf(“%d ” , *p) ;     - dereferencing
 }
 ```
 
-- Accessing Heap memory through pointer
+## Accessing Heap memory through pointer
 
 ```c++
-#include<stdio.h>
 int main( )
 {
-Int * p;
+Int *p;
 // p = (int*)malloc(5*sizeof(int)); in c
 P = new int[5]; // in C++
 }
@@ -209,32 +208,148 @@ The program will have access to stack & code section but won't have access to th
 Obtain from (a pointer) the address of a data item held in another location.
 
 ```c++
-#include<stdio.h>
+#include <stdio.h>
 
-int main()
-{
-    int a=10;
-    int p=*a;        - Declaration
-    p=&a;            - initialization
-    print("%d",a);
-    printf("%d",*p); - Dereference
+int main() {
+    int a = 10;      // Declare and initialize an integer variable
+    int *p;          // Declare a pointer to an integer
+
+    p = &a;          // Initialize the pointer to the address of 'a'
+    
+    printf("%d\n", a);  // Print the value of 'a'
+    printf("%d\n", *p); // Dereference the pointer to print the value at the address stored in 'p'
+    
+    return 0;        // Return 0 to indicate successful execution
 }
+
 ```
 
 ## Accessing Heap memory
 
-```c
-#include<stdlib.h>
+In C, dynamic memory allocation for accessing memory in the heap is typically done using the standard library functions `malloc`, `calloc`, `realloc`, and `free`. These functions are declared in the `stdlib.h` header file. Here's a brief explanation of each function and how they are used:
 
-int main()
-{
+### 1. `malloc`
+
+The `malloc` function allocates a block of memory on the heap of a specified size and returns a pointer to the beginning of the block.
+
+**Formula:**
+
+```c
+ptr = (cast_type *) malloc(size_in_bytes);
+```
+
+**Example:**
+
+```c
+int *p = (int *)malloc(10 * sizeof(int)); // Allocates memory for an array of 10 integers
+```
+
+### 2. `calloc`
+
+The `calloc` function allocates memory for an array of elements, initializes them to zero, and returns a pointer to the memory.
+
+**Formula:**
+
+```c
+ptr = (cast_type *) calloc(num_elements, size_of_each_element);
+```
+
+**Example:**
+
+```c
+int *p = (int *)calloc(10, sizeof(int)); // Allocates and initializes memory for an array of 10 integers
+```
+
+### 3. `realloc`
+
+The `realloc` function changes the size of the previously allocated memory block.
+
+**Formula:**
+
+```c
+ptr = (cast_type *) realloc(ptr, new_size_in_bytes);
+```
+
+**Example:**
+
+```c
+p = (int *)realloc(p, 20 * sizeof(int)); // Resizes the previously allocated memory to hold 20 integers
+```
+
+### 4. `free`
+
+The `free` function deallocates the previously allocated memory, releasing it back to the heap.
+
+**Formula:**
+
+```c
+free(ptr);
+```
+
+**Example:**
+
+```c
+free(p); // Frees the memory previously allocated to the pointer p
+```
+
+### Complete Example
+
+Here’s a complete example demonstrating the use of these functions:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
     int *p;
-    p=(int *) malloc(5 * sizeof(int)); - Accessing Heap memory in C.
-    //p = new int[5]; - in cpp
+
+    // Allocate memory for 10 integers
+    p = (int *)malloc(10 * sizeof(int));
+    if (p == NULL) {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+
+    // Use the allocated memory
+    for (int i = 0; i < 10; i++) {
+        p[i] = i * 10;
+    }
+
+    // Print the allocated memory
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", p[i]);
+    }
+    printf("\n");
+
+    // Reallocate memory for 20 integers
+    p = (int *)realloc(p, 20 * sizeof(int));
+    if (p == NULL) {
+        printf("Memory reallocation failed\n");
+        return 1;
+    }
+
+    // Use the reallocated memory
+    for (int i = 10; i < 20; i++) {
+        p[i] = i * 10;
+    }
+
+    // Print the reallocated memory
+    for (int i = 0; i < 20; i++) {
+        printf("%d ", p[i]);
+    }
+    printf("\n");
+
+    // Free the allocated memory
+    free(p);
+
+    return 0;
 }
 ```
 
-- Here 5 is the number of integers into the size of integers. The compiler will allocate 5 integer with each having sizeof(int).
+### Key Points
+
+- Always check if `malloc`, `calloc`, or `realloc` returns `NULL`, which indicates that the memory allocation failed.
+- After using the allocated memory, always free it using the `free` function to avoid memory leaks.
 
 ## Reference
 
@@ -244,20 +359,24 @@ int main()
 ## Example
 
 ```c++
-#include<stdio.h>
+#include <iostream>
 
-int main( )
-{
-    Int a = 10;
-    Int &r = a; - syntax of reference
-    Count << a ;
-    r++;
-    cout<< r ;
-    cout << a ;
-    int b = 30
-    r=b;
-    cout<<a<<endl<<r<<endl; // 30, 30
+int main() {
+    int a = 10;          
+    int &r = a;          // Reference to 'a'
+
+    std::cout << a << std::endl; // Output the value of 'a'
+    r++;                 // Increment the value of 'a' through the reference 'r'
+    std::cout << r << std::endl; // Output the incremented value through 'r'
+    std::cout << a << std::endl; // Output the incremented value of 'a'
+
+    int b = 30;          // Correcting missing semicolon
+    r = b;               // Assigning 'b' to 'a' through reference 'r'
+    std::cout << a << std::endl << r << std::endl; // Output the new value of 'a' and 'r', both should be 30
+
+    return 0;            // Return 0 to indicate successful execution
 }
+
 ```
 
 - This is use for parameter passing
@@ -270,29 +389,34 @@ int main( )
 - When variable is already existing , then we can use pointer to structure like
 
 ```c++
-#include<stdio.h>
+#include <stdio.h>
 
-struct Rectangle
-{
+// Define a struct named Rectangle
+struct Rectangle {
     int length;
-    int breath;
+    int breadth;
 };
 
-int main( )
-{
+int main() {
+    // Declare and initialize a Rectangle struct variable 'r'
+    struct Rectangle r = {10, 5}; 
 
-    Rectangle r = { 10, 5 }; // can write without struct in cpp
-    struct Rectangle *p= &r;
+    // Declare a pointer to a Rectangle struct and assign it the address of 'r'
+    struct Rectangle *p = &r;
 
-    r.length = 15 ;  
-    printf("%d\n",r.length);
+    // Modify the length of 'r' directly
+    r.length = 15;  
+    printf("%d\n", r.length); // Output the modified length of 'r'
 
-    (*p).length = 20;  /* This one way of declaring pointer to struct */
-    printf("%d\n",(*p).length); 
+    // Modify the length of 'r' using the pointer 'p' with dereferencing
+    (*p).length = 20;
+    printf("%d\n", (*p).length); // Output the modified length of 'r' using dereferencing
 
-    p->length = 25;  /* This another way of declaring pointer to struct */
-    printf("%d\n",p->length); 
+    // Modify the length of 'r' using the pointer 'p' with the arrow operator
+    p->length = 25;
+    printf("%d\n", p->length); // Output the modified length of 'r' using the arrow operator
 
+    return 0; // Return 0 to indicate successful execution
 }
 ```
 
@@ -301,25 +425,39 @@ int main( )
 - Dynamically object created in heap and pointer pointing there
 
 ```c++
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct Rectangle
-{
+struct Rectangle {
     int length;
-    int breath;
+    int breadth;
 };
 
-int main( )
-{
+int main() {
     struct Rectangle *p;
-    p=(struct Rectangle * )malloc(sizeof(struct Rectangle)); // in C
-    //p = new Rectangle in c++
-    p->length = 10 ;
-    p->breath = 5;
 
-    printf("The length %d & the breadth: %d",p->length,p->breath);
+    // Allocate memory for a Rectangle structure in C
+    p = (struct Rectangle *)malloc(sizeof(struct Rectangle));
+    //Rectangle *p = new Rectangle;
+
+    if (p == NULL) {
+        printf("Memory allocation failed\n");
+        return 1; // Return with an error code if memory allocation fails
+    }
+
+    // Assign values to the structure members
+    p->length = 10;
+    p->breadth = 5;
+
+    // Print the values of the structure members
+    printf("The length: %d & the breadth: %d\n", p->length, p->breadth);
+
+    // Free the allocated memory
+    free(p);
+
+    return 0;
 }
+
 ```
 
 ## Functions
@@ -358,86 +496,108 @@ int main ( )
 
 ## Parameter Passing Methods
 
-### Pass/call by value
+Your explanation of the different parameter passing mechanisms in C and C++ is clear. Here's a polished version of your examples, with additional comments for clarity.
 
-- In pass by value actual parameters will not be modified if any changes are done to the formal parameters
-Example :
+### Pass/Call by Value
 
-```c++
-#include<stdio.h>
+In pass by value, the actual parameters will not be modified if any changes are done to the formal parameters.
 
-void swap(int x , int y)
-{
+```c
+#include <stdio.h>
+
+// This function attempts to swap the values of x and y
+void swap(int x, int y) {
     int temp;
     temp = x;
     x = y;
     y = temp;
 }
 
-int main()
-{
-    int a ,b;
-    a =10;
-    b=20;
-    swap(a,b);
-    printf("%d %d", a ,b);
+int main() {
+    int a, b;
+    a = 10;
+    b = 20;
+
+    // Call the swap function
+    swap(a, b);
+
+    // Print the values of a and b after the swap function call
+    printf("%d %d\n", a, b); // Output will be 10 20, not 20 10
+
+    return 0;
 }
 ```
 
-### Call by address
+### Call by Address
 
-- Here the address of actual parameters are passed to formal parameter and formal parameters must be pointers
-- Any changes done inside function will modify the actual parameters
+In call by address, the addresses of the actual parameters are passed to the formal parameters, which must be pointers. Any changes done inside the function will modify the actual parameters.
 
-```c++
-#include<stdio.h>
+```c
+#include <stdio.h>
 
-void swap(int *x , int *y)
-{
+// This function swaps the values of the integers pointed to by x and y
+void swap(int *x, int *y) {
     int temp;
     temp = *x;
     *x = *y;
     *y = temp;
 }
 
-int main()
-{
-    int a,b;
-    a =10;
-    b=20;
-    swap(&a,&b);
-    printf("%d %d", a,b);
-} // 20, 10
+int main() {
+    int a, b;
+    a = 10;
+    b = 20;
+
+    // Call the swap function, passing the addresses of a and b
+    swap(&a, &b);
+
+    // Print the values of a and b after the swap function call
+    printf("%d %d\n", a, b); // Output will be 20 10
+
+    return 0;
+}
 ```
 
-- One function cannot access value of another function directly but it can access it indirectly through pointers
-- Thus call by address is a suitable mechanism for modifying actual parameters
+- One function cannot access the value of another function directly, but it can access it indirectly through pointers.
+- Thus, call by address is a suitable mechanism for modifying actual parameters.
 
-### Call by reference
+### Call by Reference
 
-- References are part of c++ programming, its one of the useful and powerful mechanism of this language
-- To make a function as call by reference we just need to add & in the parameters, these are the references
+References are part of C++ programming. It's one of the useful and powerful mechanisms of this language. To make a function call by reference, we just need to add `&` in the parameters. These are the references.
 
-```c++
-#include<stdio.h>
+```cpp
+#include <iostream>
 
-void swap(int & x , int & y)
-{
+// This function swaps the values of x and y using references
+void swap(int &x, int &y) {
     int temp;
     temp = x;
     x = y;
     y = temp;
 }
 
-int main()
-{
-    int a ,b;
-    a =10;
-    b=20;
-    swap(a ,b);
-    printf("%d %d", a ,b);
+int main() {
+    int a, b;
+    a = 10;
+    b = 20;
+
+    // Call the swap function
+    swap(a, b);
+
+    // Print the values of a and b after the swap function call
+    std::cout << a << " " << b << std::endl; // Output will be 20 10
+
+    return 0;
 }
 ```
+
+- In C++, references provide a powerful mechanism for directly modifying the actual parameters without needing pointers.
+
+### summary
+
+- **Pass by Value:** Copies of the actual parameters are passed. Changes in the function do not affect the originals.
+- **Call by Address:** Addresses of the actual parameters are passed. The function can modify the originals through pointers.
+- **Call by Reference:** References to the actual parameters are passed (C++ only). The function can modify the originals directly.
 
 ## Arrays as Parameters
 
@@ -447,114 +607,138 @@ int main()
 - As its call by address its possible to change the values of the arrays.
 
 ```c++
-#include<stdio.h>
-void fun(int A[ ] , int n) /* int *A its a general method which is pointer to int it may array also. */
-{
+#include <stdio.h>
+
+// Function to modify array elements
+void modifyArray(int A[], int n) {
     int i;
-    for(i=0; i<n ; i++)
-    printf("%d", A[i]);
+    for (i = 0; i < n; i++) {
+        A[i] = A[i] * 2; // Modify each element of the array
+    }
 }
 
-int main()
-{
-    int A[5] = {2,4,6,8,10};
-    fun(A,5);
+// Function to print array elements
+void printArray(int A[], int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        printf("%d ", A[i]); // Print each element of the array
+    }
+    printf("\n"); // Print newline for better readability
 }
+
+int main() {
+    int A[5] = {1, 2, 3, 4, 5}; // Initialize array
+    int n = 5; // Size of the array
+
+    printf("Original array: ");
+    printArray(A, n); // Print original array
+
+    modifyArray(A, n); // Modify array elements
+
+    printf("Modified array: ");
+    printArray(A, n); // Print modified array
+
+    return 0; // Return 0 to indicate successful execution
+}
+
 ```
 
 ## Structure as Parameter
 
-- If we are sending structure as a parameter to a structure it may be call by value or call by address call by value
+When sending a structure as a parameter to a function, it can be done by value or by address.
 
- Example
+### Call by Value
 
-```c++
-#include<stdio.h>
+- When passing a structure by value, a separate object is created, and all members are copied.
+- Modifying the formal parameter does not affect the actual parameter.
 
-struct Rectangle
-{
+```c
+#include <stdio.h>
+
+struct Rectangle {
     int length;
     int breadth;
 };
 
-int area(struct Rectangle r1)
-{
-    return r1.length*r1.breadth;
+// Function to calculate the area of the rectangle
+int area(struct Rectangle r1) {
+    return r1.length * r1.breadth;
 }
 
-int main()
-{
-    struct Rectangle r = {10,5};
-    printf("% d", area(r));
+int main() {
+    struct Rectangle r = {10, 5}; // Initialize a Rectangle structure
+    printf("%d\n", area(r)); // Call area function with the structure passed by value
+    return 0; // Return 0 to indicate successful execution
 }
 ```
 
-- A separate object will be created in call by value method and everything will be copied in the corresponding members this is one of the befit of structure as parameter
-- If you are making changes to formal parameter it will not effect the actual parameter.
+In the above example, the `area` function takes a `Rectangle` structure by value. Any changes made to `r1` inside the function do not affect the original structure `r` in the `main` function.
 
-## call by reference
+### Call by address
 
-Example:
+- When passing a structure by address, the function receives a pointer to the structure.
+- Modifying the structure via the pointer affects the original structure.
 
-```c++
-#include<stdio.h>
-#include<iostream>
+```c
+#include <stdio.h>
 
-using namespace std;
-
-struct Rectangle
-{
+struct Rectangle {
     int length;
     int breadth;
 };
 
-int area(struct Rectangle &r1) /* Error here check this program */
-{
-    return r1.length*r1.breadth;
+// Function to modify the dimensions of the rectangle
+void modify(struct Rectangle *r1) {
+    r1->length = 20;
+    r1->breadth = 10;
 }
 
-int main()
-{
-    struct Rectangle r = {10,5};
-    printf("%d", area(r));
+int main() {
+    struct Rectangle r = {10, 5}; // Initialize a Rectangle structure
+    modify(&r); // Call modify function with the structure passed by address
+    printf("Length: %d, Breadth: %d\n", r.length, r.breadth); // Output modified dimensions
+    return 0; // Return 0 to indicate successful execution
+}
+```
+
+In the above example, the `modify` function takes a pointer to a `Rectangle` structure. Changes made to the structure via the pointer affect the original structure `r` in the `main` function.
+
+> Key Points
+
+- **Call by Value:** A separate copy of the structure is created, and changes to the formal parameter do not affect the actual parameter.
+- **Call by Address:** A pointer to the structure is passed, allowing the function to modify the original structure.
+- If you want some function to change the actual parameter then it must be done by call by address or call by reference.
+- It is possible to send array as a parameter in pass by value only if its inside the structure , if its just array passing then its not possible by pass by value.
+
+## Call by reference
+
+In call by reference, a reference to the actual parameter is passed to the function. This means the function works with the original variable, not a copy. Any changes made to the parameter inside the function will affect the actual parameter.
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+struct Rectangle {
+    int length;
+    int breadth;
+};
+
+int area(struct Rectangle &r1) {
+    return r1.length * r1.breadth;
+}
+
+int main() {
+    struct Rectangle r = {10, 5};
+    cout << area(r) << endl;
 
     return 0;
 }
 ```
 
 - The only change we need to do for call by reference is adding `&` in the parameter.
-- Here the new object is not created but the same object is called r1 also.
-- Thus new changes in the values will effect the actual parameters.
-
-## call by address
-
-Example:
-
-```c++
-#include<stdio.h>
-
-struct Rectangle
-{
-    int length;
-    int breadth;
-};
-
-void changeLength(struct Rectangle *p , int l)
-{
-    p->length = l;
-    printf("%d",p->length);
-}
-
-int main()
-{
-    struct Rectangle r = {10,5};
-    printf("length before: %d\n",r.length);
-    changeLength(&r, 20);
-}
-```
-
-- If you want some function to change the actual parameter then it must be done by call by address or call by reference.
-- It is possible to send array as a parameter in pass by value only if its inside the structure , if its just array passing then its not possible by pass by value.
+- Here the new object is not created but the same object is called `r1` also.
+- Thus new changes in the values will affect the actual parameters.
 
 ## Structure & Functions in C
 
@@ -581,7 +765,7 @@ int area( struct Rectangle r)
 void changelength(struct Rectangle *r, int l)
 {
     r->length = l;
-    printf("The length has modified to: %d",r->length);
+    printf("The length has been modified to: %d\n",r->length);
 }
 
 int main()
@@ -590,208 +774,253 @@ int main()
     initialize(&r,10,5);
     printf("The area of a rectangle: %d\n",area(r));
     changelength(&r,20);
-}
-```
-
-## Object Oriented Programming using struct
-
-```c++
-#include<stdio.h>
-#include<iostream>
-using namespace std;
-
-struct Rectangle 
-{
-    int length;
-    int breadth;
-
-void initialize( int l, int b)
-{
-    length=l;
-    breadth=b;
-}
-
-int area ()
-{
-    return length*breadth;
-}
-
-int perimeter()
-{
-    int p;
-    p = 2 * ( length + breadth );
-
-    return p;
-}
-};
-int main()
-{
-    Rectangle r={0,0};
-    int l,b;
-    printf("Enter the length & breadth\n");
-    cin>>l>>b;
-    /* cin>>r.length>>r.breadth; Can also initialize like this or create a function for initialization*/
-
-    r.initialize(l,b);
-
-    int a=r.area();
-    int peri= r.perimeter();
-    printf("The area of rectangle is: %d & the perimeter of the rectangle is:%d",a,peri);
-
     return 0;
 }
 ```
 
-- How to convert the above oops struct to complete oops
-- We just need to add class in place of struct
-- But when we do so we can't access the functions as the elements & functions declared inside class are private. To over come this we need to add public in front of the functions from where we want the functions to be public
-
-Example:
+## Object Oriented Programming using `struct`
 
 ```c++
-#include<stdio.h>
-#include<iostream>
+#include <stdio.h>
+#include <iostream>
+
 using namespace std;
 
-class Rectangle 
-{
+struct Rectangle {
     int length;
     int breadth;
-public:
-void initialize( int l, int b)
-{
-    length=l;
-    breadth=b;
-}
 
-int area ()
-{
-    return length*breadth;
-}
+    void initialize(int l, int b) {
+        length = l;
+        breadth = b;
+    }
 
-int perimeter()
-{
-    int p;
-    p = 2 * ( length + breadth );
+    int area() {
+        return length * breadth;
+    }
 
-    return p;
-}
+    int perimeter() {
+        return 2 * (length + breadth);
+    }
 };
-int main()
-{
-    Rectangle r;
-    int l,b;
-    printf("Enter the length & breadth\n");
-    cin>>l>>b;
-    /* cin>>r.length>>r.breadth; Can also initialize like this or create a function for initialization*/
-    r.initialize(l,b);
 
-    int a=r.area();
-    int peri= r.perimeter();
-    printf("The area of rectangle is: %d & the perimeter of the rectangle is:%d",a,peri);
-
-    return 0;
-}
-```
-
-## class & constructor
-
-```c++
-#include<stdio.h>
-#include<iostream>
-using namespace std;
-
-class Rectangle
-{
-    private:
-        int length;
-        int breadth;
+int main() {
+    Rectangle r = {0, 0};
+    int l, b;
     
-    public:
-        Rectangle()
-        {
-            length=breadth=1;
-        }
-        Rectangle(int l,int b)
-        {
-            length=l;
-            breadth=b;
-        }
-        int area()
-        {
-            return length*breadth;
-        }
-        int perimeter()
-        {
-            return 2 * ( length + breadth );
-        }
-        int setLength(int l)
-        {
-           return length=l;
-        }
-        int setBreadth(int b)
-        {
-            return breadth=b;
-        }
-        int getLength()
-        {
-            return length;
-        }
-        int getBreadth()
-        {
-            return breadth;
-        }
-        ~Rectangle()
-        {
-            cout<<"Destructor";
-        }
-};
+    printf("Enter the length & breadth: ");
+    cin >> l >> b;
+    // cin>>r.length>>r.breadth; Can also initialize like this or create a function for initialization
 
+    // Initialize the rectangle using the initialize function
+    r.initialize(l, b);
 
-int main()
-{
-    Rectangle r{10,5};
+    // Calculate the area and perimeter
+    int a = r.area();
+    int peri = r.perimeter();
 
-    cout<<"Area: "<<r.area()<<endl;
-    cout<<"perimeter: "<<r.perimeter()<<endl;
-    cout<<"Length: "<<r.getLength()<<endl;
-    cout<<"breadth: "<<r.getBreadth()<<endl;
-     cout<<"the length is modified: "<<r.setLength(20)<<endl;
-    cout<<"The breadth is modified: "<<r.setBreadth(30)<<endl;
+    // Print the area and perimeter
+    printf("The area of the rectangle is: %d & the perimeter of the rectangle is: %d\n", a, peri);
 
     return 0;
 }
+
 ```
 
-mutated function -> set length & breadth;
-accessor function -> get length & breadth;
+## Complete Object-Oriented Programming using `class`
 
-## Templates class
+To convert the previous OOP-style `struct` to a fully encapsulated `class`, we need to use the `class` keyword instead of `struct`. Additionally, we'll declare the member functions and variables as `public` or `private` to control access. By default, members of a `class` are private, so we need to explicitly specify which members are public.
 
-A template is a simple yet very powerful tool in C++. The simple idea is to pass the data type as a parameter so that we don’t need to write the same code for different data types. For example, a software company may need to sort() for different data types. Rather than writing and maintaining multiple codes, we can write one sort() and pass the datatype as a parameter
+Here is the converted version:
 
-C++ adds two new keywords to support templates: ‘template’ and ‘type name’. The second keyword can always be replaced by the keyword ‘class’
-
-```c++
+```cpp
 #include <iostream>
 using namespace std;
- 
-// One function works for all data types.  This would work
-// even for user defined types if operator '>' is overloaded
-template <typename T> T myMax(T x, T y)
-{
+
+class Rectangle {
+private:
+    int length;
+    int breadth;
+
+public:
+    void initialize(int l, int b) {
+        length = l;
+        breadth = b;
+    }
+
+    int area() {
+        return length * breadth;
+    }
+
+    int perimeter() {
+        return 2 * (length + breadth);
+    }
+};
+
+int main() {
+    Rectangle r;
+    int l, b;
+    
+    cout << "Enter the length & breadth: ";
+    cin >> l >> b;
+
+    // Initialize the rectangle using the initialize function
+    r.initialize(l, b);
+
+    // Calculate the area and perimeter
+    int a = r.area();
+    int peri = r.perimeter();
+
+    // Print the area and perimeter
+    cout << "The area of the rectangle is: " << a << " & the perimeter of the rectangle is: " << peri << endl;
+
+    return 0;
+}
+```
+
+### Key Point
+
+- **Class Definition:**
+  - The `Rectangle` class now includes `private` members for `length` and `breadth`, ensuring encapsulation.
+  - The `public` keyword is used to make the member functions accessible from outside the class.
+
+- **Initialization:**
+  - The `initialize` function sets the `length` and `breadth` of the rectangle.
+
+- **Area Calculation:**
+  - The `area` function returns the area of the rectangle.
+
+- **Perimeter Calculation:**
+  - The `perimeter` function returns the perimeter of the rectangle.
+
+- **Main Function:**
+  - The `main` function demonstrates creating a `Rectangle` object, initializing it, and using its member functions to calculate and display the area and perimeter.
+
+This example demonstrates how to use the `class` keyword to create a fully encapsulated object in C++, adhering to the principles of object-oriented programming.
+
+## Class & Constructor
+
+- **Mutator Functions:** Functions that modify the values of private data members. In this example, `setLength` and `setBreadth` are mutator functions.
+- **Accessor Functions:** Functions that access the values of private data members without modifying them. In this example, `getLength` and `getBreadth` are accessor functions.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+private:
+    int length;
+    int breadth;
+
+public:
+    // Default constructor
+    Rectangle() {
+        length = breadth = 1;
+    }
+
+    // Parameterized constructor
+    Rectangle(int l, int b) {
+        length = l;
+        breadth = b;
+    }
+
+    // Method to calculate area
+    int area() {
+        return length * breadth;
+    }
+
+    // Method to calculate perimeter
+    int perimeter() {
+        return 2 * (length + breadth);
+    }
+
+    // Mutator function to set length
+    void setLength(int l) {
+        length = l;
+    }
+
+    // Mutator function to set breadth
+    void setBreadth(int b) {
+        breadth = b;
+    }
+
+    // Accessor function to get length
+    int getLength() {
+        return length;
+    }
+
+    // Accessor function to get breadth
+    int getBreadth() {
+        return breadth;
+    }
+
+    // Destructor
+    ~Rectangle() {
+        cout << "Destructor called" << endl;
+    }
+};
+
+int main() {
+    // Create a rectangle object using the parameterized constructor
+    Rectangle r{10, 5};
+
+    // Display area and perimeter
+    cout << "Area: " << r.area() << endl;
+    cout << "Perimeter: " << r.perimeter() << endl;
+
+    // Display current length and breadth
+    cout << "Length: " << r.getLength() << endl;
+    cout << "Breadth: " << r.getBreadth() << endl;
+
+    // Modify length and breadth using mutator functions
+    r.setLength(20);
+    r.setBreadth(30);
+
+    // Display modified length and breadth
+    cout << "Modified Length: " << r.getLength() << endl;
+    cout << "Modified Breadth: " << r.getBreadth() << endl;
+
+    // Display updated area and perimeter
+    cout << "Updated Area: " << r.area() << endl;
+    cout << "Updated Perimeter: " << r.perimeter() << endl;
+
+    return 0;
+}
+```
+
+> Key Points
+
+- **Default Constructor:** Initializes length and breadth to 1.
+- **Parameterized Constructor:** Initializes length and breadth with given values.
+- **Destructor:** Prints a message when the object is destroyed.
+- **Mutator Functions:** `setLength` and `setBreadth` modify the length and breadth of the rectangle.
+- **Accessor Functions:** `getLength` and `getBreadth` return the current values of length and breadth without modifying them.
+
+## Templates Class
+
+A template is a simple yet powerful tool in C++. The idea is to pass the data type as a parameter so that we don’t need to write the same code for different data types. For example, a software company may need a `sort()` function for different data types. Rather than writing and maintaining multiple codes, we can write one `sort()` function and pass the data type as a parameter.
+
+C++ adds two keywords to support templates: `template` and `typename`. The second keyword can always be replaced by the keyword `class`.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// One function works for all data types. This would work
+// even for user-defined types if the operator '>' is overloaded
+template <typename T>
+T myMax(T x, T y) {
     return (x > y) ? x : y;
 }
- 
-int main()
-{
+
+int main() {
     // Call myMax for int
-    cout << myMax<int>(3, 7) << endl;
-    // call myMax for double
-    cout << myMax<double>(3.0, 7.0) << endl;
-    // call myMax for char
-    cout << myMax<char>('g', 'e') << endl;
- 
+    cout << myMax(3, 7) << endl;
+    // Call myMax for double
+    cout << myMax(3.0, 7.0) << endl;
+    // Call myMax for char
+    cout << myMax('g', 'e') << endl;
+
     return 0;
 }
 ```
