@@ -37,7 +37,7 @@ Deallocating memory is crucial for several reasons, particularly in C++ and othe
 
 **RAII**: This is a common idiom in C++ programming. It ensures that resources are properly released when they are no longer needed. By following RAII, you create robust and exception-safe code. Using destructors to deallocate memory is a key part of this principle.
 
-## We need to manually deallocate the memory in C/C++. In Java, Python, Go, C# no need for manual deallocation. In Rust memory is automatically deallocated when the variable goes out of scope
+> We need to manually deallocate the memory in C/C++. In Java, Python, Go, C# no need for manual deallocation. In Rust memory is automatically deallocated when the variable goes out of scope
 
 ## Out of scope example
 

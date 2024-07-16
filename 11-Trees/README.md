@@ -1425,9 +1425,7 @@ Node* deleteNodeRecursive(Node* root, int key) {
 // Iterative delete function
 Node* deleteNodeIterative(Node* root, int key) {
     Node* parent = NULL;
-    Node* current =
-
- root;
+    Node* current = root;
 
     while (current != NULL && current->key != key) {
         parent = current;
