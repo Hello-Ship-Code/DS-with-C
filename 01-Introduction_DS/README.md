@@ -1,99 +1,128 @@
-# Introduction to Data structures
+# Introduction to Data Structures
 
-What is a Data Structure?
-A program is a set of instructions which perform operations on data. We need data without the data the program can't be executed.
-How it'll organize the data in main memory during execution time is known as Data Structure
+## What is a Data Structure?
 
-CPU
+A data structure is a way of organizing and storing data in a computer so that it can be accessed and modified efficiently. The organization of data in main memory during execution time is known as the data structure. 
 
-Data
+### Components
 
-Program Code
+- **CPU**: Executes the program.
+- **Data**: Information that is processed.
+- **Program Code**: Instructions that perform operations on data.
 
-## list of data Structures
+## List of Data Structures
 
-### Physical data structures ( arrangement )
+### Physical Data Structures (Arrangement)
 
-- Arrays
-- Matrices
-- Linked List
+- **Arrays**: A collection of elements identified by index or key.
+- **Matrices**: A two-dimensional array.
+- **Linked List**: A linear collection of data elements, known as nodes, where the linear order is not given by their physical placement in memory.
 
-### logical data structures ( utilization )
+### Logical Data Structures (Utilization)
 
-- Stack
-- Queues
-- Trees
-- Graph
-- Hashing
+- **Stack**: A collection of elements that follows the Last In, First Out (LIFO) principle.
+- **Queues**: A collection of elements that follows the First In, First Out (FIFO) principle.
+- **Trees**: A hierarchical structure with a root value and subtrees of children with a parent node, represented as a set of linked nodes.
+- **Graph**: A collection of nodes (vertices) and edges connecting pairs of nodes.
+- **Hashing**: A technique used to uniquely identify a specific object from a group of similar objects.
 
-- Recursion
-- Sorting
+### Additional Concepts
 
-- Data structures
-- Data bases
-- Data warehouse
-- Big  Data
+- **Recursion**: A method of solving a problem where the solution depends on solutions to smaller instances of the same problem.
+- **Sorting**: The process of arranging data in a particular order (ascending or descending).
+
+## Related Fields
+
+- **Databases**: Structured sets of data held in a computer, especially one that is accessible in various ways.
+- **Data Warehouse**: A system used for reporting and data analysis, considered a core component of business intelligence.
+- **Big Data**: Large and complex data sets that are difficult to process using traditional data processing applications.
 
 ## Data Structure
 
-- Arrangement of collection of items so that operations can be done efficiently. Inside main memory during execution of program.
-- During execution of a program. The complier will manage data in main memory called data Structure.
-- A data structure is not only used for organizing the data. But, Also it is also used for processing, retrieving, and storing data.
-- There are different types of basic & advanced types of data structures that are used in almost every program or software system that has been developed. So we must have good knowledge about data structures.
+- **Definition:** An arrangement of a collection of items so that operations can be done efficiently within the main memory during program execution.
+- **Function:** During the execution of a program, the compiler manages data in the main memory using data structures. They are used not only for organizing data but also for processing, retrieving, and storing it.
+- **Importance:** Different types of basic and advanced data structures are used in almost every program or software system. A good understanding of data structures is essential for efficient software development.
 
-Example:
+### Example
 
-![svg](./test.svg)
+![CPU, RAM, and Storage Diagram](./test.svg)
 
-CPU     -> Central processing unit <br/>
-Ram     -> Main memory <br/>
-Storage -> External storage <br/>
+**Components:**
 
-- CPU will execute the instructions.
-- Main memory also knows as temporary memory, Main memory that is working memory of the program code.
-- Storage also knows as permanent storage. When we install a program / application they'll install in the storage as shown in HDD( HardDisk, SSD's ).
+- **CPU (Central Processing Unit):** Executes instructions.
+- **RAM (Main Memory):** Temporary working memory for the program code.
+- **Storage (External Storage):** Permanent storage where programs/applications are installed (e.g., HDD, SSD).
 
-Example:
+**Process Explanation:**
 
-- If we have a docs file it'll be stored in the main memory. If we try to open the docs then the docs file will come to main memory.
-- When ever we run any app it should be brought to main memory.
-- When the app comes to main memory then the cpu will start to execute/process the program. We can see the window pop-up & the file will be opened.
+1. **Storage:**
+    - Permanent storage for files and applications.
+2. **Main Memory (RAM):**
+    - Temporary storage where files and applications are brought for execution.
+3. **CPU:**
+    - Executes or processes the programs loaded in the main memory.
 
-## NOTE
+**Example Scenario:**
 
-- Not only files whenever we want to execute something like data it also should be bought to main memory & the cpu can perform required operations.
+- If we have a document file stored in external storage (e.g., HDD or SSD), when we try to open the document, it is loaded into the main memory (RAM).
+- Once the document is in the main memory, the CPU can start executing the necessary instructions to open and display the document in a window.
 
-Example:
+> Note
 
-Why we need main memory?
+- Not only files but any data or application to be executed must be brought to the main memory. The CPU can then perform the required operations on this data.
 
-- If we cook an omelette on pan will we eat the omelette on pan. No, We use a plate to eat it. In the same way to execute we need to get the data to main memory then the CPU will process the data & the result will be write backed to `storage`.
-- The arrangement or organizing how the data resides in the main memory is called data structures.
-- We have many data structures like arrays, trees, hash table.
+Understanding how data structures interact with the CPU, RAM, and storage helps in designing efficient algorithms and optimizing program performance.
+
+## Data Structure
+
+### Example: Why We Need Main Memory?
+
+- **Analogy:** If we cook an omelette in a pan, we won't eat the omelette from the pan. Instead, we use a plate to eat it. Similarly, to execute a program, data must be brought into the main memory where the CPU can process it. The result is then written back to storage.
+- **Definition:** The arrangement or organization of how data resides in the main memory is called data structures.
+- **Types of Data Structures:** Examples include arrays, trees, and hash tables.
 
 ![Class_ds](../Images/class_ds.jpg)
 
-## Data base
+## Related Concepts
 
-## Data warehouse
+### Database
 
-## Big data
+### Data Warehouse
 
-## Stack VS Heap memory
+### Big Data
 
-### context
+## Stack VS Heap Memory
 
-- About main memory
-- How a program uses memory
-- Static allocation
-- Dynamic allocation
+### Context
 
-Memory is divided into bytes. Chunk of bytes makes memory/storage. Every byte has it's address in the memory to uniquely identify them from other.
+#### About Main Memory
 
-- When ever we perform any operations & we use memory. The complier will assign the bytes for instance int occupies 4-bytes.
-- In cpu the entire memory is divided into manageable pieces knows as segments. The size of segment is 64kb.
+- Main memory is essential for the CPU to execute programs, as it provides the working area for data and instructions.
+
+#### How a Program Uses Memory
+
+- **Static Allocation:** Memory is allocated at compile-time. Variables have a fixed memory size and location.
+- **Dynamic Allocation:** Memory is allocated at run-time. The program can request and release memory as needed.
+
+Memory is divided into bytes. A chunk of bytes forms memory/storage, with each byte having a unique address for identification.
+
+- When operations are performed, the compiler assigns bytes to variables (e.g., an integer occupies 4 bytes).
+- In the CPU, memory is divided into manageable pieces known as segments, typically 64KB in size.
 
 ![static_vs_dynamic](../Images/static_dynamic.png)
+
+### Memory Structure
+
+- **Stack Memory:**
+  - Used for static memory allocation.
+  - Manages function calls, local variables, and control flow.
+  - Fast access, but limited size.
+- **Heap Memory:**
+  - Used for dynamic memory allocation.
+  - Manages objects and dynamic data.
+  - Slower access, but more flexible in size.
+
+Understanding how memory is allocated and managed helps in optimizing program performance and ensuring efficient resource utilization.
 
 ## Main Memory
 
