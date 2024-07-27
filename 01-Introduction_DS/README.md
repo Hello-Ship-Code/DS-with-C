@@ -133,8 +133,8 @@ Understanding these concepts helps in effectively managing and analyzing data in
 - **Static Allocation:** Memory is allocated at compile-time. Variables have a fixed memory size and location.
 - **Dynamic Allocation:** Memory is allocated at run-time. The program can request and release memory as needed.
 
-> Memory is divided into bytes. A chunk of bytes forms memory/storage, with each byte having a unique address for identification.
-> When operations are performed, the compiler assigns bytes to variables (e.g., an integer occupies 4 bytes).
+> Memory is divided into bytes. A chunk of bytes forms memory/storage, with each byte having a unique address for identification.  
+> When operations are performed, the compiler assigns bytes to variables (e.g., an integer occupies 4 bytes).  
 > In the CPU, memory is divided into manageable pieces known as segments, typically 64KB in size.
 
 ![static_vs_dynamic](../Images/static_dynamic.png)
@@ -197,7 +197,7 @@ void main()
 }
 ```
 
-- When ever we use heap memory. We need to de-allocate the memory. If not the memory will be saved & occupied in the memory. The next time when you use heap, there may be no space left.
+> When ever we use heap memory. We need to de-allocate the memory. If not the memory will be saved & occupied in the memory. The next time when you use heap, there may be no space left.
 
 ## Physical Data structures
 
@@ -252,7 +252,7 @@ Datatype is defined as
 
 ### Operations on data `int x;`
 
-- Arthematic operations are allowed on the data like `+ , -, *, /, %, ++, --`
+- Athematic operations are allowed on the data like `+ , -, *, /, %, ++, --`
 
 ### Abstract
 
@@ -263,8 +263,8 @@ Datatype is defined as
 
 Example:
 
-List -> 8,5,4,3,2,5,11 <br/>
-         0,1,2,3,4,5,6
+List -> 8,5,4,3,2,5,11  
+        0,1,2,3,4,5,6
 
 - This is list which is collection of elements.
 - We need data Representation:
@@ -312,8 +312,6 @@ Example:
 - Based on the work we are doing or from the program code we can define/conclude what's the time complexity of the given program.
 - If there is an `for-loop` which is going through all the elements. Then the time complexity is $O(n)$.
 
-<br/>
-
 ## 2. Linked List
 
 - In a linked list for each & every element we process all the elements then the time complexity is $O(n*n)$ -> $O(n^2)$.
@@ -358,7 +356,7 @@ $$ O(n^2)$$
 ## Array of elements
 
 - It required mXn elements $O(m+n)$
-- Based on requirement or your consideration the time complexity will change.If we only choose n or m then the time complexity is $O(n)$
+- Based on requirement or your consideration the time complexity will change. If we only choose n or m then the time complexity is $O(n)$
 
 ## Space complexity
 
@@ -429,8 +427,4 @@ $O(n^2)$
 - In the above code we have 2 for loops. So, First we consider for the first loop how much time is taken.
 - Then consider for the second loop.
 
-## Note
-
-- Just don't consider the statements & decide the time function. We should also analyze the statements deep. So, we don't miss anything.
-
-______END________________________
+> Just don't consider the statements & decide the time function. We should also analyze the statements deep. So, we don't miss anything.
