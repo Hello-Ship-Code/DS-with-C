@@ -617,6 +617,61 @@ if(i<j)
 swap(A[i],A[j])
 ```
 
+## -VE full code
+
+```c
+
+#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void segregateNegativeAndPositive(int A[], int len) {
+    int i = 0, j = len - 1;
+
+    while (i < j) {
+        // Increment i until a non-negative number is found
+        while (A[i] < 0 && i < j) {
+            i++;
+        }
+        // Decrement j until a negative number is found
+        while (A[j] >= 0 && i < j) {
+            j--;
+        }
+        // If i < j, swap the elements
+        if (i < j) {
+            swap(&A[i], &A[j]);
+        }
+    }
+}
+
+void display(int A[], int len) {
+    for (int i = 0; i < len; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int A[] = {12, -7, 5, -3, 6, -2, -1, 3};
+    int len = sizeof(A) / sizeof(A[0]);
+
+    printf("Original array:\n");
+    display(A, len);
+
+    segregateNegativeAndPositive(A, len);
+
+    printf("Array after segregation:\n");
+    display(A, len);
+
+    return 0;
+}
+
+```
+
 ## Merge
 
 - Merge only can be used on sorted array and we need a third array to merge.
