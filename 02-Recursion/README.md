@@ -1,5 +1,13 @@
 # Recursion
 
+Recursion is a concept in computer science and mathematics where a function or algorithm calls itself in order to solve a problem. This technique allows for the solution of complex problems by breaking them down into simpler, more manageable sub-problems. Here is a simple definition:
+
+Recursion is a method of solving problems where a function calls itself as a subroutine. This allows the function to be repeated several times, as it can call itself during its execution.
+
+Key Points of Recursion:
+Base Case: The condition under which the recursion stops. Without a base case, the function would call itself indefinitely.
+Recursive Case: The part of the function where the function calls itself with a modified argument.
+
 ## Course Content
 
 - What is recursion
