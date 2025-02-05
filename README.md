@@ -1,25 +1,34 @@
-# Data Structures with C & C++
+# 📚 Data Structures with C & C++  
 
-[Essentials_Cpp](./00-Introduciton-C/) ✅
+This repository contains implementations of fundamental **Data Structures and Algorithms (DSA)** using **C and C++**. Each section includes well-structured code, explanations, and examples to help understand the concepts effectively.  
 
-[Introduction_DS](./01-Introduction_DS/) ✅
+## 📂 Table of Contents  
 
-[Recursion](./02-Recursion/) ✅
+### ✅ **Fundamentals**  
+- [Essentials of C & C++](./00-Introduciton-C/)  
+- [Introduction to Data Structures](./01-Introduction_DS/)  
 
-[Array_representation](./03-Array_representation/) ✅
+### 🔁 **Recursion & Arrays**  
+- [Recursion](./02-Recursion/)  
+- [Array Representation](./03-Array_representation/)  
+- [Array ADT (Abstract Data Type)](./04-Array_ADT/)  
 
-[Array_ADT](./04-Array_ADT/) ✅
+### 🔤 **Strings & Matrices**  
+- [Strings](./05-Strings/)  
+- [Matrices](./06-Matrices/)  
+- [Sparse Matrix & Polynomial Representation](./07-Sparse_Matrix/)  
 
-[Strings](./05-Strings/) ✅
+### 🔗 **Linked Lists & Stacks**  
+- [Linked List](./08-Linked_List/)  
+- [Stack](./09-Stack/)  
 
-[Matrices](./06-Matrices/)  ✅
+### 📦 **Queues & Trees**  
+- [Queues](./10-Queues/)  
+- [Trees](./11-Trees/) ⏳ *(In Progress...)*  
 
-[Sparse Matrix & polynomial representation](./07-Sparse_Matrix/) ✅
+---
 
-[Linked List](./08-Linked_List/) ✅
-
-[stack](./09-Stack/) ✅
-
-[Queues](./10-Queues/) ✅
-
-[Tree's](./11-Trees/) ⏳
+## 🚀 **How to Use**  
+1. Clone this repository:  
+   ```sh
+   git clone https://github.com/yourusername/ds-with-c.git
