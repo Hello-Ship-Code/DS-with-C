@@ -137,8 +137,6 @@ Understanding these concepts helps in effectively managing and analyzing data in
 > When operations are performed, the compiler assigns bytes to variables (e.g., an integer occupies 4 bytes).  
 > In the CPU, memory is divided into manageable pieces known as segments, typically 64KB in size.
 
-![static_vs_dynamic](../Images/static_dynamic.png)
-
 ### Memory Structure
 
 - **Stack Memory:**
@@ -152,21 +150,13 @@ Understanding these concepts helps in effectively managing and analyzing data in
 
 Understanding how memory is allocated and managed helps in optimizing program performance and ensuring efficient resource utilization.
 
-## Main Memory
-
-![program_code](../Images/program_main.png)
-
 ## static memory allocation
 
 - When ever the memory is allocated before run or compile time it's know as static memory allocation.
 - When ever a program is running, At that time the compiler will divide the memory into three parts `Code Section`,`Stack`,`Heap`. The code will reside in the code section & when we compile the program any data is assigned and stored in the stack.
 - In the below example when we have declare int, float according the compiler 2/4 bytes are assigned to the integer. The storage is assigned in stack also know as stack form.
 
-![static_memory](../Images/static_memory.png)
-
 ## Dynamic Memory Allocation
-
-![Dynamic_memory](../Images/Dynamic_memory.png)
 
 - In the above example we have a program in which we have written two functions fun1 & fun2 namely. It has main function `void main()`.
 - When the compiler is initialized the main function the integer & float pointer will be stored in stack memory. When the  execution went to `fun1`. Then integer `x` is initialized & space is allocated. In the same way for the `fun2`.
@@ -258,8 +248,6 @@ Datatype is defined as
 
 - Hiding internal details is known as abstract.
 - As mentioned above we have representation & operations of data. Which are done internally so this is know as `Abstract DataType`.
-  
-![ADT](../Images/ADT.png)
 
 Example:
 
@@ -298,10 +286,6 @@ These are some operations that we use:
 ### Time complexity
 
 - The amount of time required to do a task is known as time complexity. This time required depends on the procedure we choose.
-
-Example:
-
-![time_complex](../Images/time_complex.png)
 
 ## 1. Array
 

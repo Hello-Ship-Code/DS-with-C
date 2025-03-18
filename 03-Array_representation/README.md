@@ -78,7 +78,7 @@ p = ( int * ) malloc ( 5 * sizeof( int ) ); // C
 }
 ```
 
-- When the work in heap is done it must be deleted or it will cause [memory leak](https://github.com/Hello-Ship-Code/The-beginning-PC-) which will cause problems.
+- When the work in heap is done it must be deleted or it will cause memory leak which will cause problems.
 - To release the heap memory we do.
 
 ```c
@@ -227,7 +227,7 @@ int main()
     B[0] = (int *)malloc( 4*sizeof(int)); // Created in heap
     B[1] = (int *)malloc( 4*sizeof(int));
     B[2] = (int *)malloc( 4*sizeof(int));
-    // Accesing the data
+    // Accessing the data
     for(i=0;i<3;i++)
     {
         for(j=0;j<4;j++)
@@ -242,7 +242,7 @@ int main()
     C[0] = (int *)malloc( 4*sizeof(int));
     C[1] = (int *)malloc( 4*sizeof(int));
     C[2] = (int *)malloc( 4*sizeof(int));
-      // Accesing the data
+      // Accessing the data
     for(i=0;i<3;i++)
     {
         for(j=0;j<4;j++)
@@ -282,13 +282,13 @@ $$Addr( A[ i ] ) = Lo + ( i - 1 )* w$$
 ## Row Major Formula for 2D Arrays
 
 - In compiler a 2D array is in linear form ( 1D Array ) in terms of down  and column.
-Checkout the [Row Major](./PDF/RowMapping-89.pdf) for better understanding.
+Checkout the Row Major for better understanding.
 
 $$Addr( A[ i ][ j ] ) = Lo + [i*n+j] *w$$
 
 Note:
 
-- In some compliers the index will be starting from `1` rather than `0`. For that the address calculation will be different & it consumes more time. So, Mostly we don't see indices starting from `1`.
+- In some compilers the index will be starting from `1` rather than `0`. For that the address calculation will be different & it consumes more time. So, Mostly we don't see indices starting from `1`.
 
 $$Addr( A[ i ][ j ] ) = Lo + [ (i-1)*n+(j-1)] *w$$
 
@@ -296,7 +296,7 @@ $$Addr( A[ i ][ j ] ) = Lo + [ (i-1)*n+(j-1)] *w$$
 
 ## Column Major Mapping
 
-- Here the elements of array are stored in column by column. Checkout the [column Major](./PDF/ColumnMajorArray-90.pdf) for better understanding.
+- Here the elements of array are stored in column by column. Checkout the column Major for better understanding.
 
 $$addr( A[ i ][ j ] )= Lo + [ j * m + i] * w $$
 
@@ -309,9 +309,6 @@ Example: Type A[d1] [d2] [d3] [d4]
 $$Add( A[ i1 ] [ i2 ][ i3 ] [ i4 ] ) = L0 + [ i1 * d2* d3 * d4 + i2 * d3 * d4 + i3 * d4 + i4 ] * w$$
 
 - The time complexity is $O(n^2)$.
-
-![Row_major_optimization](../Images/Row_major_opt.png)
-
 - Here we have use honer's rule to optimize the program.
 
 ### Column Major

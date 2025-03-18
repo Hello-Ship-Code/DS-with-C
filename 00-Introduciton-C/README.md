@@ -2,32 +2,32 @@
 
 ## Arrays
 
-An array is a collection of similar data elements stored at contiguous memory locations. It is the simplest data structure where each data element can be accessed directly by only using its index number.
+An **array** is a data structure that holds multiple elements of the same type, stored in contiguous memory locations. This structure allows direct access to each element using its index. 
 
-For instance, if we want to store the marks scored by a student in 5 subjects, then there’s no need to define individual variables for each subject. Rather, we can define an array that will store the data elements at contiguous memory locations.
+For example, to store a student's scores in five subjects, instead of creating five separate variables, we can use an array to efficiently manage the data.
 
-Array marks[5] define the marks scored by a student in 5 different subjects where each subject’s marks are located at a particular location in the array, i.e., marks[0] denote the marks scored in the first subject, marks[1] denotes the marks scored in 2nd subject and so on.
+The array `marks[5]` represents the student's scores across five subjects, with each score accessible using its respective index:
+- `marks[0]` → Score for subject 1
+- `marks[1]` → Score for subject 2
+- and so on...
 
+### Example Code
 ```c++
-int a[5]; /* Initializing the array*/ 
-int b[5] = {2,3,4,5,6}; /*Declaration of array*/
+int a[5];        // Array declaration without initialization
+int b[5] = {2, 3, 4, 5, 6}; // Array declaration with initialization
 ```
 
-When ever we initialize the array its going to store in main memory.
+> When an array is initialized, it occupies space in the main memory.
 
-![memory](../Images/memory_array.png)
+## Why Deallocate Memory?
 
-## Why we need to deallocate the memory?
-
-Deallocating memory is crucial for several reasons, particularly in C++ and other languages where memory management is manual. Here's why deallocating memory is important:
+Deallocating memory is essential for several reasons, especially in C++ where memory management is manual:
 
 ### 1. Prevent Memory Leaks
-
-**Memory Leaks**: When dynamically allocated memory is not properly deallocated, it remains allocated even when it is no longer needed. This leads to memory leaks, where the application consumes more and more memory over time, potentially exhausting system resources and causing the application to crash or slow down significantly.
+- **Memory Leaks**: When dynamically allocated memory isn't properly freed, it remains occupied even after it's no longer needed. Over time, this can consume excessive memory, leading to performance issues or crashes.
 
 ### 2. Efficient Use of Resources
-
-**Resource Management**: Efficiently managing memory resources is essential for the performance and stability of an application. Deallocating memory when it is no longer needed ensures that the memory can be reused for other parts of the application or by other applications running on the system.
+- **Resource Management**: Freeing unused memory ensures better performance and allows other parts of the application or system to utilize those resources effectively.
 
 ### 3. Avoiding Undefined Behavior
 
@@ -58,54 +58,9 @@ int main() {
 
 ### Practical Example with Destructor
 
-To illustrate the importance of deallocating memory, consider a simple example with a class that dynamically allocates memory:
+To illustrate the importance of deallocating memory, consider a simple example with a class that dynamically allocates memory.
 
-```cpp
-#include <iostream>
-
-class Rectangle {
-private:
-    int* length;
-    int* breadth;
-
-public:
-    // Constructor
-    Rectangle(int l, int b) {
-        length = new int;  // Allocate memory for length
-        breadth = new int; // Allocate memory for breadth
-        *length = l;
-        *breadth = b;
-    }
-
-    // Destructor
-    ~Rectangle() {
-        delete length;  // Deallocate memory for length
-        delete breadth; // Deallocate memory for breadth
-        std::cout << "Destructor called, memory deallocated" << std::endl;
-    }
-
-    // Function to calculate the area
-    int area() const {
-        return (*length) * (*breadth);
-    }
-
-    // Function to display the dimensions
-    void display() const {
-        std::cout << "Length: " << *length << ", Breadth: " << *breadth << std::endl;
-    }
-};
-
-int main() {
-    Rectangle* rect = new Rectangle(10, 5);
-
-    rect->display();
-    std::cout << "Area of the rectangle: " << rect->area() << std::endl;
-
-    delete rect; // Manually deleting the object to invoke the destructor and deallocate memory
-
-    return 0;
-}
-```
+for reference [struct]('../Cpp/struct.cpp)
 
 ### Explanation
 
@@ -127,22 +82,7 @@ Unlike an array, a structure can contain many different data types (int, float, 
 - When structures is called in the main( ) program then it will consume space accordingly to the data members types it contains in the memory.
 - An example of structure is a program of a rectangle
 
-```c++
-Struct Rectangle
-{
-int length;
-int breath;
-}
-
-int main()
-{
-struct Rectangle r ;            - Declaration
-Struct Rectangle r = { 10, 5 }; - Declaration + Initialization
-r.length = 15 ;                 - ( . operator ) Is is used to access a members to modify
-r.breath = 10 ;
-Printf( “ Area of rectangle is %d” , r.length * r.breath ) ; - Accessing the members
-}
-```
+For reference [struct]('../Cpp/basic-struct.cpp)
 
 ## Use of structure
 
@@ -161,31 +101,9 @@ Structures is used to combine data under one name, thus some example usage of st
 - Pointer is an address variable that is meant for storing an address, not data itself.
 - They are used for indirect access to data.
 - For a program to use heap memory, pointers are used.
-- To access heap memory and resources outside the main memory like the internet, keyboard, monitor, etc pointers is used. Pointers are also used for parameter passing.
+- To access heap memory and resources outside the main memory like the internet, keyboard, monitor, etc pointers is used. [Pointers](../Cpp/basic-pointer.cpp) are also used for parameter passing.
 
-Example :
-
-```c++
-int main( )
-{
-Int a = 10 ;             - data variable
-Int *p ;                 - declaration
-P = &a ;                 - Assignment / Initialization
-printf(“%d ” , a );    
-printf(“%d ” , *p) ;     - dereferencing
-}
-```
-
-## Accessing Heap memory through pointer
-
-```c++
-int main( )
-{
-Int *p;
-// p = (int*)malloc(5*sizeof(int)); in c
-P = new int[5]; // in C++
-}
-```
+## Accessing [Heap](../Cpp/basic-heap.cpp) memory through pointer
 
 ## Memory
 
@@ -205,24 +123,8 @@ The program will have access to stack & code section but won't have access to th
 
 ## de·ref·er·ence
 
-Obtain from (a pointer) the address of a data item held in another location.
+Obtain from (a [pointer](../Cpp/basic-pointer-1.cpp)) the address of a data item held in another location.
 
-```c++
-#include <stdio.h>
-
-int main() {
-    int a = 10;      // Declare and initialize an integer variable
-    int *p;          // Declare a pointer to an integer
-
-    p = &a;          // Initialize the pointer to the address of 'a'
-    
-    printf("%d\n", a);  // Print the value of 'a'
-    printf("%d\n", *p); // Dereference the pointer to print the value at the address stored in 'p'
-    
-    return 0;        // Return 0 to indicate successful execution
-}
-
-```
 
 ## Accessing Heap memory
 
@@ -252,11 +154,6 @@ The `calloc` function allocates memory for an array of elements, initializes the
 
 ```c
 ptr = (cast_type *) calloc(num_elements, size_of_each_element);
-```
-
-**Example:**
-
-```c
 int *p = (int *)calloc(10, sizeof(int)); // Allocates and initializes memory for an array of 10 integers
 ```
 

@@ -88,9 +88,7 @@ void fun(int n)
     }
 ```
 
-![recursion_tracing_1](../Images/recursion_tracing.png)
-
-## Explaination of code: bulb
+## Explanation of code: bulb
 
 - The below example explain how the tracing is done. In the above program.
 - Here we have to statement
@@ -104,9 +102,6 @@ void fun(int n)
   2. Switch on light
 - Here first we'll enter room 1. Then instead of switching on the light. We'll go to next room until we reach the end.
 - After reaching the end the second condition of switching on light is implemented till he reaches the exit.
-
-![Example_bulb](../Images/Example_bulb.png)
-
 - The same way as the bulb example the above program is executed.
 
 ```c++
@@ -141,8 +136,6 @@ void fun(int n)
 - This statement are ascending & descending respectively.
 - Recursion are same like looping statements but looping statements only have ascending where as recursion have ascending as well as descending.
 
-![generalising_recursion](../Images/general_recursion.png)
-
 ## Recursion using stack
 
 - Recursive funtions are memory consuming functions.
@@ -154,19 +147,13 @@ void fun(int n)
 - The above process continues until the value become `n=0` when the `if` condition is satisfied the program come to the `print` statement and `prints` `1`. Then the activation record is deleted.
 - This process is continued until the value is `3`. Then the program will exit.
 
-![Stack_recursion_2](../Images/stack_recursion_2.png)
-
 Example:2
 
 - This program also follows the same procedure. It has a additional feature of printing the element.
 
-![Stack_recursion_1](../Images/stack_recursion_1.png)
-
 ## Time complexity
 
 - The time complexity is $O(n)$
-
-![time_complexity](../Images/Recursion_time_complexity.png)
 
 ## RAND
 
@@ -202,8 +189,6 @@ void main()
 Final output: 15
 ```
 
-![recursion_static_variables](../Images/static_recursion_1.png)
-
 ## Static and Global Variable in Recursion
 
 - A stack is created as , for every call each time a new variable will be created inside the memory and it'll have its value this is also know as local variable of a function
@@ -236,8 +221,6 @@ void main()
     printf("testing: %d\n",b);
 }
 ```
-
-![recursion_static_variables](../Images/static_recursion_2.png)
 
 ## Types of recursion
 
@@ -335,19 +318,11 @@ void fun(int n)
 - As shown in the below syntax below.
 - In linear recursion the function is defined in between. There are instructions that should be executed before & after the function declaration.
 
-![Tree_Recursion](../Images/Tree_recursion.png)
-
 Example:
 
-- The below program shows tree resursion. Where we use two `fun` calls.
+- The below program shows tree recursion. Where we use two `fun` calls.
 - This explains how the data it stored & deleted in stack.
-
-![Tree_resursion_tracing](../Images/Tree_recursion_1.png)
-
 - This is tracing of tree recursion
-
-![Tree_Recursion_tracing](../Images/Tree_recursion_3.png)
-
 - The time complexity is $O(2^n)$
 - Time complexity will be equal to the height of the tree $O(n)$
 
@@ -410,10 +385,6 @@ int main()
     return 0;
 }
 ```
-
-## Tracing
-
-![Nested_recursion](../Images/Nested_recursion.png)
 
 ## Coding Practice
 
@@ -478,15 +449,11 @@ int main()
 
 ### Exponential
 
-- Here we are calculating the exponentials $(m)^n$. We need find the power of the given variables.
+- Here we are calculating the exponential $(m)^n$. We need find the power of the given variables.
 
-![exponenetial](../Images/Exponential.png)
+### Optimizing exponential
 
-### Optimizing exponentail
-
-- If we divide the the exponential then the number calculations will be reduced & we can achive time complexity.
-
-![exponenetial](../Images/Exponential_2.png)
+- If we divide the the exponential then the number calculations will be reduced & we can achieve time complexity.
 
 ## Code
 

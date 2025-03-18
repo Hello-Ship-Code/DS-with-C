@@ -110,7 +110,7 @@ int main()
 output: wELCOME;
 ```
 
-## Counting vowels and consonents
+## Counting vowels and consonants
 
 ```c
 #include <iostream>

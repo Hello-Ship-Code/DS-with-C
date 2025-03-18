@@ -1,6 +1,6 @@
 # 📚 Data Structures with C & C++  
 
-This repository contains implementations of fundamental **Data Structures and Algorithms (DSA)** using **C and C++**. Each section includes well-structured code, explanations, and examples to help understand the concepts effectively.  
+This repository showcases implementations of core **Data Structures and Algorithms (DSA)** using **C and C++**. Each section features clean code, explanations, and examples to simplify learning. 🚀
 
 ## 📂 Table of Contents  
 
@@ -24,11 +24,12 @@ This repository contains implementations of fundamental **Data Structures and Al
 
 ### 📦 **Queues & Trees**  
 - [Queues](./10-Queues/)  
-- [Trees](./11-Trees/) ⏳ *(In Progress...)*  
+- [Trees](./11-Trees/) 🌳 *(In Progress...)*  
 
 ---
 
-## 🚀 **How to Use**  
+## ⚙️ **How to Use**  
 1. Clone this repository:  
    ```sh
    git clone https://github.com/yourusername/ds-with-c.git
+
