@@ -1,36 +1,56 @@
-#include <stdio.h>
 #include <iostream>
 
 using namespace std;
 
-// Rectangle structure definition
-struct Rectangle {
-    int length;
-    int breadth;
-    char x; // Extra variable to demonstrate structure padding and memory size
+struct Address
+{
+  int pincode;
+  char city[30];
+  char state[30];
+  char country[30];
 };
 
-int main() {
-    // Declaration and Initialization
-    struct Rectangle r1 = {10, 5};
+struct Students
+{
+  int id;
+  char name[100];
+  char grade;
+  struct Address address;
+};
 
-    // Displaying the size of the structure
-    printf("Size of r1: %lu bytes\n", sizeof(r1));
+int main()
+{
 
-    // Accessing structure members
-    cout << "Initial Length: " << r1.length << endl;
-    cout << "Initial Breadth: " << r1.breadth << endl;
+  int n = 1;
 
-    // Modifying structure members
-    r1.length = 15;
-    r1.breadth = 7;
+  printf("Enter the number of students: \n");
+  scanf("%d", &n);
 
-    // Displaying modified values
-    printf("Modified Length: %d\n", r1.length);
-    printf("Modified Breadth: %d\n", r1.breadth);
+  struct Students students[n];
 
-    // Calculating and displaying the area
-    printf("Area of rectangle: %d\n", r1.length * r1.breadth);
+  for (int i = 0; i < n; i++)
+  {
+    printf("Enter the details of the students %d\n", i + 1);
+    printf("Id: ");
+    scanf("%d", &students[i].id);
+    printf("Name: ");
+    scanf("%s", students[i].name);
+    printf("Grade: ");
+    scanf(" %c", &students[i].grade);
+    printf("PinCode: ");
+    scanf(" %d", &students[i].address.pincode);
+    printf("City: ");
+    scanf(" %s", students[i].address.city);
+    printf("State: ");
+    scanf(" %s", students[i].address.state);
+    printf("Country: ");
+    scanf(" %s", students[i].address.country);
+  }
 
-    return 0;
+  printf("\n------ Student List -----\n");
+  for (int i = 0; i < n; i++)
+  {
+    printf("Id: %d, Name: %s, Grade: %c, Pincode: %d, City: %s, State: %s, Country: %s\n", students[i].id, students[i].name, students[i].grade, students[i].address.pincode, students[i].address.city, students[i].address.state, students[i].address.country);
+  }
+  return 0;
 }

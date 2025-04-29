@@ -1,0 +1,27 @@
+# === Executable Binaries ===
+# Ignore common output files for C/C++ programs
+*.out
+*.o
+*.obj
+*.exe
+*.bin
+*.elf
+
+# Ignore specific compiled executables (you can list your own here)
+basic-struct
+struct
+a.out
+
+# Ignore executables with no extension (Unix-specific; must have execute permission)
+# This is a heuristic, not always accurate
+**/a.out
+**/struct
+**/basic-struct
+
+# === Build & IDE Files ===
+/build/
+/dist/
+/Debug/
+/Release/
+
+# === Editor & OS Backup Files ===
