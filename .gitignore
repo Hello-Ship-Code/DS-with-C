@@ -1,27 +1,35 @@
-# === Executable Binaries ===
-# Ignore common output files for C/C++ programs
-*.out
+# === Ignore all executables (files with no extension and execute permission) ===
+# This works on Unix-like systems where files have execute permissions
+*.[!c|h]*
+
+# === Ignore object files and other common C build artifacts ===
 *.o
+*.out
 *.obj
 *.exe
 *.bin
 *.elf
 
-# Ignore specific compiled executables (you can list your own here)
-basic-struct
-struct
+# === Ignore common output files ===
 a.out
+core
+*.stackdump
 
-# Ignore executables with no extension (Unix-specific; must have execute permission)
-# This is a heuristic, not always accurate
-**/a.out
-**/struct
-**/basic-struct
-
-# === Build & IDE Files ===
+# === Ignore Build Folders ===
 /build/
 /dist/
 /Debug/
 /Release/
 
 # === Editor & OS Backup Files ===
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+
+# === Logs and Misc ===
+*.log
+*.cache
