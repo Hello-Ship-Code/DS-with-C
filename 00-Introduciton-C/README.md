@@ -1,5 +1,135 @@
 # Basics in C & C++
 
+### **C Programming Language**  
+**Released**: 1972  
+**Developed by**: Dennis Ritchie at Bell Labs  
+**Key Features**:  
+- **Procedural programming**: Focuses on functions and procedures to perform tasks.  
+- **Low-level language**: Allows direct manipulation of memory, which gives it high performance but also potential risks (e.g., buffer overflow).  
+- **Portability**: C code is portable across various platforms (with minimal modification).  
+- **Memory management**: Manual memory management using `malloc`, `free`, etc.  
+- **No OOP**: C doesn’t support Object-Oriented Programming (OOP), so structures and functions are separate.
+
+**Use Cases**:  
+- Systems programming (e.g., operating systems like Linux).  
+- Embedded systems and hardware-level programming.  
+- Compilers and interpreters.
+
+**Example (C)**:  
+```c
+#include <stdio.h>
+
+struct Person {
+    char name[50];
+    int age;
+};
+
+int main() {
+    struct Person p = {"John", 30};
+    printf("Name: %s, Age: %d\n", p.name, p.age);
+    return 0;
+}
+```
+
+---
+
+### **C++ Programming Language**  
+**Released**: 1983 (by Bjarne Stroustrup)  
+**Developed by**: Bjarne Stroustrup at Bell Labs (extension of C)  
+**Key Features**:  
+- **Object-Oriented Programming** (OOP): C++ introduced classes, inheritance, polymorphism, and encapsulation.  
+- **Procedural programming**: Still retains all procedural features of C.  
+- **Memory management**: Supports manual memory management like C, but also has **RAII** (Resource Acquisition Is Initialization) through constructors/destructors.  
+- **Templates**: Supports generic programming with templates, which allows type-independent functions and classes (used for creating libraries like STL).  
+- **Performance**: Offers high performance and low-level access like C but adds more abstractions for complex applications.
+
+**Use Cases**:  
+- Software requiring high performance (e.g., game engines like Unreal Engine).  
+- System/software applications, embedded systems, and hardware interfaces.  
+- Large applications like web browsers, desktop software, etc.
+
+**Example (C++)**:  
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+    void introduce() {
+        cout << "Name: " << name << ", Age: " << age << endl;
+    }
+};
+
+int main() {
+    Person p = {"Alice", 25};
+    p.introduce();
+    return 0;
+}
+```
+
+---
+
+### **C# Programming Language**  
+**Released**: 2000  
+**Developed by**: Microsoft  
+**Key Features**:  
+- **Object-Oriented**: Fully supports OOP with features like inheritance, interfaces, and polymorphism.  
+- **High-level, managed language**: Unlike C and C++, C# runs on the .NET runtime (CLR) and uses garbage collection for memory management.  
+- **Rich Standard Library**: C# has a vast .NET Framework, which provides libraries for UI, database access, networking, and more.  
+- **Cross-platform**: Originally Windows-focused but now supports cross-platform development with **.NET Core**.  
+- **Modern Language Features**: Supports properties, events, async/await, LINQ (Language Integrated Query), etc.
+
+**Use Cases**:  
+- Enterprise software development (e.g., web applications, desktop applications).  
+- Game development with **Unity**.  
+- Cloud applications and microservices on **Azure**.
+
+**Example (C#)**:  
+```csharp
+using System;
+
+class Person {
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public void Introduce() {
+        Console.WriteLine($"Name: {Name}, Age: {Age}");
+    }
+}
+
+class Program {
+    static void Main() {
+        Person p = new Person { Name = "Bob", Age = 40 };
+        p.Introduce();
+    }
+}
+```
+
+---
+
+### **Key Differences between C, C++, and C#**
+
+| Feature                 | **C**                           | **C++**                         | **C#**                                  |
+|-------------------------|---------------------------------|---------------------------------|-----------------------------------------|
+| **Paradigm**            | Procedural                      | Procedural, OOP                 | Object-Oriented, Functional             |
+| **Memory Management**   | Manual (malloc, free)           | Manual (new, delete) + RAII     | Automatic (Garbage collection)          |
+| **Inheritance**         | Not supported                   | Supported                       | Fully supported (OOP)                   |
+| **Templates/Generics**  | Not supported                   | Supported                       | Supported                               |
+| **Standard Library**    | Minimal, low-level              | STL (Standard Template Library) | Extensive (.NET Framework)              |
+| **Cross-platform**      | Yes (but platform-dependent)    | Yes (platform-dependent)        | Yes (with .NET Core)                    |
+| **Usage**               | Systems programming, embedded   | System/software, games, apps    | Enterprise, games (Unity), cloud apps   |
+
+---
+
+### Conclusion:  
+- **C** is great for low-level, performance-critical tasks.  
+- **C++** extends C with OOP and other high-level abstractions, making it suitable for larger and more complex applications.  
+- **C#** is a higher-level language that simplifies development with OOP, garbage collection, and modern language features, making it ideal for business applications and games with Unity.
+
+Each language has its place depending on your project needs. If you're looking for low-level access and performance, C or C++ might be better. If you need high-level abstractions and a rich ecosystem, C# is a great choice.
+
 ## Arrays
 
 An **array** is a data structure that holds multiple elements of the same type, stored in contiguous memory locations. This structure allows direct access to each element using its index. 
@@ -82,7 +212,7 @@ Unlike an array, a structure can contain many different data types (int, float, 
 - When structures is called in the main( ) program then it will consume space accordingly to the data members types it contains in the memory.
 - An example of structure is a program of a rectangle
 
-For reference [struct]('../Cpp/basic-struct.cpp)
+For reference [struct](../Cpp/basic-struct.cpp)
 
 ## Use of structure
 
