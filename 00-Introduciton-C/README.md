@@ -19,14 +19,32 @@
 ```c
 #include <stdio.h>
 
+// Define a structure to represent a person
 struct Person {
-    char name[50];
-    int age;
+    char name[50];  // A character array to store the person's name (max 50 characters)
+    int age;        // An integer to store the person's age
 };
 
 int main() {
-    struct Person p = {"John", 30};
-    printf("Name: %s, Age: %d\n", p.name, p.age);
+    // Declare a variable 'p' of type struct Person
+    struct Person p;
+    
+    // Prompt the user to enter their name and age
+    // Example input format: "Peter 20"
+    printf("Enter your name & age (e.g., Peter 20):\n");
+    
+    // Use 'scanf' to read the user's input
+    // '%s' reads a string (name), and '%d' reads an integer (age)
+    // '&p.name' is the address of the 'name' field in the struct, and '&p.age' is the address of the 'age' field.
+    scanf("%s %d", p.name, &p.age);
+    
+    // Print a separator line for clarity
+    printf("------------------\n");
+    
+    // Output a greeting message with the name and age of the person
+    printf("Hello, %s 👋 your age is: %d\n", p.name, p.age);
+    
+    // End the program
     return 0;
 }
 ```
@@ -66,44 +84,6 @@ int main() {
     Person p = {"Alice", 25};
     p.introduce();
     return 0;
-}
-```
-
----
-
-### **C# Programming Language**  
-**Released**: 2000  
-**Developed by**: Microsoft  
-**Key Features**:  
-- **Object-Oriented**: Fully supports OOP with features like inheritance, interfaces, and polymorphism.  
-- **High-level, managed language**: Unlike C and C++, C# runs on the .NET runtime (CLR) and uses garbage collection for memory management.  
-- **Rich Standard Library**: C# has a vast .NET Framework, which provides libraries for UI, database access, networking, and more.  
-- **Cross-platform**: Originally Windows-focused but now supports cross-platform development with **.NET Core**.  
-- **Modern Language Features**: Supports properties, events, async/await, LINQ (Language Integrated Query), etc.
-
-**Use Cases**:  
-- Enterprise software development (e.g., web applications, desktop applications).  
-- Game development with **Unity**.  
-- Cloud applications and microservices on **Azure**.
-
-**Example (C#)**:  
-```csharp
-using System;
-
-class Person {
-    public string Name { get; set; }
-    public int Age { get; set; }
-
-    public void Introduce() {
-        Console.WriteLine($"Name: {Name}, Age: {Age}");
-    }
-}
-
-class Program {
-    static void Main() {
-        Person p = new Person { Name = "Bob", Age = 40 };
-        p.Introduce();
-    }
 }
 ```
 
@@ -190,7 +170,7 @@ int main() {
 
 To illustrate the importance of deallocating memory, consider a simple example with a class that dynamically allocates memory.
 
-for reference [struct]('../Cpp/struct.cpp)
+for reference [struct](../Cpp/struct.cpp)
 
 ### Explanation
 

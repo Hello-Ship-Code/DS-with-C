@@ -1,8 +1,13 @@
-int main( )
+#include <stdio.h>
+
+int main()
 {
-Int a = 10 ;             - data variable
-Int *p ;                 - declaration
-P = &a ;                 - Assignment / Initialization
-printf(“%d ” , a );    
-printf(“%d ” , *p) ;     - dereferencing
+
+  int a = 10;
+  int *p;
+  p = &a;
+  printf("%d\n", a);
+  printf("%d\n", *p);
+
+  return 0;
 }
