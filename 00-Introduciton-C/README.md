@@ -484,7 +484,7 @@ Example :
 ```c++
 #include<stdio.h>
 
-int add( int a , int b ) /* Actual parameters */
+int add( int a , int b ) /* formal parameters */
 {
     int c;
     c = a + b;
@@ -494,9 +494,9 @@ int add( int a , int b ) /* Actual parameters */
 int main ( )
 {
     int x,y,z;
-    x =10;
+    x = 10;
     y = 5;
-    z = add (x,y); /* Formal parameters */
+    z = add (x,y); /* Actual parameters */
     printf("The sum of two number is: %d",z);
 }
 ```
@@ -529,7 +529,7 @@ int main() {
     swap(a, b);
 
     // Print the values of a and b after the swap function call
-    printf("%d %d\n", a, b); // Output will be 10 20, not 20 10
+    printf("%d %d\n", a, b); // Output will be 10 20, not 20 10 as we are swapping different elements not a,b. we are swapping (x,y).
 
     return 0;
 }
